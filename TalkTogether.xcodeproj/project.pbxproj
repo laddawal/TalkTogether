@@ -34,6 +34,8 @@
 		C9460EE5183F23FB0043A5F1 /* UIBubbleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C9460EDE183F23FB0043A5F1 /* UIBubbleTableViewCell.m */; };
 		C9460EE6183F23FB0043A5F1 /* UIBubbleTypingTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C9460EE1183F23FB0043A5F1 /* UIBubbleTypingTableViewCell.m */; };
 		C959F7EC183CF8740042CAAB /* GPSContactViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C959F7EB183CF8730042CAAB /* GPSContactViewController.m */; };
+		C9635CA1184E264E008E6215 /* loginView1.png in Resources */ = {isa = PBXBuildFile; fileRef = C9635CA0184E264E008E6215 /* loginView1.png */; };
+		C9635CA7184E3267008E6215 /* NavigationBarOr.png in Resources */ = {isa = PBXBuildFile; fileRef = C9635CA6184E3267008E6215 /* NavigationBarOr.png */; };
 		C998227018279C2B0026B0EC /* QRRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C998226F18279C2B0026B0EC /* QRRegisterViewController.m */; };
 		C99B15CA1835D63000B68BAC /* zbar-back.png in Resources */ = {isa = PBXBuildFile; fileRef = C99B15C51835D63000B68BAC /* zbar-back.png */; };
 		C99B15CB1835D63000B68BAC /* zbar-help.html in Resources */ = {isa = PBXBuildFile; fileRef = C99B15C61835D63000B68BAC /* zbar-help.html */; };
@@ -129,6 +131,8 @@
 		C9460EE1183F23FB0043A5F1 /* UIBubbleTypingTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIBubbleTypingTableViewCell.m; sourceTree = "<group>"; };
 		C959F7EA183CF8730042CAAB /* GPSContactViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPSContactViewController.h; sourceTree = "<group>"; };
 		C959F7EB183CF8730042CAAB /* GPSContactViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GPSContactViewController.m; sourceTree = "<group>"; };
+		C9635CA0184E264E008E6215 /* loginView1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = loginView1.png; sourceTree = "<group>"; };
+		C9635CA6184E3267008E6215 /* NavigationBarOr.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NavigationBarOr.png; sourceTree = "<group>"; };
 		C998226E18279C2B0026B0EC /* QRRegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRRegisterViewController.h; sourceTree = "<group>"; };
 		C998226F18279C2B0026B0EC /* QRRegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRRegisterViewController.m; sourceTree = "<group>"; };
 		C99B15AF1835D63000B68BAC /* Decoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Decoder.h; sourceTree = "<group>"; };
@@ -343,6 +347,8 @@
 		C93E43CD182229E800DC8104 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				C9635CA6184E3267008E6215 /* NavigationBarOr.png */,
+				C9635CA0184E264E008E6215 /* loginView1.png */,
 				C9A25394184B1929006FF37C /* IdentifyBtn.png */,
 				C9155CC21844BC8600F2DF17 /* paper_background.png */,
 				C9A52420184265F6009C12B4 /* navigationBar.png */,
@@ -545,6 +551,8 @@
 				C99B15CD1835D63000B68BAC /* zbar-samples.png in Resources */,
 				C99B15CB1835D63000B68BAC /* zbar-help.html in Resources */,
 				C99B15CA1835D63000B68BAC /* zbar-back.png in Resources */,
+				C9635CA1184E264E008E6215 /* loginView1.png in Resources */,
+				C9635CA7184E3267008E6215 /* NavigationBarOr.png in Resources */,
 				C99B15CC1835D63000B68BAC /* zbar-helpicons.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -741,7 +749,7 @@
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = armv7;
 				WRAPPER_EXTENSION = app;
 			};
@@ -770,7 +778,7 @@
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = armv7;
 				WRAPPER_EXTENSION = app;
 			};

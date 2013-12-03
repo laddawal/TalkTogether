@@ -32,6 +32,8 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"loginView1.png"]]; // bg
 
     flagFacebookID = true;
     
@@ -42,8 +44,9 @@
     
     loginview.frame = CGRectOffset(loginview.frame, 10, 10);
     
+    // ตำแหน่งปุ่ม login
     if ([self respondsToSelector:@selector(setEdgesForExtendedLayout:)]) {
-        loginview.frame = CGRectOffset(loginview.frame, 5, 25);
+        loginview.frame = CGRectOffset(loginview.frame, 40, 495);
     }
     
     loginview.delegate = self;

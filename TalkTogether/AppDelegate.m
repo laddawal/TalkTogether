@@ -43,7 +43,7 @@
     [FBLoginView class];
     
     // Background Navigation Bar
-    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"navigationBar.png"] forBarMetrics:UIBarMetricsDefault];
+    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"NavigationBarOr.png"] forBarMetrics:UIBarMetricsDefault];
     
     // Navigation Bar Title Shadow
     NSShadow *shadow = [[NSShadow alloc] init];
