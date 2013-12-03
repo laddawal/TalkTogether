@@ -34,7 +34,7 @@
 	// Do any additional setup after loading the view.
     
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"loginView1.png"]]; // bg
-
+    
     flagFacebookID = true;
     
     sendBox = [[postMessage alloc]init];

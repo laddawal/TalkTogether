@@ -34,8 +34,6 @@
 		C9460EE5183F23FB0043A5F1 /* UIBubbleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C9460EDE183F23FB0043A5F1 /* UIBubbleTableViewCell.m */; };
 		C9460EE6183F23FB0043A5F1 /* UIBubbleTypingTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C9460EE1183F23FB0043A5F1 /* UIBubbleTypingTableViewCell.m */; };
 		C959F7EC183CF8740042CAAB /* GPSContactViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C959F7EB183CF8730042CAAB /* GPSContactViewController.m */; };
-		C9635CA1184E264E008E6215 /* loginView1.png in Resources */ = {isa = PBXBuildFile; fileRef = C9635CA0184E264E008E6215 /* loginView1.png */; };
-		C9635CA7184E3267008E6215 /* NavigationBarOr.png in Resources */ = {isa = PBXBuildFile; fileRef = C9635CA6184E3267008E6215 /* NavigationBarOr.png */; };
 		C998227018279C2B0026B0EC /* QRRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C998226F18279C2B0026B0EC /* QRRegisterViewController.m */; };
 		C99B15CA1835D63000B68BAC /* zbar-back.png in Resources */ = {isa = PBXBuildFile; fileRef = C99B15C51835D63000B68BAC /* zbar-back.png */; };
 		C99B15CB1835D63000B68BAC /* zbar-help.html in Resources */ = {isa = PBXBuildFile; fileRef = C99B15C61835D63000B68BAC /* zbar-help.html */; };
@@ -65,6 +63,10 @@
 		C9A2CDCB183A075200F69533 /* libzbar.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C99B15C31835D63000B68BAC /* libzbar.a */; };
 		C9A2CDCD183A078900F69533 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9A2CDCC183A078900F69533 /* QuartzCore.framework */; };
 		C9A52421184265F6009C12B4 /* navigationBar.png in Resources */ = {isa = PBXBuildFile; fileRef = C9A52420184265F6009C12B4 /* navigationBar.png */; };
+		C9B3ACA4184E398000237695 /* loginView1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C9B3ACA3184E398000237695 /* loginView1@2x.png */; };
+		C9B3ACA6184E399C00237695 /* loginView1.png in Resources */ = {isa = PBXBuildFile; fileRef = C9B3ACA5184E399C00237695 /* loginView1.png */; };
+		C9B3ACA9184E39C300237695 /* NavigationBarOr.png in Resources */ = {isa = PBXBuildFile; fileRef = C9B3ACA7184E39C300237695 /* NavigationBarOr.png */; };
+		C9B3ACAA184E39C300237695 /* NavigationBarOr@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C9B3ACA8184E39C300237695 /* NavigationBarOr@2x.png */; };
 		C9F31783183C77B000B6882C /* GPSRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9F31782183C77B000B6882C /* GPSRegisterViewController.m */; };
 		C9F31784183C780D00B6882C /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C912D7AE1823A46F003F29B3 /* CoreLocation.framework */; };
 /* End PBXBuildFile section */
@@ -131,8 +133,6 @@
 		C9460EE1183F23FB0043A5F1 /* UIBubbleTypingTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIBubbleTypingTableViewCell.m; sourceTree = "<group>"; };
 		C959F7EA183CF8730042CAAB /* GPSContactViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPSContactViewController.h; sourceTree = "<group>"; };
 		C959F7EB183CF8730042CAAB /* GPSContactViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GPSContactViewController.m; sourceTree = "<group>"; };
-		C9635CA0184E264E008E6215 /* loginView1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = loginView1.png; sourceTree = "<group>"; };
-		C9635CA6184E3267008E6215 /* NavigationBarOr.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NavigationBarOr.png; sourceTree = "<group>"; };
 		C998226E18279C2B0026B0EC /* QRRegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRRegisterViewController.h; sourceTree = "<group>"; };
 		C998226F18279C2B0026B0EC /* QRRegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRRegisterViewController.m; sourceTree = "<group>"; };
 		C99B15AF1835D63000B68BAC /* Decoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Decoder.h; sourceTree = "<group>"; };
@@ -193,6 +193,10 @@
 		C9AD509D182B843400504D2E /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		C9AD509F182B843F00504D2E /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		C9AD50A1182B844E00504D2E /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		C9B3ACA3184E398000237695 /* loginView1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "loginView1@2x.png"; sourceTree = "<group>"; };
+		C9B3ACA5184E399C00237695 /* loginView1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = loginView1.png; sourceTree = "<group>"; };
+		C9B3ACA7184E39C300237695 /* NavigationBarOr.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NavigationBarOr.png; sourceTree = "<group>"; };
+		C9B3ACA8184E39C300237695 /* NavigationBarOr@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NavigationBarOr@2x.png"; sourceTree = "<group>"; };
 		C9F31781183C77B000B6882C /* GPSRegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPSRegisterViewController.h; sourceTree = "<group>"; };
 		C9F31782183C77B000B6882C /* GPSRegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GPSRegisterViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -347,8 +351,10 @@
 		C93E43CD182229E800DC8104 /* images */ = {
 			isa = PBXGroup;
 			children = (
-				C9635CA6184E3267008E6215 /* NavigationBarOr.png */,
-				C9635CA0184E264E008E6215 /* loginView1.png */,
+				C9B3ACA7184E39C300237695 /* NavigationBarOr.png */,
+				C9B3ACA8184E39C300237695 /* NavigationBarOr@2x.png */,
+				C9B3ACA3184E398000237695 /* loginView1@2x.png */,
+				C9B3ACA5184E399C00237695 /* loginView1.png */,
 				C9A25394184B1929006FF37C /* IdentifyBtn.png */,
 				C9155CC21844BC8600F2DF17 /* paper_background.png */,
 				C9A52420184265F6009C12B4 /* navigationBar.png */,
@@ -543,17 +549,19 @@
 			files = (
 				C93E43A9182226A600DC8104 /* Images.xcassets in Resources */,
 				C93E439B182226A600DC8104 /* InfoPlist.strings in Resources */,
+				C9B3ACA6184E399C00237695 /* loginView1.png in Resources */,
 				C93E43A4182226A600DC8104 /* Main.storyboard in Resources */,
 				C93E43CF182229F900DC8104 /* fbLogin.png in Resources */,
+				C9B3ACAA184E39C300237695 /* NavigationBarOr@2x.png in Resources */,
 				C9A25395184B1929006FF37C /* IdentifyBtn.png in Resources */,
 				C9155CC31844BC8600F2DF17 /* paper_background.png in Resources */,
 				C9A52421184265F6009C12B4 /* navigationBar.png in Resources */,
 				C99B15CD1835D63000B68BAC /* zbar-samples.png in Resources */,
 				C99B15CB1835D63000B68BAC /* zbar-help.html in Resources */,
 				C99B15CA1835D63000B68BAC /* zbar-back.png in Resources */,
-				C9635CA1184E264E008E6215 /* loginView1.png in Resources */,
-				C9635CA7184E3267008E6215 /* NavigationBarOr.png in Resources */,
 				C99B15CC1835D63000B68BAC /* zbar-helpicons.png in Resources */,
+				C9B3ACA9184E39C300237695 /* NavigationBarOr.png in Resources */,
+				C9B3ACA4184E398000237695 /* loginView1@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
