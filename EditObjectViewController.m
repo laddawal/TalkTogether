@@ -32,6 +32,8 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg.png"]]; // bg
+    
     // รับ objectID จาหหน้าก่อนหน้า
     objectID = [recieveObjectID description];
     NSLog(@"objectIDEditObject : %@",objectID);

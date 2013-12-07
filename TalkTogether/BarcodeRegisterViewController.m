@@ -36,7 +36,7 @@
     
     sendBox = [[postMessage alloc]init];
     
-    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"paper_background.png"]]; // bg
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg.png"]]; // bg
 }
 
 - (void)didReceiveMemoryWarning

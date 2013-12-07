@@ -43,18 +43,14 @@
     [FBLoginView class];
     
     // Background Navigation Bar
-    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"NavigationBarOr.png"] forBarMetrics:UIBarMetricsDefault];
+    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"navBarBlue.png"] forBarMetrics:UIBarMetricsDefault];
     
     // Navigation Bar Title Shadow
-    NSShadow *shadow = [[NSShadow alloc] init];
-    shadow.shadowColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.8];
-    shadow.shadowOffset = CGSizeMake(0,2);
     [[UINavigationBar appearance] setTitleTextAttributes: [NSDictionary dictionaryWithObjectsAndKeys:
-                                                           [UIColor colorWithRed:245.0/255.0 green:245.0/255.0 blue:245.0/255.0 alpha:1.0], NSForegroundColorAttributeName,
-                                                           shadow, NSShadowAttributeName, nil]];
+                                                           [UIColor colorWithRed:69.0/255.0 green:47.0/255.0 blue:24.0/255.0 alpha:1.0], NSForegroundColorAttributeName,nil]];
     
     // Navigation Bar Tint Color
-    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
+    [[UINavigationBar appearance] setTintColor:[UIColor colorWithRed:69.0/255.0 green:47.0/255.0 blue:24.0/255.0 alpha:1.0]];
 
 
     // Override point for customization after application launch.

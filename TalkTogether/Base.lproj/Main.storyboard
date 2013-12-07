@@ -98,10 +98,10 @@
             </objects>
             <point key="canvasLocation" x="-4350" y="-1611"/>
         </scene>
-        <!--View Controller - ระบุอัตลักษณ์วัตถุ-->
+        <!--Identify View Controller - ระบุอัตลักษณ์วัตถุ-->
         <scene sceneID="wJZ-40-lbG">
             <objects>
-                <viewController id="CiZ-Bs-b0K" sceneMemberID="viewController">
+                <viewController id="CiZ-Bs-b0K" customClass="IdentifyViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="aAB-Pd-bH5"/>
                         <viewControllerLayoutGuide type="bottom" id="sMr-Kb-AKy"/>
@@ -287,19 +287,20 @@
                                 </connections>
                             </tableView>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Kdb-1v-P9p">
-                                <rect key="frame" x="0.0" y="521" width="320" height="47"/>
+                                <rect key="frame" x="0.0" y="524" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qKp-Me-sKf">
-                                        <rect key="frame" x="7" y="9" width="268" height="30"/>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="qKp-Me-sKf">
+                                        <rect key="frame" x="7" y="7" width="268" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="textColor" red="0.17946827169999999" green="0.13129247320000001" blue="0.068342334379999994" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hON-SG-HVD">
-                                        <rect key="frame" x="283" y="9" width="30" height="30"/>
+                                        <rect key="frame" x="283" y="7" width="30" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                         <state key="normal" title="ส่ง">
                                             <color key="titleColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -309,7 +310,7 @@
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" red="0.17946827168367352" green="0.13129247320405568" blue="0.068342334382986134" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.46274513006210327" green="0.38823533058166504" blue="0.3333333432674408" alpha="1" colorSpace="deviceRGB"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -511,10 +512,10 @@
             </objects>
             <point key="canvasLocation" x="-3872" y="-907"/>
         </scene>
-        <!--View Controller - ระบุอัตลักษณ์วัตถุ-->
+        <!--Identify View Controller - ระบุอัตลักษณ์วัตถุ-->
         <scene sceneID="hCK-o9-KAF">
             <objects>
-                <viewController id="Uow-WK-jjB" sceneMemberID="viewController">
+                <viewController id="Uow-WK-jjB" customClass="IdentifyViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="4yK-aH-qlz"/>
                         <viewControllerLayoutGuide type="bottom" id="st1-ro-MgN"/>
@@ -665,7 +666,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="XWr-07-udB">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="XWr-07-udB">
                                 <rect key="frame" x="76" y="137" width="168" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -760,7 +761,7 @@
                                     <action selector="nameRegisterBtn:" destination="gMV-3f-OCK" eventType="touchUpInside" id="gYb-On-Ic4"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6fX-El-pMG">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="6fX-El-pMG">
                                 <rect key="frame" x="70" y="155" width="181" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>

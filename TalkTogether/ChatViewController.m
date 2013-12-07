@@ -162,7 +162,14 @@
 - (IBAction)sendBtn:(id)sender {
     myTable.typingBubble = NSBubbleTypingTypeNobody;
     NSBubbleData *sayBubble = [NSBubbleData dataWithText:message.text date:[NSDate dateWithTimeIntervalSinceNow:0] type:BubbleTypeMine];
-    sayBubble.avatar = [UIImage imageNamed:@"navigationBar.png"]; // Object Image
+    
+    // Avatar Image
+    if ([senderID isEqualToString:@"1"]) {
+        sayBubble.avatar = [UIImage imageNamed:@"user.png"];
+    }else{
+        sayBubble.avatar = [UIImage imageNamed:@"car1.png"];
+    }
+    
     [bubbleData addObject:sayBubble];
     
     // Start on last cell
@@ -209,20 +216,36 @@
             NSString *strMessage = [dataDict objectForKey:@"message"];
             NSString *sender = [dataDict objectForKey:@"sender"];
             NSLog(@"messageID : %@",messageID);
+            NSLog(@"Sender!!!!!!!!!!!!!!! : %@",sender);
             lastMessageID = messageID;
             
             // ใส่ใน Table
-            if ([sender isEqualToString:@"1"]) {
-                myTable.typingBubble = NSBubbleTypingTypeNobody;
-                NSBubbleData *sayBubble = [NSBubbleData dataWithText:strMessage date:[NSDate dateWithTimeIntervalSinceNow:0] type:BubbleTypeMine];
-//                sayBubble.avatar = userPic; // User Image
-                [bubbleData addObject:sayBubble];
+            if ([senderID isEqualToString:@"1"]) {
+                if ([sender isEqualToString:@"1"]) {
+                    myTable.typingBubble = NSBubbleTypingTypeNobody;
+                    NSBubbleData *sayBubble = [NSBubbleData dataWithText:strMessage date:[NSDate dateWithTimeIntervalSinceNow:0] type:BubbleTypeMine];
+                    sayBubble.avatar = [UIImage imageNamed:@"user.png"]; // User Image
+                    [bubbleData addObject:sayBubble];
+                }else{
+                    myTable.typingBubble = NSBubbleTypingTypeNobody;
+                    NSBubbleData *sayBubble = [NSBubbleData dataWithText:strMessage date:[NSDate dateWithTimeIntervalSinceNow:0] type:BubbleTypeSomeoneElse];
+                    sayBubble.avatar = [UIImage imageNamed:@"car1.png"]; // Object Image
+                    [bubbleData addObject:sayBubble];
+                }
             }else{
-                myTable.typingBubble = NSBubbleTypingTypeNobody;
-                NSBubbleData *sayBubble = [NSBubbleData dataWithText:strMessage date:[NSDate dateWithTimeIntervalSinceNow:0] type:BubbleTypeSomeoneElse];
-//                sayBubble.avatar = [UIImage imageNamed:@"navigationBar.png"]; // Object Image
-                [bubbleData addObject:sayBubble];
+                if ([sender isEqualToString:@"2"]) {
+                    myTable.typingBubble = NSBubbleTypingTypeNobody;
+                    NSBubbleData *sayBubble = [NSBubbleData dataWithText:strMessage date:[NSDate dateWithTimeIntervalSinceNow:0] type:BubbleTypeMine];
+                    sayBubble.avatar = [UIImage imageNamed:@"car1.png"]; // User Image
+                    [bubbleData addObject:sayBubble];
+                }else{
+                    myTable.typingBubble = NSBubbleTypingTypeNobody;
+                    NSBubbleData *sayBubble = [NSBubbleData dataWithText:strMessage date:[NSDate dateWithTimeIntervalSinceNow:0] type:BubbleTypeSomeoneElse];
+                    sayBubble.avatar = [UIImage imageNamed:@"user.png"]; // Object Image
+                    [bubbleData addObject:sayBubble];
+                }
             }
+            
             
             // Start on last cell
             [myTable setContentOffset:CGPointMake(myTable.contentSize.height,myTable.frame.size.height)];
