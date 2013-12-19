@@ -1,22 +1,18 @@
 //
-//  EditObjectViewController.m
+//  RegisIdentifyViewController.m
 //  TalkTogether
 //
-//  Created by PloyZb on 11/12/56 BE.
+//  Created by PloyZb on 12/8/56 BE.
 //  Copyright (c) 2556 PloyZb. All rights reserved.
 //
 
-#import "EditObjectViewController.h"
+#import "RegisIdentifyViewController.h"
 
-@interface EditObjectViewController ()
+@interface RegisIdentifyViewController ()
 
 @end
 
-@implementation EditObjectViewController
-{
-    NSString *objectID;
-}
-@synthesize recieveObjectID;
+@implementation RegisIdentifyViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -33,10 +29,6 @@
 	// Do any additional setup after loading the view.
     
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg.png"]]; // bg
-    
-    // รับ objectID จาหหน้าก่อนหน้า
-    objectID = [recieveObjectID description];
-    NSLog(@"objectIDEditObject : %@",objectID);
 }
 
 - (void)didReceiveMemoryWarning

@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "LoginViewController.m"
-            timestampString = "406107139.833022"
+            timestampString = "408719359.093257"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "17"
-            endingLineNumber = "17"
+            startingLineNumber = "19"
+            endingLineNumber = "19"
             landmarkName = "@implementation LoginViewController"
             landmarkType = "3">
          </BreakpointContent>
@@ -26,12 +26,26 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TalkTogether/MainMenuViewController.m"
-            timestampString = "407157995.600117"
+            timestampString = "408695077.002757"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "49"
-            endingLineNumber = "49"
-            landmarkName = "-logout:"
+            startingLineNumber = "60"
+            endingLineNumber = "60">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TalkTogether/ChatViewController.m"
+            timestampString = "408873724.550058"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "133"
+            endingLineNumber = "133"
+            landmarkName = "-textFieldShouldClear:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

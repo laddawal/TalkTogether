@@ -9,15 +9,13 @@
 #import "BarcodeRegisterViewController.h"
 
 @interface BarcodeRegisterViewController ()
-
-@end
-
-@implementation BarcodeRegisterViewController
 {
     NSString *barCodeID;
     NSString *userID;
 }
+@end
 
+@implementation BarcodeRegisterViewController
 @synthesize barCodeImg;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -85,26 +83,14 @@
     
     NSURL *url = [NSURL URLWithString:@"http://angsila.cs.buu.ac.th/~53160117/TalkTogether/insertBarcode.php"];
     
-    NSMutableArray * jsonReturn = [sendBox post:post toUrl:url];
-    
-    if (jsonReturn != nil) {
-        for (NSDictionary* fetchDict in jsonReturn){
-            NSString *strReturnMessage = [NSString stringWithFormat:@"%@",[fetchDict objectForKey:@"returnMessage"]];
+    [sendBox post:post toUrl:url];
             
-            UIAlertView *alertReturnMessage =[[UIAlertView alloc]
-                                              initWithTitle:strReturnMessage
-                                              message:nil delegate:self
-                                              cancelButtonTitle:@"OK" otherButtonTitles:nil];
-            [alertReturnMessage show];
-            
-            // clear UIImage
-            barCodeImg.image = NULL;
-        }
-    }else{
-        [sendBox getErrorMessage];
-    }
+    // clear UIImage
+    barCodeImg.image = NULL;
     
-     [reader.navigationController popViewControllerAnimated:YES];
+//    [sendBox getErrorMessage];
+    
+    [reader.navigationController popViewControllerAnimated:YES];
 }
 
 @end

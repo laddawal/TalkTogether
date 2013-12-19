@@ -10,16 +10,14 @@
 #import "ChatViewController.h"
 
 @interface BarcodeContactViewController ()
-
-@end
-
-@implementation BarcodeContactViewController
 {
     NSString *barCodeID;
     NSString *userID;
     NSString *objectID;
 }
+@end
 
+@implementation BarcodeContactViewController
 @synthesize barCodeImg;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -40,15 +38,6 @@
     
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg.png"]]; // bg
 }
-
-//- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-//{
-//    NSLog(@"Prepare");
-//    
-//    if ([[segue identifier] isEqualToString:@"BarcodeContactChat"]) {
-//        [[segue destinationViewController] setDetailItem:objectID];
-//    }
-//}
 
 - (IBAction)scanBtn:(id)sender {
     NSLog(@"Scan");

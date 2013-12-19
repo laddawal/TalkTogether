@@ -9,13 +9,12 @@
 #import "NameRegisterViewController.h"
 
 @interface NameRegisterViewController ()
-
-@end
-
-@implementation NameRegisterViewController
 {
     NSString *userID;
 }
+@end
+
+@implementation NameRegisterViewController
 @synthesize objectName;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -63,24 +62,12 @@
         
         NSURL *url = [NSURL URLWithString:@"http://angsila.cs.buu.ac.th/~53160117/TalkTogether/insertObjectName.php"];
         
-        NSMutableArray * jsonReturn = [sendBox post:post toUrl:url];
-        
-        if (jsonReturn != nil) {
-            for (NSDictionary* fetchDict in jsonReturn){
-                NSString *strReturnMessage = [NSString stringWithFormat:@"%@",[fetchDict objectForKey:@"objectID"]];
+        [sendBox post:post toUrl:url];
                 
-                UIAlertView *alertReturnMessage =[[UIAlertView alloc]
-                                                  initWithTitle:strReturnMessage
-                                                  message:nil delegate:self
-                                                  cancelButtonTitle:@"OK" otherButtonTitles:nil];
-                [alertReturnMessage show];
-                
-                // clear TextField
-                objectName.text = NULL;
-            }
-        }else{
-            [sendBox getErrorMessage];
-        }
+        // clear TextField
+        objectName.text = NULL;
+
+        [sendBox getErrorMessage];
     }
 }
 @end

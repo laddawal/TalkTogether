@@ -2,20 +2,19 @@
 //  MainMenuViewController.m
 //  TalkTogether
 //
-//  Created by PloyZb on 11/2/56 BE.
+//  Created by PloyZb on 12/14/56 BE.
 //  Copyright (c) 2556 PloyZb. All rights reserved.
 //
 
 #import "MainMenuViewController.h"
-#import "LoginViewController.h"
 #import "AppDelegate.h"
+#import "LoginViewController.h"
 
 @interface MainMenuViewController ()
 
 @end
 
 @implementation MainMenuViewController
-
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -30,12 +29,6 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    
-    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg.png"]]; // bg
-    
-//    // ดึง userID จาก NSUserDefault
-//    NSUserDefaults *defaultUserID = [NSUserDefaults standardUserDefaults];
-//    NSString *userID = [defaultUserID stringForKey:@"userID"];
 }
 
 - (void)didReceiveMemoryWarning
@@ -44,13 +37,13 @@
     // Dispose of any resources that can be recreated.
 }
 
-    // Close session facebook
+// close session facebook
 - (IBAction)logout:(id)sender {
     AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
     [appDelegate closeSession];
     
-    LoginViewController *login =[self.storyboard instantiateViewControllerWithIdentifier:@"login"];
-    [login setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
-    [self presentViewController:login animated:NO completion:nil];
+    LoginViewController *loginView =[self.storyboard instantiateViewControllerWithIdentifier:@"loginView"];
+    [loginView setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
+    [self presentViewController:loginView animated:NO completion:nil];
 }
 @end

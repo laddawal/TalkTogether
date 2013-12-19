@@ -7,18 +7,20 @@
 //
 
 #import "MyObjectViewController.h"
-#import "ObjectChatViewController.h"
+#import "DetailObjectViewController.h"
 
 @interface  MyObjectViewController()
-
-@end
-
-@implementation MyObjectViewController
 {
     NSMutableArray *myObject;
     
     NSString *userID;
+    
+    NSMutableArray *displayObject;
 }
+@end
+
+@implementation MyObjectViewController
+@synthesize showObj;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -55,29 +57,16 @@
         for (NSDictionary* fetchDict in jsonReturn){
             [myObject addObject:fetchDict];
         }
-        [_showObj reloadData];
+        displayObject =[[NSMutableArray alloc] initWithArray:myObject];
+//        [showObj reloadData];
     }else{
         [sendBox getErrorMessage];
     }
 }
 
-// สลับสี Cell Background
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row%2 == 0) {
-        UIColor *altCellColor = [UIColor colorWithWhite:0.7 alpha:0.5];
-        cell.backgroundColor = altCellColor;
-    }
-}
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    
-    int nbCount = [myObject count];
-    if (nbCount == 0)
-        return 1;
-    else
-        return [myObject count];
-    
+    return [displayObject count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -86,39 +75,134 @@
     static NSString *CellIdentifier = @"myObjectCell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    
+    // selected cell color
+    UIView *bgColorView = [[UIView alloc] init];
+    [bgColorView setBackgroundColor:[UIColor colorWithRed:134.0/255.0 green:114.0/255.0 blue:93.0/255.0 alpha:1.0]];
+    [cell setSelectedBackgroundView:bgColorView];
+    
     if (cell == nil) {
         // Use the default cell style.
-        cell = [[UITableViewCell alloc] initWithStyle : UITableViewCellStyleSubtitle
+        cell = [[UITableViewCell alloc] initWithStyle : UITableViewCellStyleDefault
                                       reuseIdentifier : CellIdentifier];
     }
     
-    int nbCount = [myObject count];
-    if (nbCount ==0)
-        cell.textLabel.text = @"";
-    else
-    {
-        NSDictionary *tmpDict = [myObject objectAtIndex:indexPath.row];
-        
-        // ObjectName
-        NSString *text;
-        text = [NSString stringWithFormat:@"objectName : %@",[tmpDict objectForKey:@"objectName"]];
-        cell.textLabel.text = text;
-    }
+    NSDictionary *tmpDict = [displayObject objectAtIndex:indexPath.row];
+    
+    // ObjectName
+    NSString *text;
+    text = [NSString stringWithFormat:@"%@",[tmpDict objectForKey:@"objectName"]];
+    cell.textLabel.text = text;
+    
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSDictionary *tmpDict = [myObject objectAtIndex:indexPath.row];
+    NSDictionary *tmpDict = [displayObject objectAtIndex:indexPath.row];
     
-    // ไปหน้า objectChat
-    ObjectChatViewController *objectChatView =[self.storyboard instantiateViewControllerWithIdentifier:@"objectChatView"];
+    // ดึง userID จาก NSUserDefault
+    NSUserDefaults *defaultUserID = [NSUserDefaults standardUserDefaults];
+    userID = [defaultUserID stringForKey:@"userID"];
     
-    objectChatView.detailItem = [tmpDict objectForKey:@"objectID"];
+    // ไปหน้า detail
+    DetailObjectViewController *detailView =[self.storyboard instantiateViewControllerWithIdentifier:@"detailView"];
     
-    [objectChatView setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
+    detailView.recieveObjectID = [tmpDict objectForKey:@"objectID"];
+//    detailView.recieveUserID = userID;
+//    detailView.recieveSender = @"1"; // กำหนดให้ผู้ส่งคือผู้ใช้
     
-    [self.navigationController pushViewController:objectChatView animated:YES];
+    [detailView setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
+    
+    [self.navigationController pushViewController:detailView animated:YES];
+}
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // Return NO if you do not want the specified item to be editable.
+    return YES;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        
+        // ลบวัตถุใน database
+        // ส่ง objectID ให้ php
+        NSDictionary *tmpDict = [displayObject objectAtIndex:indexPath.row];
+        
+        NSLog(@"objectID : %@",[tmpDict objectForKey:@"objectID"]);
+        
+        NSLog(@"IndexPath : %ld",(long)indexPath.row);
+        
+        NSString *post = [NSString stringWithFormat:@"objectID=%@",[tmpDict objectForKey:@"objectID"]];
+        
+        NSURL *url = [NSURL URLWithString:@"http://angsila.cs.buu.ac.th/~53160117/TalkTogether/deleteObject.php"];
+        
+        NSMutableArray * jsonReturn = [sendBox post:post toUrl:url];
+        
+        if (jsonReturn != nil) {
+            
+            [showObj reloadData];
+        }else{
+            [sendBox getErrorMessage];
+        }
+        
+        // ลบวัตถุใน table
+        [displayObject removeObjectAtIndex:indexPath.row];
+        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+    }
+}
+
+-(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
+{
+    if([searchText length] == 0)
+    {
+        [displayObject removeAllObjects];
+        [displayObject addObjectsFromArray:myObject];
+    }
+    else
+    {
+        [displayObject removeAllObjects];
+        for (NSDictionary *item in myObject) {
+            NSString *string = [item objectForKey:@"objectName"];
+            NSRange range = [string rangeOfString:searchText options:NSCaseInsensitiveSearch];
+            if (range.location != NSNotFound) {
+                [displayObject addObject:item];
+            } 
+        }
+    }
+    
+    [showObj reloadData];
+}
+
+-(void) searchBarSearchButtonClicked:(UISearchBar *)searchBar{
+	
+    [searchBar setShowsCancelButton:NO animated:YES];
+    [searchBar resignFirstResponder];
+    showObj.allowsSelection = YES;
+    showObj.scrollEnabled = YES;
+    
+}
+
+- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
+    [searchBar setShowsCancelButton:YES animated:YES];
+    // tableViewObj.allowsSelection = NO;
+    showObj.scrollEnabled = NO;
+}
+
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
+    searchBar.text=@"";
+    
+    [searchBar setShowsCancelButton:NO animated:YES];
+    [searchBar resignFirstResponder];
+    showObj.allowsSelection = YES;
+    showObj.scrollEnabled = YES;
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    //[searchBarObj becomeFirstResponder];
+    //[super viewDidAppear:animated];
 }
 
 - (void)didReceiveMemoryWarning

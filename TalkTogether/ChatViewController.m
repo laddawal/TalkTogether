@@ -10,12 +10,9 @@
 #import "UIBubbleTableView.h"
 #import "UIBubbleTableViewDataSource.h"
 #import "NSBubbleData.h"
+#import "DetailObjectViewController.h"
 
 @interface ChatViewController ()
-
-@end
-
-@implementation ChatViewController
 {
     NSMutableArray *myObject;
     
@@ -29,6 +26,9 @@
     
     NSString *senderID;
 }
+@end
+
+@implementation ChatViewController
 @synthesize myTable,message,textViewInput;
 @synthesize recieveObjectID;
 @synthesize recieveUserID;
@@ -46,8 +46,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-    myTable.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"paper_background.png"]]; // bg table
     
     sendBox = [[postMessage alloc]init];
     
@@ -62,38 +60,10 @@
     lastMessageID = [NSString stringWithFormat:@"0"];
 	// Do any additional setup after loading the view, typically from a nib.
     
-//    NSBubbleData *heyBubble = [NSBubbleData dataWithText:@"Hey, halloween is soon" date:[NSDate dateWithTimeIntervalSinceNow:-300] type:BubbleTypeSomeoneElse];
-//    heyBubble.avatar = [UIImage imageNamed:@"avatar1.png"];
-//    
-//    NSBubbleData *photoBubble = [NSBubbleData dataWithImage:[UIImage imageNamed:@"halloween.jpg"] date:[NSDate dateWithTimeIntervalSinceNow:-290] type:BubbleTypeSomeoneElse];
-//    photoBubble.avatar = [UIImage imageNamed:@"avatar1.png"];
-//    
-//    NSBubbleData *replyBubble = [NSBubbleData dataWithText:@"Wow.. Really cool picture out there. iPhone 5 has really nice camera, yeah?" date:[NSDate dateWithTimeIntervalSinceNow:-5] type:BubbleTypeMine];
-//    replyBubble.avatar = nil;
-    
     bubbleData = [[NSMutableArray alloc] init];
     myTable.bubbleDataSource = self.myTable.bubbleDataSource;
     
-    // The line below sets the snap interval in seconds. This defines how the bubbles will be grouped in time.
-    // Interval of 120 means that if the next messages comes in 2 minutes since the last message, it will be added into the same group.
-    // Groups are delimited with header which contains date and time for the first message in the group.
-    
-    myTable.snapInterval = 120;
-    
-    // The line below enables avatar support. Avatar can be specified for each bubble with .avatar property of NSBubbleData.
-    // Avatars are enabled for the whole table at once. If particular NSBubbleData misses the avatar, a default placeholder will be set (missingAvatar.png)
-    
     myTable.showAvatars = YES;
-    
-    // Uncomment the line below to add "Now typing" bubble
-    // Possible values are
-    //    - NSBubbleTypingTypeSomebody - shows "now typing" bubble on the left
-    //    - NSBubbleTypingTypeMe - shows "now typing" bubble on the right
-    //    - NSBubbleTypingTypeNone - no "now typing" bubble
-    
-    myTable.typingBubble = NSBubbleTypingTypeSomebody;
-    
-//    [myTable reloadData];
     
     // Keyboard events
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWasShown:) name:UIKeyboardWillShowNotification object:nil];
@@ -159,43 +129,62 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (BOOL)textFieldShouldClear:(UITextField *)textField
+{
+    return YES;
+}
+
 - (IBAction)sendBtn:(id)sender {
-    myTable.typingBubble = NSBubbleTypingTypeNobody;
-    NSBubbleData *sayBubble = [NSBubbleData dataWithText:message.text date:[NSDate dateWithTimeIntervalSinceNow:0] type:BubbleTypeMine];
-    
-    // Avatar Image
-    if ([senderID isEqualToString:@"1"]) {
-        sayBubble.avatar = [UIImage imageNamed:@"user.png"];
-    }else{
-        sayBubble.avatar = [UIImage imageNamed:@"car1.png"];
-    }
-    
-    [bubbleData addObject:sayBubble];
-    
-    // Start on last cell
-    [myTable setContentOffset:CGPointMake(myTable.contentSize.height,myTable.frame.size.height)];
-    [myTable reloadData];
-    
-    
-    NSMutableString *post = [NSMutableString stringWithFormat:@"objectID=%@&contactID=%@&message=%@&sender=%@",objectID,userID,[message text],senderID];
-    NSURL *url = [NSURL URLWithString:@"http://angsila.cs.buu.ac.th/~53160117/TalkTogether/insertMessage.php"];
-    
-    NSMutableArray *jsonReturn = [sendBox post:post toUrl:url];
-    
-    if (jsonReturn != nil) {
-        for (NSDictionary *dataDict in jsonReturn) {
-            
-            NSString *messageID = [dataDict objectForKey:@"messageID"];
-            lastMessageID = messageID;
+    if (![message.text isEqualToString:@""]) { // ถ้า text field จะไม่ส่งข้อมูล
+        NSBubbleData *sayBubble = [NSBubbleData dataWithText:message.text date:[NSDate dateWithTimeIntervalSinceNow:0] type:BubbleTypeMine];
+        
+        // Avatar Image
+        if ([senderID isEqualToString:@"1"]) {
+            sayBubble.avatar = [UIImage imageNamed:@"user.png"];
+        }else{
+            sayBubble.avatar = [UIImage imageNamed:@"car1.png"];
         }
-    }else{
-        [sendBox getErrorMessage];
+        
+        [bubbleData addObject:sayBubble];
+        
+        // Start on last cell
+        [myTable setContentOffset:CGPointMake(myTable.contentSize.height,myTable.frame.size.height)];
+        [myTable reloadData];
+        
+        
+        NSMutableString *post = [NSMutableString stringWithFormat:@"objectID=%@&contactID=%@&message=%@&sender=%@",objectID,userID,[message text],senderID];
+        NSURL *url = [NSURL URLWithString:@"http://angsila.cs.buu.ac.th/~53160117/TalkTogether/insertMessage.php"];
+        
+        NSMutableArray *jsonReturn = [sendBox post:post toUrl:url];
+        
+        if (jsonReturn != nil) {
+            for (NSDictionary *dataDict in jsonReturn) {
+                
+                NSString *messageID = [dataDict objectForKey:@"messageID"];
+                lastMessageID = messageID;
+            }
+        }else{
+            [sendBox getErrorMessage];
+        }
+        
+        // clear text field
+        message.text = @"";
+        
+        [message resignFirstResponder];
     }
+}
+
+- (IBAction)detailView:(id)sender {
+    // ไปหน้า detail
+    DetailObjectViewController *detailView =[self.storyboard instantiateViewControllerWithIdentifier:@"detailView"];
     
-    // clear text field
-    message.text = @"";
+    //    chatView.recieveUserID = [tmpDict objectForKey:@"userID"];
+    //    chatView.recieveObjectID = objectID;
+    //    chatView.recieveSender = @"2"; // กำหนดให้ผู้ส่งคือวัตถุ
     
-    [message resignFirstResponder];
+    [detailView setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
+    
+    [self.navigationController pushViewController:detailView animated:YES];
 }
 
 -(void)updateMessage{
@@ -216,30 +205,25 @@
             NSString *strMessage = [dataDict objectForKey:@"message"];
             NSString *sender = [dataDict objectForKey:@"sender"];
             NSLog(@"messageID : %@",messageID);
-            NSLog(@"Sender!!!!!!!!!!!!!!! : %@",sender);
             lastMessageID = messageID;
             
             // ใส่ใน Table
             if ([senderID isEqualToString:@"1"]) {
                 if ([sender isEqualToString:@"1"]) {
-                    myTable.typingBubble = NSBubbleTypingTypeNobody;
                     NSBubbleData *sayBubble = [NSBubbleData dataWithText:strMessage date:[NSDate dateWithTimeIntervalSinceNow:0] type:BubbleTypeMine];
                     sayBubble.avatar = [UIImage imageNamed:@"user.png"]; // User Image
                     [bubbleData addObject:sayBubble];
                 }else{
-                    myTable.typingBubble = NSBubbleTypingTypeNobody;
                     NSBubbleData *sayBubble = [NSBubbleData dataWithText:strMessage date:[NSDate dateWithTimeIntervalSinceNow:0] type:BubbleTypeSomeoneElse];
                     sayBubble.avatar = [UIImage imageNamed:@"car1.png"]; // Object Image
                     [bubbleData addObject:sayBubble];
                 }
             }else{
                 if ([sender isEqualToString:@"2"]) {
-                    myTable.typingBubble = NSBubbleTypingTypeNobody;
                     NSBubbleData *sayBubble = [NSBubbleData dataWithText:strMessage date:[NSDate dateWithTimeIntervalSinceNow:0] type:BubbleTypeMine];
                     sayBubble.avatar = [UIImage imageNamed:@"car1.png"]; // User Image
                     [bubbleData addObject:sayBubble];
                 }else{
-                    myTable.typingBubble = NSBubbleTypingTypeNobody;
                     NSBubbleData *sayBubble = [NSBubbleData dataWithText:strMessage date:[NSDate dateWithTimeIntervalSinceNow:0] type:BubbleTypeSomeoneElse];
                     sayBubble.avatar = [UIImage imageNamed:@"user.png"]; // Object Image
                     [bubbleData addObject:sayBubble];

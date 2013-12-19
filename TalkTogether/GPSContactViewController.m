@@ -10,10 +10,6 @@
 #import "ChatViewController.h"
 
 @interface GPSContactViewController ()
-
-@end
-
-@implementation GPSContactViewController
 {
     NSMutableArray *myObject;
     
@@ -22,7 +18,9 @@
     
     NSString *userID;
 }
+@end
 
+@implementation GPSContactViewController
 @synthesize locationManager;
 @synthesize nearObject;
 
@@ -43,6 +41,9 @@
     sendBox = [[postMessage alloc]init];
     
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg.png"]]; // bg
+    
+    // Create array to hold dictionaries
+    myObject = [[NSMutableArray alloc] init];
     
     // Create object
     locationManager=[[CLLocationManager alloc] init];
@@ -84,9 +85,14 @@
             
             //ส่ง latitude & longtitude ให้ php เพื่อหาตำแหน่งวัตถุที่ใกล้เคียง
             
-            NSMutableString *post = [NSMutableString stringWithFormat:@"latitude=%+.7f&longitude=%+.7f",latitude,longitude];
+            //latitude = 37.7858340;
+            //longitude = -122.4064170;
             
-            NSURL *url = [NSURL URLWithString:@"http://angsila.cs.buu.ac.th/~53160117/TalkTogether/insertGPS.php"];
+            NSMutableString *post = [NSMutableString stringWithFormat:@"latitude=%.7f&longitude=%.7f",latitude,longitude];
+            
+            NSLog(@"Latitude :%f",latitude);
+            
+            NSURL *url = [NSURL URLWithString:@"http://angsila.cs.buu.ac.th/~53160117/TalkTogether/searchGPS.php"];
             
             NSMutableArray * jsonReturn = [sendBox post:post toUrl:url];
             
@@ -114,25 +120,25 @@
     static NSString *CellIdentifier = @"gpsContactCell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    
+    // selected cell color
+    UIView *bgColorView = [[UIView alloc] init];
+    [bgColorView setBackgroundColor:[UIColor colorWithRed:134.0/255.0 green:114.0/255.0 blue:93.0/255.0 alpha:1.0]];
+    [cell setSelectedBackgroundView:bgColorView];
+    
     if (cell == nil) {
         // Use the default cell style.
-        cell = [[UITableViewCell alloc] initWithStyle : UITableViewCellStyleSubtitle
+        cell = [[UITableViewCell alloc] initWithStyle : UITableViewCellStyleDefault
                                       reuseIdentifier : CellIdentifier];
     }
     
-    int nbCount = [myObject count];
-    if (nbCount ==0)
-        cell.textLabel.text = @"";
-    else
-    {
-        NSDictionary *tmpDict = [myObject objectAtIndex:indexPath.row];
-        
-        // ObjectName
-        NSString *text;
-        text = [NSString stringWithFormat:@"objectName : %@",[tmpDict objectForKey:@"objectName"]];
-        
-        cell.textLabel.text = text;
-    }
+    NSDictionary *tmpDict = [myObject objectAtIndex:indexPath.row];
+    
+    // ObjectName
+    NSString *text;
+    text = [NSString stringWithFormat:@"%@",[tmpDict objectForKey:@"objectName"]];
+    
+    cell.textLabel.text = text;
     return cell;
 }
 

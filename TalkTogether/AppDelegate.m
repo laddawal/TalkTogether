@@ -25,8 +25,6 @@
                     }];
 }
 
-
-
 - (void)applicationWillTerminate:(UIApplication *)application {
     // FBSample logic
     // if the app is going away, we close the session object
@@ -43,22 +41,15 @@
     [FBLoginView class];
     
     // Background Navigation Bar
-    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"navBarBlue.png"] forBarMetrics:UIBarMetricsDefault];
+    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"nav.png"] forBarMetrics:UIBarMetricsDefault];
     
-    // Navigation Bar Title Shadow
-    [[UINavigationBar appearance] setTitleTextAttributes: [NSDictionary dictionaryWithObjectsAndKeys:
-                                                           [UIColor colorWithRed:69.0/255.0 green:47.0/255.0 blue:24.0/255.0 alpha:1.0], NSForegroundColorAttributeName,nil]];
+    // Navugation Bar Tint Color
+    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
     
-    // Navigation Bar Tint Color
-    [[UINavigationBar appearance] setTintColor:[UIColor colorWithRed:69.0/255.0 green:47.0/255.0 blue:24.0/255.0 alpha:1.0]];
-
-
     // Override point for customization after application launch.
     
     [self.window makeKeyAndVisible];
     
-    
-
     return YES;
 }
 

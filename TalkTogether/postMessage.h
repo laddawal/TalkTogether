@@ -9,7 +9,9 @@
 #import <Foundation/Foundation.h>
 
 @interface postMessage : NSObject
+
 -(NSMutableArray*) post:(NSString*)postMessage toUrl:(NSURL*)url;
 -(BOOL)postImage:(NSData*)image withObjectID:(NSString*)objectID toUrl:(NSURL*)url;
 -(void)getErrorMessage;
+
 @end

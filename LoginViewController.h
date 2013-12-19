@@ -15,8 +15,4 @@
     postMessage *sendBox;
 }
 
-//- (void)showAlert:(NSString *)message
-//           result:(id)result
-//            error:(NSError *)error;
-
 @end

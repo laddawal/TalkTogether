@@ -14,5 +14,7 @@
     postMessage *sendBox;
 }
 
+@property (strong, nonatomic) IBOutlet UISearchBar *searchObj;
 @property (strong, nonatomic) IBOutlet UITableView *showObj;
+
 @end

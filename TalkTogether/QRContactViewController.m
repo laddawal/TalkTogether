@@ -10,14 +10,13 @@
 #import "ChatViewController.h"
 
 @interface QRContactViewController ()
-
-@end
-
-@implementation QRContactViewController
 {
     NSString *objectID;
     NSString *userID;
 }
+@end
+
+@implementation QRContactViewController
 @synthesize qrImg;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil

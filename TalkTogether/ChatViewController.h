@@ -24,5 +24,6 @@
 @property (strong, nonatomic) id recieveSender;
 
 - (IBAction)sendBtn:(id)sender;
+- (IBAction)detailView:(id)sender;
 
 @end

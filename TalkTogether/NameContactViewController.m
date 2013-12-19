@@ -41,23 +41,9 @@
     myObject = [[NSMutableArray alloc] init];
 }
 
-// สลับสี Cell Background
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row%2 == 0) {
-        UIColor *altCellColor = [UIColor colorWithWhite:0.7 alpha:0.5];
-        cell.backgroundColor = altCellColor;
-    }
-}
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    
-    int nbCount = [myObject count];
-    if (nbCount == 0)
-        return 1;
-    else
-        return [myObject count];
-    
+    return [myObject count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -66,25 +52,25 @@
     static NSString *CellIdentifier = @"nameContactCell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    
+    // selected cell color
+    UIView *bgColorView = [[UIView alloc] init];
+    [bgColorView setBackgroundColor:[UIColor colorWithRed:134.0/255.0 green:114.0/255.0 blue:93.0/255.0 alpha:1.0]];
+    [cell setSelectedBackgroundView:bgColorView];
+    
     if (cell == nil) {
         // Use the default cell style.
-        cell = [[UITableViewCell alloc] initWithStyle : UITableViewCellStyleSubtitle
+        cell = [[UITableViewCell alloc] initWithStyle : UITableViewCellStyleDefault
                                        reuseIdentifier : CellIdentifier];
     }
     
-    int nbCount = [myObject count];
-    if (nbCount ==0)
-        cell.textLabel.text = @"";
-    else
-    {
-        NSDictionary *tmpDict = [myObject objectAtIndex:indexPath.row];
-        
-        // ObjectName
-        NSString *text;
-        text = [NSString stringWithFormat:@"%@",[tmpDict objectForKey:@"objectName"]];
-        
-        cell.textLabel.text = text;
-    }
+    NSDictionary *tmpDict = [myObject objectAtIndex:indexPath.row];
+    
+    // ObjectName
+    NSString *text;
+    text = [NSString stringWithFormat:@"%@",[tmpDict objectForKey:@"objectName"]];
+    
+    cell.textLabel.text = text;
     return cell;
 }
 
@@ -179,29 +165,11 @@
     chatView.recieveObjectID = [tmpDict objectForKey:@"objectID"];
     chatView.recieveUserID = userID;
     chatView.recieveSender = @"1"; // กำหนดให้ผู้ส่งคือผู้ใช้
+    chatView.navigationItem.title = [tmpDict objectForKey:@"objectName"];
     
     [chatView setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
     
     [self.navigationController pushViewController:chatView animated:YES];
 }
-
-//- (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender {
-//    return NO;
-//}
-
-//- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-//{
-//    if ([[segue identifier] isEqualToString:@"NameContactChat"]) {
-//        
-//        NSIndexPath *indexPath = [self.showObject indexPathForSelectedRow];
-//        
-//        NSDictionary *tmpDict = [myObject objectAtIndex:indexPath.row];
-//        
-//        NSString *objectID = [tmpDict objectForKey:@"objectID"];
-//        
-//        [[segue destinationViewController] setDetailItem:objectID];
-//    }
-//    
-//}
 
 @end
