@@ -8,8 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "ZBarSDK.h"
+#import "postMessage.h"
 
 @interface QRContactViewController : UIViewController < ZBarReaderDelegate,UIAlertViewDelegate >
+{
+    postMessage *sendBox;
+}
 
 @property (strong, nonatomic) IBOutlet UIImageView *qrImg;
 - (IBAction)scanBtn:(id)sender;

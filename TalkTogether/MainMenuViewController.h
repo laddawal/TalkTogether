@@ -10,5 +10,6 @@
 
 @interface MainMenuViewController : UIViewController
 - (IBAction)logout:(id)sender;
+- (IBAction)everChat:(id)sender;
 
 @end

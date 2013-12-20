@@ -13,6 +13,7 @@
 {
     NSString *objectID;
     NSString *userID;
+    NSString *objectName;
 }
 @end
 
@@ -32,6 +33,8 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    
+    sendBox = [[postMessage alloc]init];
     
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg.png"]]; // bg
 }
@@ -69,6 +72,22 @@
     
     objectID =  symbol.data ;
     
+    //ส่ง objectID ให้ php เพื่อหา objectName
+    
+    NSString *post = [NSString stringWithFormat:@"objectID=%@",objectID];
+    
+    NSURL *url = [NSURL URLWithString:@"http://angsila.cs.buu.ac.th/~53160117/TalkTogether/getObjectName.php"];
+    
+    NSMutableArray * jsonReturn = [sendBox post:post toUrl:url];
+    
+    if (jsonReturn != nil) {
+        for (NSDictionary* fetchDict in jsonReturn){
+            objectName = [fetchDict objectForKey:objectName];
+        }
+    }else{
+        [sendBox getErrorMessage];
+    }
+    
 //    if (ใช่ QR เรา) {
         // ดึง userID จาก NSUserDefault
         NSUserDefaults *defaultUserID = [NSUserDefaults standardUserDefaults];
@@ -79,6 +98,7 @@
         chatView.recieveObjectID = objectID;
         chatView.recieveUserID = userID;
         chatView.recieveSender = @"1"; // กำหนดให้ผู้ส่งคือผู้ใช้
+        chatView.navigationItem.title = objectName;
     
         [chatView setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
         [reader.navigationController pushViewController:chatView animated:YES];

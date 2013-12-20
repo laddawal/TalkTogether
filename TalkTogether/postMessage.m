@@ -15,6 +15,7 @@
 
 -(NSMutableArray*) post:(NSString*)postMessage toUrl:(NSURL*)url{
     
+    postMessage = [postMessage stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     NSData *postData = [postMessage dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
     NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];
     

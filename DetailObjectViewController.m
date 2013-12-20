@@ -46,7 +46,7 @@
     
     // รับ objectID จาหหน้าก่อนหน้า
     objectID = [recieveObjectID description];
-    
+    NSLog(@"DetailViewObjectID : %@",objectID);
     
 }
 

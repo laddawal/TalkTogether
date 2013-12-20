@@ -9,9 +9,12 @@
 #import "MainMenuViewController.h"
 #import "AppDelegate.h"
 #import "LoginViewController.h"
+#import "EverChatViewController.h"
 
 @interface MainMenuViewController ()
-
+{
+    NSString *userID;
+}
 @end
 
 @implementation MainMenuViewController
@@ -45,5 +48,22 @@
     LoginViewController *loginView =[self.storyboard instantiateViewControllerWithIdentifier:@"loginView"];
     [loginView setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
     [self presentViewController:loginView animated:NO completion:nil];
+}
+
+- (IBAction)everChat:(id)sender {
+    // ดึง userID จาก NSUserDefault
+    NSUserDefaults *defaultUserID = [NSUserDefaults standardUserDefaults];
+    userID = [defaultUserID stringForKey:@"userID"];
+    
+    // ไปหน้า detail
+    EverChatViewController *everChatView =[self.storyboard instantiateViewControllerWithIdentifier:@"everChatView"];
+    
+    everChatView.recieveUserID = userID;
+    //    detailView.recieveUserID = userID;
+    //    detailView.recieveSender = @"1"; // กำหนดให้ผู้ส่งคือผู้ใช้
+    
+    [everChatView setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
+    
+    [self.navigationController pushViewController:everChatView animated:YES];
 }
 @end

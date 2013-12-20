@@ -66,7 +66,7 @@
                 
         // clear TextField
         objectName.text = NULL;
-
+        
         [sendBox getErrorMessage];
     }
 }

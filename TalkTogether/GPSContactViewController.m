@@ -132,20 +132,13 @@
                                       reuseIdentifier : CellIdentifier];
     }
     
-    NSDictionary *tmpDict = [myObject objectAtIndex:indexPath.row];
-    
     // ObjectName
-    NSString *text;
-    text = [NSString stringWithFormat:@"%@",[tmpDict objectForKey:@"objectName"]];
-    
-    cell.textLabel.text = text;
+    cell.textLabel.text = [[myObject objectAtIndex:indexPath.row] objectForKey:@"objectName"];
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSDictionary *tmpDict = [myObject objectAtIndex:indexPath.row];
-    
     // ดึง userID จาก NSUserDefault
     NSUserDefaults *defaultUserID = [NSUserDefaults standardUserDefaults];
     userID = [defaultUserID stringForKey:@"userID"];
@@ -153,9 +146,10 @@
     // ไปหน้า chat
     ChatViewController *chatView =[self.storyboard instantiateViewControllerWithIdentifier:@"chatView"];
     
-    chatView.recieveObjectID = [tmpDict objectForKey:@"objectID"];
+    chatView.recieveObjectID = [[myObject objectAtIndex:indexPath.row] objectForKey:@"objectID"];
     chatView.recieveUserID = userID;
     chatView.recieveSender = @"1"; // กำหนดให้ผู้ส่งคือผู้ใช้
+    chatView.navigationItem.title = [[myObject objectAtIndex:indexPath.row] objectForKey:@"objectName"];
     
     [chatView setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
     

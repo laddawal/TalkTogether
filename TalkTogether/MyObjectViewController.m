@@ -46,7 +46,6 @@
     userID = [defaultUserID stringForKey:@"userID"];
     
     // ส่ง userID ให้ php
-    
     NSString *post = [NSString stringWithFormat:@"userID=%@",userID];
     
     NSURL *url = [NSURL URLWithString:@"http://angsila.cs.buu.ac.th/~53160117/TalkTogether/getUserObject.php"];
@@ -58,7 +57,7 @@
             [myObject addObject:fetchDict];
         }
         displayObject =[[NSMutableArray alloc] initWithArray:myObject];
-//        [showObj reloadData];
+        [showObj reloadData];
     }else{
         [sendBox getErrorMessage];
     }
@@ -87,20 +86,13 @@
                                       reuseIdentifier : CellIdentifier];
     }
     
-    NSDictionary *tmpDict = [displayObject objectAtIndex:indexPath.row];
-    
     // ObjectName
-    NSString *text;
-    text = [NSString stringWithFormat:@"%@",[tmpDict objectForKey:@"objectName"]];
-    cell.textLabel.text = text;
-    
+    cell.textLabel.text = [[displayObject objectAtIndex:indexPath.row] objectForKey:@"objectName"];
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSDictionary *tmpDict = [displayObject objectAtIndex:indexPath.row];
-    
     // ดึง userID จาก NSUserDefault
     NSUserDefaults *defaultUserID = [NSUserDefaults standardUserDefaults];
     userID = [defaultUserID stringForKey:@"userID"];
@@ -108,9 +100,7 @@
     // ไปหน้า detail
     DetailObjectViewController *detailView =[self.storyboard instantiateViewControllerWithIdentifier:@"detailView"];
     
-    detailView.recieveObjectID = [tmpDict objectForKey:@"objectID"];
-//    detailView.recieveUserID = userID;
-//    detailView.recieveSender = @"1"; // กำหนดให้ผู้ส่งคือผู้ใช้
+    detailView.recieveObjectID = [[displayObject objectAtIndex:indexPath.row] objectForKey:@"objectID"];
     
     [detailView setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
     
@@ -129,20 +119,17 @@
         
         // ลบวัตถุใน database
         // ส่ง objectID ให้ php
-        NSDictionary *tmpDict = [displayObject objectAtIndex:indexPath.row];
-        
-        NSLog(@"objectID : %@",[tmpDict objectForKey:@"objectID"]);
+        NSLog(@"objectID : %@",[[displayObject objectAtIndex:indexPath.row] objectForKey:@"objectID"]);
         
         NSLog(@"IndexPath : %ld",(long)indexPath.row);
         
-        NSString *post = [NSString stringWithFormat:@"objectID=%@",[tmpDict objectForKey:@"objectID"]];
+        NSString *post = [NSString stringWithFormat:@"objectID=%@",[[displayObject objectAtIndex:indexPath.row] objectForKey:@"objectID"]];
         
         NSURL *url = [NSURL URLWithString:@"http://angsila.cs.buu.ac.th/~53160117/TalkTogether/deleteObject.php"];
         
         NSMutableArray * jsonReturn = [sendBox post:post toUrl:url];
         
         if (jsonReturn != nil) {
-            
             [showObj reloadData];
         }else{
             [sendBox getErrorMessage];
@@ -167,7 +154,7 @@
         for (NSDictionary *item in myObject) {
             NSString *string = [item objectForKey:@"objectName"];
             NSRange range = [string rangeOfString:searchText options:NSCaseInsensitiveSearch];
-            if (range.location != NSNotFound) {
+            if (range.location !=  NSNotFound) {
                 [displayObject addObject:item];
             } 
         }
@@ -182,7 +169,6 @@
     [searchBar resignFirstResponder];
     showObj.allowsSelection = YES;
     showObj.scrollEnabled = YES;
-    
 }
 
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {

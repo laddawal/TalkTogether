@@ -64,41 +64,38 @@
                                        reuseIdentifier : CellIdentifier];
     }
     
-    NSDictionary *tmpDict = [myObject objectAtIndex:indexPath.row];
-    
     // ObjectName
-    NSString *text;
-    text = [NSString stringWithFormat:@"%@",[tmpDict objectForKey:@"objectName"]];
-    
-    cell.textLabel.text = text;
+    cell.textLabel.text = [[myObject objectAtIndex:indexPath.row] objectForKey:@"objectName"];
     return cell;
 }
 
--(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
-{
-    if([searchText length] == 0)
-    {
-        [displayObject removeAllObjects];
-        [displayObject addObjectsFromArray:allObject];
-    }
-    else
-    {
-        [displayObject removeAllObjects];
-        for(NSString * string in allObject)
-        {
-            NSRange r = [string rangeOfString:searchText options:NSCaseInsensitiveSearch];
-            if(r.location != NSNotFound)
-            {
-                [displayObject addObject:string];
-            }
-        }
-    }
-    
-    [_showObject reloadData];
-}
+//-(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
+//{
+//    if([searchText length] == 0)
+//    {
+//        [displayObject removeAllObjects];
+//        [displayObject addObjectsFromArray:allObject];
+//    }
+//    else
+//    {
+//        [displayObject removeAllObjects];
+//        for(NSString * string in allObject)
+//        {
+//            NSRange r = [string rangeOfString:searchText options:NSCaseInsensitiveSearch];
+//            if(r.location != NSNotFound)
+//            {
+//                [displayObject addObject:string];
+//            }
+//        }
+//    }
+//    
+//    [_showObject reloadData];
+//}
 
 -(void) searchBarSearchButtonClicked:(UISearchBar *)searchBar{
-	
+    // clear วัตถุที่ค้นหาครั้งที่แล้วออก
+	[myObject removeAllObjects];
+    
     [searchBar setShowsCancelButton:NO animated:YES];
     [searchBar resignFirstResponder]; // hide keyboard เมื่อกด search
     _showObject.allowsSelection = YES;
@@ -118,11 +115,12 @@
         for (NSDictionary* fetchDict in jsonReturn){
             [myObject addObject:fetchDict];
         }
-        [_showObject reloadData];
+        NSLog(@"%@",myObject);
     }else{
         [sendBox getErrorMessage];
     }
     
+    [_showObject reloadData];
 }
 
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
@@ -153,8 +151,6 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSDictionary *tmpDict = [myObject objectAtIndex:indexPath.row];
-    
     // ดึง userID จาก NSUserDefault
     NSUserDefaults *defaultUserID = [NSUserDefaults standardUserDefaults];
     userID = [defaultUserID stringForKey:@"userID"];
@@ -162,10 +158,10 @@
     // ไปหน้า chat
     ChatViewController *chatView =[self.storyboard instantiateViewControllerWithIdentifier:@"chatView"];
     
-    chatView.recieveObjectID = [tmpDict objectForKey:@"objectID"];
+    chatView.recieveObjectID = [[myObject objectAtIndex:indexPath.row] objectForKey:@"objectID"];
     chatView.recieveUserID = userID;
     chatView.recieveSender = @"1"; // กำหนดให้ผู้ส่งคือผู้ใช้
-    chatView.navigationItem.title = [tmpDict objectForKey:@"objectName"];
+    chatView.navigationItem.title = [[myObject objectAtIndex:indexPath.row] objectForKey:@"objectName"];
     
     [chatView setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
     

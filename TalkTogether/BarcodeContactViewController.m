@@ -14,6 +14,7 @@
     NSString *barCodeID;
     NSString *userID;
     NSString *objectID;
+    NSString *objectName;
 }
 @end
 
@@ -85,6 +86,7 @@
     if (jsonReturn != nil) {
         for (NSDictionary* fetchDict in jsonReturn){
             objectID = [NSString stringWithFormat:@"%@",[fetchDict objectForKey:@"objectID"]];
+            objectName = [NSString stringWithFormat:@"%@",[fetchDict objectForKey:@"objectName"]];
             NSLog(@"BarcodeObjectID : %@",objectID);
         }
         
@@ -97,6 +99,7 @@
         chatView.recieveObjectID = objectID;
         chatView.recieveUserID = userID;
         chatView.recieveSender = @"1"; // กำหนดให้ผู้ส่งคือผู้ใช้
+        chatView.navigationItem.title = objectName;
         
         [chatView setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
         [reader.navigationController pushViewController:chatView animated:YES];
