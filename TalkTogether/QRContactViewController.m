@@ -37,6 +37,15 @@
     sendBox = [[postMessage alloc]init];
     
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg.png"]]; // bg
+    
+    // border uiImage
+    CALayer *borderLayer = [CALayer layer];
+    CGRect borderFrame = CGRectMake(0, 0, (qrImg.frame.size.width), (qrImg.frame.size.height));
+    [borderLayer setBackgroundColor:[[UIColor lightGrayColor] CGColor]];
+    [borderLayer setFrame:borderFrame];
+    [borderLayer setBorderWidth:5.0];
+    [borderLayer setBorderColor:[[UIColor whiteColor] CGColor]];
+    [qrImg.layer addSublayer:borderLayer];
 }
 
 - (void)didReceiveMemoryWarning
@@ -56,7 +65,7 @@
     [scanner setSymbology: ZBAR_I25
                    config: ZBAR_CFG_ENABLE
                        to: 0];
-    
+
     [self.navigationController pushViewController:reader animated:YES];
 }
 

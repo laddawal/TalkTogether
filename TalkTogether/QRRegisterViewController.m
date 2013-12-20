@@ -38,6 +38,15 @@
     
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg.png"]]; // bg
     
+    // border uiImage
+    CALayer *borderLayer = [CALayer layer];
+    CGRect borderFrame = CGRectMake(0, 0, (qrImage.frame.size.width), (qrImage.frame.size.height));
+    [borderLayer setBackgroundColor:[[UIColor lightGrayColor] CGColor]];
+    [borderLayer setFrame:borderFrame];
+    [borderLayer setBorderWidth:5.0];
+    [borderLayer setBorderColor:[[UIColor whiteColor] CGColor]];
+    [qrImage.layer addSublayer:borderLayer];
+    
     sendBox = [[postMessage alloc]init];
     
     insertQRCode = false;

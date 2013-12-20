@@ -135,7 +135,7 @@
 }
 
 - (IBAction)sendBtn:(id)sender {
-    if (![message.text isEqualToString:@""]) { // ถ้า text field จะไม่ส่งข้อมูล
+    if (![message.text isEqualToString:@""]) { // ถ้า text field ว่าง จะไม่ส่งข้อมูล
         NSBubbleData *sayBubble = [NSBubbleData dataWithText:message.text date:[NSDate dateWithTimeIntervalSinceNow:0] type:BubbleTypeMine];
         
         // Avatar Image
@@ -151,11 +151,60 @@
         [myTable setContentOffset:CGPointMake(myTable.contentSize.height,myTable.frame.size.height)];
         [myTable reloadData];
         
+        // ดึงข้อความจาก db ก่อนส่งข้อความใหม่ไป ป้องกันการส่งข้อความพร้อมกัน แล้วข้อความไม่ครบ
+        //ส่ง ObjectID & UserID & lastMessageID ให้ php
+        NSMutableString *post = [NSMutableString stringWithFormat:@"objectID=%@&userID=%@&lastMessageID=%@",objectID,userID,lastMessageID];
         
-        NSMutableString *post = [NSMutableString stringWithFormat:@"objectID=%@&contactID=%@&message=%@&sender=%@",objectID,userID,[message text],senderID];
-        NSURL *url = [NSURL URLWithString:@"http://angsila.cs.buu.ac.th/~53160117/TalkTogether/insertMessage.php"];
+        NSURL *url = [NSURL URLWithString:@"http://angsila.cs.buu.ac.th/~53160117/TalkTogether/getMessage.php"];
         
         NSMutableArray *jsonReturn = [sendBox post:post toUrl:url];
+        
+        if (jsonReturn != nil) {
+            for (NSDictionary *dataDict in jsonReturn) {
+                
+                NSString *messageID = [dataDict objectForKey:@"messageID"];
+                NSString *strMessage = [dataDict objectForKey:@"message"];
+                NSString *sender = [dataDict objectForKey:@"sender"];
+                NSLog(@"messageID : %@",messageID);
+                lastMessageID = messageID;
+                
+                // ใส่ใน Table
+                if ([senderID isEqualToString:@"1"]) {
+                    if ([sender isEqualToString:@"1"]) {
+                        NSBubbleData *sayBubble = [NSBubbleData dataWithText:strMessage date:[NSDate dateWithTimeIntervalSinceNow:0] type:BubbleTypeMine];
+                        sayBubble.avatar = [UIImage imageNamed:@"user.png"]; // User Image
+                        [bubbleData addObject:sayBubble];
+                    }else{
+                        NSBubbleData *sayBubble = [NSBubbleData dataWithText:strMessage date:[NSDate dateWithTimeIntervalSinceNow:0] type:BubbleTypeSomeoneElse];
+                        sayBubble.avatar = [UIImage imageNamed:@"car1.png"]; // Object Image
+                        [bubbleData addObject:sayBubble];
+                    }
+                }else{
+                    if ([sender isEqualToString:@"2"]) {
+                        NSBubbleData *sayBubble = [NSBubbleData dataWithText:strMessage date:[NSDate dateWithTimeIntervalSinceNow:0] type:BubbleTypeMine];
+                        sayBubble.avatar = [UIImage imageNamed:@"car1.png"]; // User Image
+                        [bubbleData addObject:sayBubble];
+                    }else{
+                        NSBubbleData *sayBubble = [NSBubbleData dataWithText:strMessage date:[NSDate dateWithTimeIntervalSinceNow:0] type:BubbleTypeSomeoneElse];
+                        sayBubble.avatar = [UIImage imageNamed:@"user.png"]; // Object Image
+                        [bubbleData addObject:sayBubble];
+                    }
+                }
+                
+                
+                // Start on last cell
+                [myTable setContentOffset:CGPointMake(myTable.contentSize.height,myTable.frame.size.height)];
+                [myTable reloadData];
+            }                   
+        }else{
+            //[sendBox getErrorMessage];
+        }
+        
+        // ส่งข้อความ
+        post = [NSMutableString stringWithFormat:@"objectID=%@&contactID=%@&message=%@&sender=%@",objectID,userID,[message text],senderID];
+        url = [NSURL URLWithString:@"http://angsila.cs.buu.ac.th/~53160117/TalkTogether/insertMessage.php"];
+        
+        jsonReturn = [sendBox post:post toUrl:url];
         
         if (jsonReturn != nil) {
             for (NSDictionary *dataDict in jsonReturn) {
@@ -191,7 +240,7 @@
     
     NSLog(@"hello lastMessage : %@",lastMessageID);
     
-    //ส่ง ObjectName & UserID ให้ php
+    //ส่ง ObjectID & UserID & lastMessageID ให้ php
     NSMutableString *post = [NSMutableString stringWithFormat:@"objectID=%@&userID=%@&lastMessageID=%@",objectID,userID,lastMessageID];
     
      NSURL *url = [NSURL URLWithString:@"http://angsila.cs.buu.ac.th/~53160117/TalkTogether/getMessage.php"];

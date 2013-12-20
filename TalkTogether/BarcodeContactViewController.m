@@ -38,6 +38,16 @@
     sendBox = [[postMessage alloc]init];
     
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg.png"]]; // bg
+    
+    // border uiImage
+    CALayer *borderLayer = [CALayer layer];
+    CGRect borderFrame = CGRectMake(0, 0, (barCodeImg.frame.size.width), (barCodeImg.frame.size.height));
+    [borderLayer setBackgroundColor:[[UIColor lightGrayColor] CGColor]];
+    [borderLayer setFrame:borderFrame];
+    [borderLayer setBorderWidth:5.0];
+    [borderLayer setBorderColor:[[UIColor whiteColor] CGColor]];
+    [barCodeImg.layer addSublayer:borderLayer];
+
 }
 
 - (IBAction)scanBtn:(id)sender {
