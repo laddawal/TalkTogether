@@ -35,7 +35,9 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    
+}
+
+- (void)viewWillAppear:(BOOL)animated {
     sendBox = [[postMessage alloc]init];
     
     // Create array to hold dictionaries
@@ -47,20 +49,28 @@
     
     // ส่ง userID ให้ php
     NSString *post = [NSString stringWithFormat:@"userID=%@",userID];
-    
     NSURL *url = [NSURL URLWithString:@"http://angsila.cs.buu.ac.th/~53160117/TalkTogether/getUserObject.php"];
+    BOOL error = [sendBox post:post toUrl:url];
     
-    NSMutableArray * jsonReturn = [sendBox post:post toUrl:url];
-    
-    if (jsonReturn != nil) {
-        for (NSDictionary* fetchDict in jsonReturn){
-            [myObject addObject:fetchDict];
+    if (!error) {
+        int returnNum = [sendBox getReturnMessage];
+        if (returnNum == 0) {
+            NSMutableArray *jsonReturn = [sendBox getData];
+            for (NSDictionary* fetchDict in jsonReturn){
+                [myObject addObject:fetchDict];
+            }
+            displayObject =[[NSMutableArray alloc] initWithArray:myObject];
+        }else{
+            UIAlertView *returnMessage = [[UIAlertView alloc]
+                                          initWithTitle:@"ไม่พบข้อมูล"
+                                          message:nil delegate:self
+                                          cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            [returnMessage show];
         }
-        displayObject =[[NSMutableArray alloc] initWithArray:myObject];
-        [showObj reloadData];
     }else{
         [sendBox getErrorMessage];
     }
+    [showObj reloadData];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -70,7 +80,6 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
     static NSString *CellIdentifier = @"myObjectCell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -93,10 +102,6 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // ดึง userID จาก NSUserDefault
-    NSUserDefaults *defaultUserID = [NSUserDefaults standardUserDefaults];
-    userID = [defaultUserID stringForKey:@"userID"];
-    
     // ไปหน้า detail
     DetailObjectViewController *detailView =[self.storyboard instantiateViewControllerWithIdentifier:@"detailView"];
     
@@ -118,26 +123,25 @@
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         
         // ลบวัตถุใน database
-        // ส่ง objectID ให้ php
-        NSLog(@"objectID : %@",[[displayObject objectAtIndex:indexPath.row] objectForKey:@"objectID"]);
-        
-        NSLog(@"IndexPath : %ld",(long)indexPath.row);
-        
+        // ส่ง objectID ให้ php  
         NSString *post = [NSString stringWithFormat:@"objectID=%@",[[displayObject objectAtIndex:indexPath.row] objectForKey:@"objectID"]];
-        
         NSURL *url = [NSURL URLWithString:@"http://angsila.cs.buu.ac.th/~53160117/TalkTogether/deleteObject.php"];
+        BOOL error = [sendBox post:post toUrl:url];
         
-        NSMutableArray * jsonReturn = [sendBox post:post toUrl:url];
-        
-        if (jsonReturn != nil) {
+        if (!error) {
+            UIAlertView *returnMessage = [[UIAlertView alloc]
+                                          initWithTitle:@"สำเร็จ!!"
+                                          message:nil delegate:self
+                                          cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            [returnMessage show];
             [showObj reloadData];
+            
+            // ลบวัตถุใน table
+            [displayObject removeObjectAtIndex:indexPath.row];
+            [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
         }else{
             [sendBox getErrorMessage];
         }
-        
-        // ลบวัตถุใน table
-        [displayObject removeObjectAtIndex:indexPath.row];
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
     }
 }
 
@@ -148,8 +152,7 @@
         [displayObject removeAllObjects];
         [displayObject addObjectsFromArray:myObject];
     }
-    else
-    {
+    else{
         [displayObject removeAllObjects];
         for (NSDictionary *item in myObject) {
             NSString *string = [item objectForKey:@"objectName"];
@@ -184,11 +187,6 @@
     [searchBar resignFirstResponder];
     showObj.allowsSelection = YES;
     showObj.scrollEnabled = YES;
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-    //[searchBarObj becomeFirstResponder];
-    //[super viewDidAppear:animated];
 }
 
 - (void)didReceiveMemoryWarning

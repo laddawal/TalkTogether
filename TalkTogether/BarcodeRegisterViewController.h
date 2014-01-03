@@ -10,7 +10,7 @@
 #import "ZBarSDK.h"
 #import "postMessage.h"
 
-@interface BarcodeRegisterViewController : UIViewController < ZBarReaderDelegate >
+@interface BarcodeRegisterViewController : UIViewController <ZBarReaderDelegate>
 {
     postMessage *sendBox;
 }

@@ -40,11 +40,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TalkTogether/ChatViewController.m"
-            timestampString = "408873724.550058"
+            timestampString = "410110336.822386"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "133"
-            endingLineNumber = "133"
+            startingLineNumber = "138"
+            endingLineNumber = "138"
             landmarkName = "-textFieldShouldClear:"
             landmarkType = "5">
          </BreakpointContent>

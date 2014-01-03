@@ -22,6 +22,7 @@
 @property (strong, nonatomic) id recieveObjectID;
 @property (strong, nonatomic) id recieveUserID;
 @property (strong, nonatomic) id recieveSender;
+@property (strong, nonatomic) id recieveResponderID;
 
 - (IBAction)sendBtn:(id)sender;
 - (IBAction)detailView:(id)sender;

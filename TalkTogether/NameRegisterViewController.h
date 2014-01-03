@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "postMessage.h"
 
-@interface NameRegisterViewController : UIViewController
+@interface NameRegisterViewController : UIViewController <UITextFieldDelegate>
 {
     postMessage *sendBox;
 }

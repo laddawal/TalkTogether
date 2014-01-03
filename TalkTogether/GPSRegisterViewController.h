@@ -9,14 +9,15 @@
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
 #import "postMessage.h"
+#import <MapKit/MapKit.h>
 
-@interface GPSRegisterViewController : UIViewController <CLLocationManagerDelegate>
+@interface GPSRegisterViewController : UIViewController <CLLocationManagerDelegate,MKMapViewDelegate,UITextFieldDelegate>
 {
     postMessage *sendBox;
 }
 
-@property (strong, nonatomic) IBOutlet UITextView *location;
 @property (strong, nonatomic) IBOutlet UITextField *objectName;
+@property (strong, nonatomic) IBOutlet MKMapView *mapView;
 
 //Add a location manager property to this app delegate
 @property (strong, nonatomic) CLLocationManager *locationManager;

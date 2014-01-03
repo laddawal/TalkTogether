@@ -15,6 +15,7 @@
     NSString *userID;
     NSString *objectID;
     NSString *objectName;
+    NSString *responderID;
 }
 @end
 
@@ -42,7 +43,7 @@
     // border uiImage
     CALayer *borderLayer = [CALayer layer];
     CGRect borderFrame = CGRectMake(0, 0, (barCodeImg.frame.size.width), (barCodeImg.frame.size.height));
-    [borderLayer setBackgroundColor:[[UIColor lightGrayColor] CGColor]];
+    [borderLayer setBackgroundColor:[[UIColor clearColor] CGColor]];
     [borderLayer setFrame:borderFrame];
     [borderLayer setBorderWidth:5.0];
     [borderLayer setBorderColor:[[UIColor whiteColor] CGColor]];
@@ -51,8 +52,6 @@
 }
 
 - (IBAction)scanBtn:(id)sender {
-    NSLog(@"Scan");
-    
     // ADD: present a barcode reader that scans from the camera feed
     ZBarReaderViewController *reader = [ZBarReaderViewController new];
     reader.readerDelegate = self;
@@ -67,16 +66,13 @@
                        to: 0];
     
     // present and release the controller
-    [self.navigationController pushViewController:reader animated:YES];
-//    [self presentViewController:reader animated:YES completion:nil];
+    [self presentViewController:reader animated:YES completion:nil];
 
 }
 
 - (void) imagePickerController: (UIImagePickerController*) reader
  didFinishPickingMediaWithInfo: (NSDictionary*) info
 {
-    NSLog(@"Image Picker");
-    
     id<NSFastEnumeration> results = [info objectForKey: ZBarReaderControllerResults];
     ZBarSymbol *symbol = nil;
     for(symbol in results)
@@ -84,38 +80,62 @@
     
     barCodeImg.image = [info objectForKey: UIImagePickerControllerOriginalImage];
     barCodeID =  symbol.data ;
-    NSLog(@"BarcodeID : %@",barCodeID);
+    
+    [reader dismissViewControllerAnimated:YES completion:nil]; // กลับหน้าระบุวัตถุด้วย Barcode
     
     //ส่ง barcodeID ให้ php
     NSMutableString *post = [NSMutableString stringWithFormat:@"barcodeID=%@",barCodeID];
     
     NSURL *url = [NSURL URLWithString:@"http://angsila.cs.buu.ac.th/~53160117/TalkTogether/searchBarcode.php"];
     
-    NSMutableArray * jsonReturn = [sendBox post:post toUrl:url];
+    BOOL error = [sendBox post:post toUrl:url];
     
-    if (jsonReturn != nil) {
-        for (NSDictionary* fetchDict in jsonReturn){
-            objectID = [NSString stringWithFormat:@"%@",[fetchDict objectForKey:@"objectID"]];
-            objectName = [NSString stringWithFormat:@"%@",[fetchDict objectForKey:@"objectName"]];
-            NSLog(@"BarcodeObjectID : %@",objectID);
+    if (!error) {
+        int returnNum = [sendBox getReturnMessage];
+        if (returnNum == 0) {
+            NSMutableArray *jsonReturn = [sendBox getData];
+            for (NSDictionary* fetchDict in jsonReturn){
+                objectID = [NSString stringWithFormat:@"%@",[fetchDict objectForKey:@"objectID"]];
+                objectName = [NSString stringWithFormat:@"%@",[fetchDict objectForKey:@"objectName"]];
+            }
+            
+            // ดึง userID จาก NSUserDefault
+            NSUserDefaults *defaultUserID = [NSUserDefaults standardUserDefaults];
+            userID = [defaultUserID stringForKey:@"userID"];
+            
+            // ดึงผู้รับผิดชอบ
+            NSMutableString *post = [NSMutableString stringWithFormat:@"objectID=%@&userID=%@",objectID,userID];
+            NSURL *url = [NSURL URLWithString:@"http://angsila.cs.buu.ac.th/~53160117/TalkTogether/randomResponder.php"];
+            BOOL error = [sendBox post:post toUrl:url];
+            
+            if (!error) {
+                NSMutableArray *jsonReturn = [sendBox getData];
+                for (NSDictionary* fetchDict in jsonReturn){
+                    responderID = [fetchDict objectForKey:@"responder_ID"];
+                }
+                
+                // ไปหน้า chat
+                ChatViewController *chatView =[self.storyboard instantiateViewControllerWithIdentifier:@"chatView"];
+                chatView.recieveObjectID = objectID;
+                chatView.recieveUserID = userID;
+                chatView.recieveSender = @"1"; // กำหนดให้ผู้ส่งคือผู้ใช้
+                chatView.recieveResponderID = responderID;
+                chatView.navigationItem.title = objectName;
+                
+                [chatView setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
+                [self.navigationController pushViewController:chatView animated:YES];
+            }else{
+                [sendBox getErrorMessage];
+            }
+        }else{
+            UIAlertView *returnMessage = [[UIAlertView alloc]
+                                          initWithTitle:@"ไม่พบข้อมูล"
+                                          message:nil delegate:self
+                                          cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            [returnMessage show];
         }
-        
-        // ดึง userID จาก NSUserDefault
-        NSUserDefaults *defaultUserID = [NSUserDefaults standardUserDefaults];
-        userID = [defaultUserID stringForKey:@"userID"];
-        
-        // ไปหน้า chat
-        ChatViewController *chatView =[self.storyboard instantiateViewControllerWithIdentifier:@"chatView"];
-        chatView.recieveObjectID = objectID;
-        chatView.recieveUserID = userID;
-        chatView.recieveSender = @"1"; // กำหนดให้ผู้ส่งคือผู้ใช้
-        chatView.navigationItem.title = objectName;
-        
-        [chatView setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
-        [reader.navigationController pushViewController:chatView animated:YES];
     }else{
         [sendBox getErrorMessage];
-        [reader.navigationController popViewControllerAnimated:YES];
     }
 }
 

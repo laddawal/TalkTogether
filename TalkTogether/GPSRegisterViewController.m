@@ -7,6 +7,7 @@
 //
 
 #import "GPSRegisterViewController.h"
+#import "DisplayMap.h"
 
 @interface GPSRegisterViewController ()
 {
@@ -18,9 +19,9 @@
 @end
 
 @implementation GPSRegisterViewController
-@synthesize location;
 @synthesize objectName;
 @synthesize locationManager;
+@synthesize mapView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -55,6 +56,8 @@
     if([CLLocationManager locationServicesEnabled]){
         [self.locationManager startUpdatingLocation];
     }
+    
+    [objectName setDelegate:self];
 }
 
 -(void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation{
@@ -74,15 +77,28 @@
             
             //Optional: turn off location services once we've gotten a good location
             [manager stopUpdatingLocation];
-         
-            // Show Location
-            self.location.text=[NSString stringWithFormat:@"latitude: %+.7f\nlongitude: %+.7f\naccuracy: %f",
-                                newLocation.coordinate.latitude,
-                                newLocation.coordinate.longitude,
-                                newLocation.horizontalAccuracy];
             
             latitude = newLocation.coordinate.latitude;
             longitude = newLocation.coordinate.longitude;
+            
+            // กำหนด latitude longtitude ลงในแผนที่
+            mapView.hidden = NO;
+            [mapView setMapType:MKMapTypeStandard];
+            [mapView setZoomEnabled:YES];
+            [mapView setScrollEnabled:YES];
+            MKCoordinateRegion region = { {0.0, 0.0 }, { 0.0, 0.0 } };
+            region.center.latitude = latitude;
+            region.center.longitude = longitude;
+            region.span.longitudeDelta = 0.01f;
+            region.span.latitudeDelta = 0.01f;
+            [mapView setRegion:region animated:YES];
+            
+            [mapView setDelegate:self];
+            
+            DisplayMap *ann = [[DisplayMap alloc] init];
+            ann.title = @"ตำแหน่งของคุณ";
+            ann.coordinate = region.center;
+            [mapView addAnnotation:ann];
         }
     }
 }
@@ -91,6 +107,12 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return YES;
 }
 
 - (IBAction)register:(id)sender {
@@ -108,20 +130,22 @@
         userID = [defaultUserID stringForKey:@"userID"];
         
         //ส่ง ObjectName & UserID ให้ php
-        
         NSMutableString *post = [NSMutableString stringWithFormat:@"objectName=%@&userID=%@&latitude=%.7f&longitude=%.7f",[objectName text],userID,latitude,longitude];
-        
         NSURL *url = [NSURL URLWithString:@"http://angsila.cs.buu.ac.th/~53160117/TalkTogether/insertGPS.php"];
+        BOOL error = [sendBox post:post toUrl:url];
         
-        [sendBox post:post toUrl:url];
-                
-        // clear UIImage
-        location.text = NULL;
-        
-        // clear TextField
-        objectName.text = NULL;
-
-//        [sendBox getErrorMessage];
+        if(!error){
+            UIAlertView *returnMessage = [[UIAlertView alloc]
+                                          initWithTitle:@"สำเร็จ!!"
+                                          message:nil delegate:self
+                                          cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            [returnMessage show];
+            
+            // clear TextField
+            objectName.text = NULL;
+        }else{
+            [sendBox getErrorMessage];
+        }
     }
 }
 @end

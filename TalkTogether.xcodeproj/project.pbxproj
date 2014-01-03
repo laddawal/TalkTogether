@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C90796971866050900A1C41B /* noQrCode.png in Resources */ = {isa = PBXBuildFile; fileRef = C90796951866050900A1C41B /* noQrCode.png */; };
+		C90796981866050900A1C41B /* noGPS.png in Resources */ = {isa = PBXBuildFile; fileRef = C90796961866050900A1C41B /* noGPS.png */; };
+		C907969A1866094900A1C41B /* viewQR.png in Resources */ = {isa = PBXBuildFile; fileRef = C90796991866094900A1C41B /* viewQR.png */; };
+		C907969C18660A3300A1C41B /* viewGPS.png in Resources */ = {isa = PBXBuildFile; fileRef = C907969B18660A3300A1C41B /* viewGPS.png */; };
 		C9095C671853119600A7CC07 /* bubbleMine.png in Resources */ = {isa = PBXBuildFile; fileRef = C9095C5D1853119600A7CC07 /* bubbleMine.png */; };
 		C9095C681853119600A7CC07 /* bubbleMine@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C9095C5E1853119600A7CC07 /* bubbleMine@2x.png */; };
 		C9095C691853119600A7CC07 /* bubbleSomeone.png in Resources */ = {isa = PBXBuildFile; fileRef = C9095C5F1853119600A7CC07 /* bubbleSomeone.png */; };
@@ -26,13 +30,14 @@
 		C914E1C91828D7FE00A3A11D /* NameContactViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C914E1C81828D7FE00A3A11D /* NameContactViewController.m */; };
 		C918857718649E6300AC2C6C /* info.png in Resources */ = {isa = PBXBuildFile; fileRef = C918857518649E6300AC2C6C /* info.png */; };
 		C918857818649E6300AC2C6C /* info@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C918857618649E6300AC2C6C /* info@2x.png */; };
+		C918857A18649F4200AC2C6C /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C918857918649F4200AC2C6C /* MapKit.framework */; };
+		C918857D1864A08E00AC2C6C /* DisplayMap.m in Sources */ = {isa = PBXBuildFile; fileRef = C918857C1864A08E00AC2C6C /* DisplayMap.m */; };
 		C91B52F8185F5000003BFED8 /* viewName.png in Resources */ = {isa = PBXBuildFile; fileRef = C91B52F7185F5000003BFED8 /* viewName.png */; };
-		C91B52FA185F5211003BFED8 /* viewQR.png in Resources */ = {isa = PBXBuildFile; fileRef = C91B52F9185F5211003BFED8 /* viewQR.png */; };
-		C91B52FC185F5301003BFED8 /* viewGPS.png in Resources */ = {isa = PBXBuildFile; fileRef = C91B52FB185F5301003BFED8 /* viewGPS.png */; };
 		C9237F3118407D77007FC209 /* postMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = C9237F3018407D77007FC209 /* postMessage.m */; };
 		C925EF3A183BAFEF00ACB687 /* BarcodeContactViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C925EF39183BAFEF00ACB687 /* BarcodeContactViewController.m */; };
 		C925EF3D183BB9BD00ACB687 /* BarcodeRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C925EF3C183BB9BD00ACB687 /* BarcodeRegisterViewController.m */; };
 		C92820EF1831F1DF007EEBD5 /* NameRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C92820EE1831F1DF007EEBD5 /* NameRegisterViewController.m */; };
+		C92BD0B0186C15EB00E0FDAF /* addResponderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C92BD0AF186C15EB00E0FDAF /* addResponderViewController.m */; };
 		C93E4391182226A600DC8104 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C93E4390182226A600DC8104 /* Foundation.framework */; };
 		C93E4393182226A600DC8104 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C93E4392182226A600DC8104 /* CoreGraphics.framework */; };
 		C93E4395182226A600DC8104 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C93E4394182226A600DC8104 /* UIKit.framework */; };
@@ -53,6 +58,8 @@
 		C959F7EC183CF8740042CAAB /* GPSContactViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C959F7EB183CF8730042CAAB /* GPSContactViewController.m */; };
 		C97E7EEA1855C27300CE58E0 /* DetailObjectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C97E7EE91855C27300CE58E0 /* DetailObjectViewController.m */; };
 		C998227018279C2B0026B0EC /* QRRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C998226F18279C2B0026B0EC /* QRRegisterViewController.m */; };
+		C99A912E1866C8360058550C /* setting.png in Resources */ = {isa = PBXBuildFile; fileRef = C99A912C1866C8360058550C /* setting.png */; };
+		C99A91311866C8F70058550C /* setting@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C99A91301866C8F70058550C /* setting@2x.png */; };
 		C99ABF99185CA33D0098FDAD /* nav@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C99ABF98185CA33D0098FDAD /* nav@2x.png */; };
 		C99B15CA1835D63000B68BAC /* zbar-back.png in Resources */ = {isa = PBXBuildFile; fileRef = C99B15C51835D63000B68BAC /* zbar-back.png */; };
 		C99B15CB1835D63000B68BAC /* zbar-help.html in Resources */ = {isa = PBXBuildFile; fileRef = C99B15C61835D63000B68BAC /* zbar-help.html */; };
@@ -67,6 +74,7 @@
 		C99B15E51835D64100B68BAC /* rscode.c in Sources */ = {isa = PBXBuildFile; fileRef = C99B15DB1835D64100B68BAC /* rscode.c */; };
 		C99B15E61835D64100B68BAC /* split.c in Sources */ = {isa = PBXBuildFile; fileRef = C99B15DD1835D64100B68BAC /* split.c */; };
 		C99D3912185C2C2500F09455 /* MainMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C99D3911185C2C2500F09455 /* MainMenuViewController.m */; };
+		C99D3E58186ABEFE00CDF3DE /* EditResponderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C99D3E57186ABEFE00CDF3DE /* EditResponderViewController.m */; };
 		C9A25395184B1929006FF37C /* IdentifyBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = C9A25394184B1929006FF37C /* IdentifyBtn.png */; };
 		C9A2539B184B1E29006FF37C /* MyObjectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9A2539A184B1E29006FF37C /* MyObjectViewController.m */; };
 		C9A2CD6C1839EF5900F69533 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9A2CD6B1839EF5900F69533 /* FacebookSDK.framework */; };
@@ -84,6 +92,7 @@
 		C9A3BBD71854CE8A00CC040D /* bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C9A3BBD51854CE8A00CC040D /* bg@2x.png */; };
 		C9B3ACA4184E398000237695 /* loginView1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C9B3ACA3184E398000237695 /* loginView1@2x.png */; };
 		C9B842DB185998A300C87E29 /* loginView1.png in Resources */ = {isa = PBXBuildFile; fileRef = C9B842DA185998A300C87E29 /* loginView1.png */; };
+		C9B8B54E187461280037DCCE /* keywordBtn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C9B8B54D187461280037DCCE /* keywordBtn@2x.png */; };
 		C9CC613F185465DB00E956AF /* RegisIdentifyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9CC613E185465DB00E956AF /* RegisIdentifyViewController.m */; };
 		C9F2E02E1863F74000F22FE8 /* EverChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9F2E02D1863F74000F22FE8 /* EverChatViewController.m */; };
 		C9F2E03818640BFD00F22FE8 /* logout.png in Resources */ = {isa = PBXBuildFile; fileRef = C9F2E02F18640BFD00F22FE8 /* logout.png */; };
@@ -91,7 +100,6 @@
 		C9F2E03A18640BFD00F22FE8 /* logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C9F2E03118640BFD00F22FE8 /* logo@2x.png */; };
 		C9F2E03B18640BFD00F22FE8 /* chatBtn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C9F2E03218640BFD00F22FE8 /* chatBtn@2x.png */; };
 		C9F2E03C18640BFD00F22FE8 /* barCodeBtn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C9F2E03318640BFD00F22FE8 /* barCodeBtn@2x.png */; };
-		C9F2E03D18640BFD00F22FE8 /* keywordBtn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C9F2E03418640BFD00F22FE8 /* keywordBtn@2x.png */; };
 		C9F2E03E18640BFD00F22FE8 /* qrCodeBtn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C9F2E03518640BFD00F22FE8 /* qrCodeBtn@2x.png */; };
 		C9F2E03F18640BFD00F22FE8 /* gpsBtn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C9F2E03618640BFD00F22FE8 /* gpsBtn@2x.png */; };
 		C9F2E04018640BFD00F22FE8 /* nav.png in Resources */ = {isa = PBXBuildFile; fileRef = C9F2E03718640BFD00F22FE8 /* nav.png */; };
@@ -111,6 +119,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C90796951866050900A1C41B /* noQrCode.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = noQrCode.png; sourceTree = "<group>"; };
+		C90796961866050900A1C41B /* noGPS.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = noGPS.png; sourceTree = "<group>"; };
+		C90796991866094900A1C41B /* viewQR.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = viewQR.png; sourceTree = "<group>"; };
+		C907969B18660A3300A1C41B /* viewGPS.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = viewGPS.png; sourceTree = "<group>"; };
 		C9095C5D1853119600A7CC07 /* bubbleMine.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bubbleMine.png; sourceTree = "<group>"; };
 		C9095C5E1853119600A7CC07 /* bubbleMine@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bubbleMine@2x.png"; sourceTree = "<group>"; };
 		C9095C5F1853119600A7CC07 /* bubbleSomeone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bubbleSomeone.png; sourceTree = "<group>"; };
@@ -132,9 +144,10 @@
 		C914E1C81828D7FE00A3A11D /* NameContactViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NameContactViewController.m; sourceTree = "<group>"; };
 		C918857518649E6300AC2C6C /* info.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = info.png; sourceTree = "<group>"; };
 		C918857618649E6300AC2C6C /* info@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "info@2x.png"; sourceTree = "<group>"; };
+		C918857918649F4200AC2C6C /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		C918857B1864A08E00AC2C6C /* DisplayMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DisplayMap.h; sourceTree = "<group>"; };
+		C918857C1864A08E00AC2C6C /* DisplayMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DisplayMap.m; sourceTree = "<group>"; };
 		C91B52F7185F5000003BFED8 /* viewName.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = viewName.png; sourceTree = "<group>"; };
-		C91B52F9185F5211003BFED8 /* viewQR.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = viewQR.png; sourceTree = "<group>"; };
-		C91B52FB185F5301003BFED8 /* viewGPS.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = viewGPS.png; sourceTree = "<group>"; };
 		C9237F2F18407D77007FC209 /* postMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = postMessage.h; sourceTree = "<group>"; };
 		C9237F3018407D77007FC209 /* postMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = postMessage.m; sourceTree = "<group>"; };
 		C925EF38183BAFEF00ACB687 /* BarcodeContactViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BarcodeContactViewController.h; sourceTree = "<group>"; };
@@ -143,6 +156,8 @@
 		C925EF3C183BB9BD00ACB687 /* BarcodeRegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BarcodeRegisterViewController.m; sourceTree = "<group>"; };
 		C92820ED1831F1DF007EEBD5 /* NameRegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NameRegisterViewController.h; sourceTree = "<group>"; };
 		C92820EE1831F1DF007EEBD5 /* NameRegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NameRegisterViewController.m; sourceTree = "<group>"; };
+		C92BD0AE186C15EB00E0FDAF /* addResponderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = addResponderViewController.h; path = TalkTogether/addResponderViewController.h; sourceTree = "<group>"; };
+		C92BD0AF186C15EB00E0FDAF /* addResponderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = addResponderViewController.m; path = TalkTogether/addResponderViewController.m; sourceTree = "<group>"; };
 		C93E438D182226A600DC8104 /* TalkTogether.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TalkTogether.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C93E4390182226A600DC8104 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		C93E4392182226A600DC8104 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -181,6 +196,8 @@
 		C97E7EE91855C27300CE58E0 /* DetailObjectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailObjectViewController.m; sourceTree = "<group>"; };
 		C998226E18279C2B0026B0EC /* QRRegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRRegisterViewController.h; sourceTree = "<group>"; };
 		C998226F18279C2B0026B0EC /* QRRegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRRegisterViewController.m; sourceTree = "<group>"; };
+		C99A912C1866C8360058550C /* setting.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = setting.png; sourceTree = "<group>"; };
+		C99A91301866C8F70058550C /* setting@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "setting@2x.png"; sourceTree = "<group>"; };
 		C99ABF98185CA33D0098FDAD /* nav@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nav@2x.png"; sourceTree = "<group>"; };
 		C99B15AF1835D63000B68BAC /* Decoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Decoder.h; sourceTree = "<group>"; };
 		C99B15B01835D63000B68BAC /* Exception.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Exception.h; sourceTree = "<group>"; };
@@ -225,6 +242,8 @@
 		C99B15DE1835D64100B68BAC /* split.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = split.h; sourceTree = "<group>"; };
 		C99D3910185C2C2500F09455 /* MainMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainMenuViewController.h; path = TalkTogether/MainMenuViewController.h; sourceTree = "<group>"; };
 		C99D3911185C2C2500F09455 /* MainMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MainMenuViewController.m; path = TalkTogether/MainMenuViewController.m; sourceTree = "<group>"; };
+		C99D3E56186ABEFE00CDF3DE /* EditResponderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditResponderViewController.h; sourceTree = "<group>"; };
+		C99D3E57186ABEFE00CDF3DE /* EditResponderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditResponderViewController.m; sourceTree = "<group>"; };
 		C9A25394184B1929006FF37C /* IdentifyBtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = IdentifyBtn.png; sourceTree = "<group>"; };
 		C9A25399184B1E29006FF37C /* MyObjectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyObjectViewController.h; sourceTree = "<group>"; };
 		C9A2539A184B1E29006FF37C /* MyObjectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyObjectViewController.m; sourceTree = "<group>"; };
@@ -241,6 +260,7 @@
 		C9AD50A1182B844E00504D2E /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		C9B3ACA3184E398000237695 /* loginView1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "loginView1@2x.png"; sourceTree = "<group>"; };
 		C9B842DA185998A300C87E29 /* loginView1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = loginView1.png; sourceTree = "<group>"; };
+		C9B8B54D187461280037DCCE /* keywordBtn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "keywordBtn@2x.png"; sourceTree = "<group>"; };
 		C9CC613D185465DB00E956AF /* RegisIdentifyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RegisIdentifyViewController.h; path = ../RegisIdentifyViewController.h; sourceTree = "<group>"; };
 		C9CC613E185465DB00E956AF /* RegisIdentifyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RegisIdentifyViewController.m; path = ../RegisIdentifyViewController.m; sourceTree = "<group>"; };
 		C9F2E02C1863F74000F22FE8 /* EverChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EverChatViewController.h; path = TalkTogether/EverChatViewController.h; sourceTree = "<group>"; };
@@ -250,7 +270,6 @@
 		C9F2E03118640BFD00F22FE8 /* logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo@2x.png"; sourceTree = "<group>"; };
 		C9F2E03218640BFD00F22FE8 /* chatBtn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "chatBtn@2x.png"; sourceTree = "<group>"; };
 		C9F2E03318640BFD00F22FE8 /* barCodeBtn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "barCodeBtn@2x.png"; sourceTree = "<group>"; };
-		C9F2E03418640BFD00F22FE8 /* keywordBtn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "keywordBtn@2x.png"; sourceTree = "<group>"; };
 		C9F2E03518640BFD00F22FE8 /* qrCodeBtn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "qrCodeBtn@2x.png"; sourceTree = "<group>"; };
 		C9F2E03618640BFD00F22FE8 /* gpsBtn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gpsBtn@2x.png"; sourceTree = "<group>"; };
 		C9F2E03718640BFD00F22FE8 /* nav.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nav.png; sourceTree = "<group>"; };
@@ -265,6 +284,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C918857A18649F4200AC2C6C /* MapKit.framework in Frameworks */,
 				C9F31784183C780D00B6882C /* CoreLocation.framework in Frameworks */,
 				C9A2CDCD183A078900F69533 /* QuartzCore.framework in Frameworks */,
 				C9A2CDCB183A075200F69533 /* libzbar.a in Frameworks */,
@@ -295,6 +315,8 @@
 		C93E4384182226A600DC8104 = {
 			isa = PBXGroup;
 			children = (
+				C99D3E56186ABEFE00CDF3DE /* EditResponderViewController.h */,
+				C99D3E57186ABEFE00CDF3DE /* EditResponderViewController.m */,
 				C97E7EE81855C27300CE58E0 /* DetailObjectViewController.h */,
 				C97E7EE91855C27300CE58E0 /* DetailObjectViewController.m */,
 				C9FB649A185716D70077AFFF /* ResponViewController.h */,
@@ -303,6 +325,8 @@
 				C99D3911185C2C2500F09455 /* MainMenuViewController.m */,
 				C9F2E02C1863F74000F22FE8 /* EverChatViewController.h */,
 				C9F2E02D1863F74000F22FE8 /* EverChatViewController.m */,
+				C92BD0AE186C15EB00E0FDAF /* addResponderViewController.h */,
+				C92BD0AF186C15EB00E0FDAF /* addResponderViewController.m */,
 				C9460ED6183F23EA0043A5F1 /* Bubble */,
 				C99B15CE1835D64100B68BAC /* libqrencode */,
 				C99B15AB1835D63000B68BAC /* ZBarSDK */,
@@ -325,6 +349,7 @@
 		C93E438F182226A600DC8104 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C918857918649F4200AC2C6C /* MapKit.framework */,
 				C9A2CDBF1839FAC300F69533 /* libiconv.dylib */,
 				C9A2CDCC183A078900F69533 /* QuartzCore.framework */,
 				C9A2CD6B1839EF5900F69533 /* FacebookSDK.framework */,
@@ -351,6 +376,8 @@
 				C93E439F182226A600DC8104 /* AppDelegate.h */,
 				C93E43A0182226A600DC8104 /* AppDelegate.m */,
 				C93E43A2182226A600DC8104 /* Main.storyboard */,
+				C918857B1864A08E00AC2C6C /* DisplayMap.h */,
+				C918857C1864A08E00AC2C6C /* DisplayMap.m */,
 				C93E43C51822277D00DC8104 /* LoginViewController.h */,
 				C93E43C61822277D00DC8104 /* LoginViewController.m */,
 				C9A25399184B1E29006FF37C /* MyObjectViewController.h */,
@@ -412,19 +439,23 @@
 		C93E43CD182229E800DC8104 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				C99A91301866C8F70058550C /* setting@2x.png */,
+				C99A912C1866C8360058550C /* setting.png */,
+				C90796951866050900A1C41B /* noQrCode.png */,
+				C90796961866050900A1C41B /* noGPS.png */,
 				C918857518649E6300AC2C6C /* info.png */,
 				C918857618649E6300AC2C6C /* info@2x.png */,
 				C9F2E02F18640BFD00F22FE8 /* logout.png */,
 				C9F2E03018640BFD00F22FE8 /* logout@2x.png */,
 				C9F2E03118640BFD00F22FE8 /* logo@2x.png */,
 				C9F2E03218640BFD00F22FE8 /* chatBtn@2x.png */,
+				C9B8B54D187461280037DCCE /* keywordBtn@2x.png */,
 				C9F2E03318640BFD00F22FE8 /* barCodeBtn@2x.png */,
-				C9F2E03418640BFD00F22FE8 /* keywordBtn@2x.png */,
 				C9F2E03518640BFD00F22FE8 /* qrCodeBtn@2x.png */,
 				C9F2E03618640BFD00F22FE8 /* gpsBtn@2x.png */,
-				C91B52FB185F5301003BFED8 /* viewGPS.png */,
-				C91B52F9185F5211003BFED8 /* viewQR.png */,
 				C91B52F7185F5000003BFED8 /* viewName.png */,
+				C90796991866094900A1C41B /* viewQR.png */,
+				C907969B18660A3300A1C41B /* viewGPS.png */,
 				C9F2E03718640BFD00F22FE8 /* nav.png */,
 				C99ABF98185CA33D0098FDAD /* nav@2x.png */,
 				C90B75A518585CA30058C4D7 /* navBarBlue.png */,
@@ -639,12 +670,12 @@
 				C9095C6B1853119600A7CC07 /* missingAvatar.png in Resources */,
 				C9095C691853119600A7CC07 /* bubbleSomeone.png in Resources */,
 				C9095C861853252F00A7CC07 /* car1.png in Resources */,
-				C91B52FC185F5301003BFED8 /* viewGPS.png in Resources */,
 				C93E43A9182226A600DC8104 /* Images.xcassets in Resources */,
 				C9F2E03C18640BFD00F22FE8 /* barCodeBtn@2x.png in Resources */,
 				C9F2E03E18640BFD00F22FE8 /* qrCodeBtn@2x.png in Resources */,
 				C93E439B182226A600DC8104 /* InfoPlist.strings in Resources */,
 				C9095C6A1853119600A7CC07 /* bubbleSomeone@2x.png in Resources */,
+				C90796981866050900A1C41B /* noGPS.png in Resources */,
 				C99ABF99185CA33D0098FDAD /* nav@2x.png in Resources */,
 				C9F2E03918640BFD00F22FE8 /* logout@2x.png in Resources */,
 				C90B759C18584EF30058C4D7 /* tabBar@2x.png in Resources */,
@@ -658,12 +689,12 @@
 				C9095C6F1853119600A7CC07 /* typingSomeone.png in Resources */,
 				C99B15CD1835D63000B68BAC /* zbar-samples.png in Resources */,
 				C99B15CB1835D63000B68BAC /* zbar-help.html in Resources */,
+				C907969C18660A3300A1C41B /* viewGPS.png in Resources */,
 				C9095C671853119600A7CC07 /* bubbleMine.png in Resources */,
 				C99B15CA1835D63000B68BAC /* zbar-back.png in Resources */,
-				C91B52FA185F5211003BFED8 /* viewQR.png in Resources */,
 				C99B15CC1835D63000B68BAC /* zbar-helpicons.png in Resources */,
 				C90B75A718585CA30058C4D7 /* navBarBlue.png in Resources */,
-				C9F2E03D18640BFD00F22FE8 /* keywordBtn@2x.png in Resources */,
+				C907969A1866094900A1C41B /* viewQR.png in Resources */,
 				C9A3BBD61854CE8A00CC040D /* bg.png in Resources */,
 				C918857718649E6300AC2C6C /* info.png in Resources */,
 				C9F2E03A18640BFD00F22FE8 /* logo@2x.png in Resources */,
@@ -673,12 +704,16 @@
 				C9B3ACA4184E398000237695 /* loginView1@2x.png in Resources */,
 				C918857818649E6300AC2C6C /* info@2x.png in Resources */,
 				C90B75A818585CA30058C4D7 /* navBarBlue@2x.png in Resources */,
+				C99A912E1866C8360058550C /* setting.png in Resources */,
+				C9B8B54E187461280037DCCE /* keywordBtn@2x.png in Resources */,
 				C9F2E04018640BFD00F22FE8 /* nav.png in Resources */,
 				C9F2E03B18640BFD00F22FE8 /* chatBtn@2x.png in Resources */,
 				C9F2E03818640BFD00F22FE8 /* logout.png in Resources */,
 				C9A3BBD71854CE8A00CC040D /* bg@2x.png in Resources */,
 				C9095C8218531DA200A7CC07 /* user.png in Resources */,
+				C90796971866050900A1C41B /* noQrCode.png in Resources */,
 				C9095C6D1853119600A7CC07 /* typingMine.png in Resources */,
+				C99A91311866C8F70058550C /* setting@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -716,15 +751,18 @@
 				C9460EE2183F23FB0043A5F1 /* NSBubbleData.m in Sources */,
 				C9A2539B184B1E29006FF37C /* MyObjectViewController.m in Sources */,
 				C97E7EEA1855C27300CE58E0 /* DetailObjectViewController.m in Sources */,
+				C918857D1864A08E00AC2C6C /* DisplayMap.m in Sources */,
 				C93E43A1182226A600DC8104 /* AppDelegate.m in Sources */,
 				C9F31783183C77B000B6882C /* GPSRegisterViewController.m in Sources */,
 				C99B15E61835D64100B68BAC /* split.c in Sources */,
 				C9FB649C185716D70077AFFF /* ResponViewController.m in Sources */,
 				C914E1C91828D7FE00A3A11D /* NameContactViewController.m in Sources */,
 				C93E439D182226A600DC8104 /* main.m in Sources */,
+				C92BD0B0186C15EB00E0FDAF /* addResponderViewController.m in Sources */,
 				C9A2CDBD1839F99A00F69533 /* QRContactViewController.m in Sources */,
 				C93E43C71822277D00DC8104 /* LoginViewController.m in Sources */,
 				C99B15E41835D64100B68BAC /* qrspec.c in Sources */,
+				C99D3E58186ABEFE00CDF3DE /* EditResponderViewController.m in Sources */,
 				C99B15E01835D64100B68BAC /* mask.c in Sources */,
 				C9460EE4183F23FB0043A5F1 /* UIBubbleTableView.m in Sources */,
 				C9237F3118407D77007FC209 /* postMessage.m in Sources */,

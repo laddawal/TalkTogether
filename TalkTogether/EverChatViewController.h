@@ -7,9 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "postMessage.h"
 
 @interface EverChatViewController : UIViewController
+{
+    postMessage *sendBox;
+}
 
 @property (strong, nonatomic) id recieveUserID;
+@property (strong, nonatomic) IBOutlet UITableView *myTable;
+@property (strong, nonatomic) IBOutlet UISearchBar *searchBar;
 
 @end

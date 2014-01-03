@@ -62,9 +62,13 @@
     }
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [nearObject reloadData];
+}
+
 -(void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation{
     
-    NSDate* eventDate = newLocation.timestamp;
+    NSDate *eventDate = newLocation.timestamp;
     NSTimeInterval howRecent = [eventDate timeIntervalSinceNow];
     
     if (abs(howRecent) < 15.0)
@@ -83,24 +87,26 @@
             latitude = newLocation.coordinate.latitude;
             longitude = newLocation.coordinate.longitude;
             
-            //ส่ง latitude & longtitude ให้ php เพื่อหาตำแหน่งวัตถุที่ใกล้เคียง
-            
-            //latitude = 37.7858340;
-            //longitude = -122.4064170;
-            
+            //ส่ง latitude & longtitude ให้ php เพื่อหาวัตถุที่อยู่ในตำแหน่งใกล้เคียง
             NSMutableString *post = [NSMutableString stringWithFormat:@"latitude=%.7f&longitude=%.7f",latitude,longitude];
-            
-            NSLog(@"Latitude :%f",latitude);
-            
             NSURL *url = [NSURL URLWithString:@"http://angsila.cs.buu.ac.th/~53160117/TalkTogether/searchGPS.php"];
+            BOOL error = [sendBox post:post toUrl:url];
             
-            NSMutableArray * jsonReturn = [sendBox post:post toUrl:url];
-            
-            if (jsonReturn != nil) {
-                for (NSDictionary* fetchDict in jsonReturn){
-                    [myObject addObject:fetchDict];
+            if (!error) {
+                int returnNum = [sendBox getReturnMessage];
+                if (returnNum == 0) {
+                    NSMutableArray *jsonReturn = [sendBox getData];
+                    for (NSDictionary* fetchDict in jsonReturn){
+                        [myObject addObject:fetchDict];
+                    }
+                    [nearObject reloadData];
+                }else{
+                    UIAlertView *returnMessage = [[UIAlertView alloc]
+                                                  initWithTitle:@"ไม่พบข้อมูล"
+                                                  message:nil delegate:self
+                                                  cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                    [returnMessage show];
                 }
-                [nearObject reloadData];
             }else{
                 [sendBox getErrorMessage];
             }
@@ -143,17 +149,33 @@
     NSUserDefaults *defaultUserID = [NSUserDefaults standardUserDefaults];
     userID = [defaultUserID stringForKey:@"userID"];
     
-    // ไปหน้า chat
-    ChatViewController *chatView =[self.storyboard instantiateViewControllerWithIdentifier:@"chatView"];
+    // ดึงผู้รับผิดชอบ
+    NSMutableString *post = [NSMutableString stringWithFormat:@"objectID=%@&userID=%@",[[myObject objectAtIndex:indexPath.row] objectForKey:@"objectID"],userID];
+    NSURL *url = [NSURL URLWithString:@"http://angsila.cs.buu.ac.th/~53160117/TalkTogether/randomResponder.php"];
+    BOOL error = [sendBox post:post toUrl:url];
     
-    chatView.recieveObjectID = [[myObject objectAtIndex:indexPath.row] objectForKey:@"objectID"];
-    chatView.recieveUserID = userID;
-    chatView.recieveSender = @"1"; // กำหนดให้ผู้ส่งคือผู้ใช้
-    chatView.navigationItem.title = [[myObject objectAtIndex:indexPath.row] objectForKey:@"objectName"];
+    if (!error) {
+        NSMutableArray *jsonReturn = [sendBox getData];
+        NSString *responderID;
+        for (NSDictionary* fetchDict in jsonReturn){
+            responderID = [fetchDict objectForKey:@"responder_ID"];
+        }
     
-    [chatView setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
-    
-    [self.navigationController pushViewController:chatView animated:YES];
+        // ไปหน้า chat
+        ChatViewController *chatView =[self.storyboard instantiateViewControllerWithIdentifier:@"chatView"];
+        
+        chatView.recieveObjectID = [[myObject objectAtIndex:indexPath.row] objectForKey:@"objectID"];
+        chatView.recieveUserID = userID;
+        chatView.recieveSender = @"1"; // กำหนดให้ผู้ส่งคือผู้ใช้
+        chatView.recieveResponderID = responderID;
+        chatView.navigationItem.title = [[myObject objectAtIndex:indexPath.row] objectForKey:@"objectName"];
+        
+        [chatView setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
+        
+        [self.navigationController pushViewController:chatView animated:YES];
+    }else{
+        [sendBox getErrorMessage];
+    }
 }
 
 - (void)didReceiveMemoryWarning

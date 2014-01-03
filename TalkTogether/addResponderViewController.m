@@ -1,25 +1,32 @@
 //
-//  EverChatViewController.m
+//  addResponderViewController.m
 //  TalkTogether
 //
-//  Created by PloyZb on 12/20/56 BE.
+//  Created by PloyZb on 12/26/56 BE.
 //  Copyright (c) 2556 PloyZb. All rights reserved.
 //
 
-#import "EverChatViewController.h"
-#import "ChatViewController.h"
+#import "addResponderViewController.h"
 
-@interface EverChatViewController ()
+@interface addResponderViewController ()
 {
-    NSString *userID;
+//    NSString *userID;
     NSMutableArray *myObject;
     NSMutableArray *displayObject;
+    NSString *objectID;
+    NSString *selectedUserID;
+    
+    NSString *post;
+    NSURL *url;
+    BOOL error;
 }
 @end
 
-@implementation EverChatViewController
-@synthesize recieveUserID;
+@implementation addResponderViewController
+//@synthesize recieveUserID;
 @synthesize myTable;
+@synthesize searchResponder;
+@synthesize recieveObjectID;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -35,27 +42,25 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
-    // รับ userID จากหน้า mainMenu
-    userID = [recieveUserID description];
+//    // รับ userID
+//    userID = [recieveUserID description];
+//    NSLog(@"userID : %@",userID);
     
-//    NSLog(@"EverChatUserID : %@",userID);
+    // รับ objectID
+    objectID = [recieveObjectID description];
 }
 
-- (void) viewWillAppear:(BOOL)animated
-{
+- (void)viewWillAppear:(BOOL)animated {
+    
     sendBox = [[postMessage alloc]init];
     
     // Create array to hold dictionaries
     myObject = [[NSMutableArray alloc] init];
     
-    // ดึง userID จาก NSUserDefault
-    NSUserDefaults *defaultUserID = [NSUserDefaults standardUserDefaults];
-    userID = [defaultUserID stringForKey:@"userID"];
-    
-    // ส่ง userID ให้ php
-    NSString *post = [NSString stringWithFormat:@"userID=%@",userID];
-    NSURL *url = [NSURL URLWithString:@"http://angsila.cs.buu.ac.th/~53160117/TalkTogether/getChatHistory"];
-    BOOL error = [sendBox post:post toUrl:url];
+    //ส่ง objectID ให้ php เพื่อเอารายละเอียดวัตถุ
+    post = [NSString stringWithFormat:@"objectID=%@",objectID];
+    url = [NSURL URLWithString:@"http://angsila.cs.buu.ac.th/~53160117/TalkTogether/getUserAddResponder.php"];
+    error = [sendBox post:post toUrl:url];
     
     if (!error) {
         int returnNum = [sendBox getReturnMessage];
@@ -85,8 +90,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
-    static NSString *CellIdentifier = @"everChatCell";
+    static NSString *CellIdentifier = @"addResponderCell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
@@ -101,41 +105,57 @@
                                       reuseIdentifier : CellIdentifier];
     }
     
-    NSDictionary *tmpDict = [displayObject objectAtIndex:indexPath.row];
-    
     // ObjectName
-    NSString *text;
-    text = [NSString stringWithFormat:@"%@",[tmpDict objectForKey:@"objectName"]];
-    
-    cell.textLabel.text = text;
-    if ([[[displayObject objectAtIndex:indexPath.row] objectForKey:@"responder_ID"] isEqualToString:userID]) {
-        cell.detailTextLabel.text = @"วัตถุ -> ผู้ใช้";
-    }else{
-        cell.detailTextLabel.text = @"ผู้ใช้ -> วัตถุ";
-    }
+    cell.textLabel.text = [[displayObject objectAtIndex:indexPath.row] objectForKey:@"userName"];
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // ไปหน้า chat
-    ChatViewController *chatView =[self.storyboard instantiateViewControllerWithIdentifier:@"chatView"];
-    
-    chatView.recieveObjectID = [[displayObject objectAtIndex:indexPath.row] objectForKey:@"object_ID"];
-    if ([[[displayObject objectAtIndex:indexPath.row] objectForKey:@"responder_ID"] isEqualToString:userID]) {
-        chatView.recieveSender = @"2"; // กำหนดให้ผู้ส่งคือวัตถุ
-        chatView.recieveResponderID = userID;
-        chatView.recieveUserID = [[displayObject objectAtIndex:indexPath.row] objectForKey:@"contact_ID"];
-    }else{
-        chatView.recieveSender = @"1"; // กำหนดให้ผู้ส่งคือผู้ใช้
-        chatView.recieveResponderID = [[displayObject objectAtIndex:indexPath.row] objectForKey:@"responder_ID"];
-        chatView.recieveUserID = userID;
+    selectedUserID = [[displayObject objectAtIndex:indexPath.row] objectForKey:@"userID"];
+    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"หน้าที่"
+                                                       delegate:self
+                                              cancelButtonTitle:@"ยกเลิก"
+                                         destructiveButtonTitle:nil
+                                              otherButtonTitles:@"เจ้าของ", @"ผู้ดูแล", nil];
+    // Show the sheet
+    [sheet showInView:self.view];
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+    switch (buttonIndex) {
+        case 0:{
+            // กำหนดให้ ผู้ที่ถูกเลือก เป็นเจ้าของ
+            post = [NSString stringWithFormat:@"userID=%@&objectID=%@&permission=1",selectedUserID,objectID];
+            
+            url = [NSURL URLWithString:@"http://angsila.cs.buu.ac.th/~53160117/TalkTogether/insertPermission.php"];
+            
+            error = [sendBox post:post toUrl:url];
+            
+            if (!error) {
+                [self.navigationController popViewControllerAnimated:YES];
+            }else{
+                [sendBox getErrorMessage];
+            }
+        }
+            break;
+        case 1:{
+            // กำหนดให้ ผู้ที่ถูกเลือก เป็นผู้ดูแล
+            post = [NSString stringWithFormat:@"userID=%@&objectID=%@&permission=2",selectedUserID,objectID];
+            
+            url = [NSURL URLWithString:@"http://angsila.cs.buu.ac.th/~53160117/TalkTogether/insertPermission.php"];
+            
+            error = [sendBox post:post toUrl:url];
+            
+            if (!error) {
+                [self.navigationController popViewControllerAnimated:YES];
+            }else{
+                [sendBox getErrorMessage];
+            }
+        }
+            break;
     }
-    chatView.navigationItem.title = [[displayObject objectAtIndex:indexPath.row] objectForKey:@"objectName"];
-    
-    [chatView setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
-    
-    [self.navigationController pushViewController:chatView animated:YES];
 }
 
 -(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
@@ -148,13 +168,14 @@
     else{
         [displayObject removeAllObjects];
         for (NSDictionary *item in myObject) {
-            NSString *string = [item objectForKey:@"objectName"];
+            NSString *string = [item objectForKey:@"userName"];
             NSRange range = [string rangeOfString:searchText options:NSCaseInsensitiveSearch];
             if (range.location !=  NSNotFound) {
                 [displayObject addObject:item];
             }
         }
     }
+    
     [myTable reloadData];
 }
 

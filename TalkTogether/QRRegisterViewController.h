@@ -10,7 +10,7 @@
 #import "ZBarSDK.h"
 #import "postMessage.h"
 
-@interface QRRegisterViewController : UIViewController <ZBarReaderDelegate,UIAlertViewDelegate>
+@interface QRRegisterViewController : UIViewController <ZBarReaderDelegate,UIAlertViewDelegate,UITextFieldDelegate>
 {
     postMessage *sendBox;
 }

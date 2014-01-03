@@ -10,10 +10,11 @@
 
 @implementation postMessage{
     NSMutableArray* jsonObject;
-    int errorNumber;
+    int headerNumber;
+    id jsonReturn;
 }
 
--(NSMutableArray*) post:(NSString*)postMessage toUrl:(NSURL*)url{
+-(BOOL) post:(NSString*)postMessage toUrl:(NSURL*)url{
     
     postMessage = [postMessage stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     NSData *postData = [postMessage dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
@@ -34,12 +35,12 @@
                                          returningResponse:&response
                                                      error:&error];
     // do something with the data, response, error, etc
-    id jsonReturn = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+    jsonReturn = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
     
     if([self errorChecking:jsonReturn]){
-        return nil;
+        return TRUE;
     }else{
-        return jsonObject;
+        return FALSE;
     }
 }
 
@@ -77,7 +78,7 @@
                                          returningResponse:&response
                                                      error:&error];
     // do something with the data, response, error, etc
-    id jsonReturn = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+    jsonReturn = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
     
     if([self errorChecking:jsonReturn]){
         return TRUE;
@@ -86,15 +87,15 @@
     }
 }
 
--(BOOL) errorChecking:(id)jsonReturn{
+-(BOOL) errorChecking:(id)jsonReturnRetrieve{
     BOOL checkedHeader = NO;
     jsonObject = [[NSMutableArray alloc]init];
-    for (NSDictionary *dataDict in jsonReturn) {
+    for (NSDictionary *dataDict in jsonReturnRetrieve) {
         if(checkedHeader){
             [jsonObject addObject:dataDict];
         }else{
-            errorNumber = [[dataDict objectForKey:@"header"]intValue];
-            if (errorNumber != 0) {
+            headerNumber = [[dataDict objectForKey:@"header"]intValue];
+            if (headerNumber == -1 || headerNumber == -2 || headerNumber == -3) { // ติดลบ
                 return YES;
             }
             checkedHeader = YES;
@@ -103,50 +104,36 @@
     return NO;
 }
 
+-(NSMutableArray *)getData{
+    return jsonObject;
+}
+
+-(int)getReturnMessage{
+    return headerNumber;
+}
+
 -(void)getErrorMessage{
-    UIAlertView *alertTextFieldNull;
-    switch (errorNumber) {
-        case 1:
-            alertTextFieldNull =[[UIAlertView alloc]
-                                 initWithTitle:@"ปกติ การทำงานว่างเปล่า"
-                                 message:nil delegate:self
-                                 cancelButtonTitle:@"OK" otherButtonTitles:nil];
-            [alertTextFieldNull show];
-            break;
-        case 2:
-            alertTextFieldNull =[[UIAlertView alloc]
-                                 initWithTitle:@"ปกติ ไม่ต้องการข้อมูล"
-                                 message:nil delegate:self
-                                 cancelButtonTitle:@"OK" otherButtonTitles:nil];
-            [alertTextFieldNull show];
-            break;
+    UIAlertView *errorMessage;
+    switch (headerNumber) {
         case -1:
-            alertTextFieldNull =[[UIAlertView alloc]
-                                 initWithTitle:@"ฐานข้อมูล"
-                                 message:nil delegate:self
-                                 cancelButtonTitle:@"OK" otherButtonTitles:nil];
-            [alertTextFieldNull show];
+            NSLog(@"ฐานข้อมูล");
             break;
         case -2:
-            alertTextFieldNull =[[UIAlertView alloc]
+            errorMessage =[[UIAlertView alloc]
                                  initWithTitle:@"การส่งข้อมูลผิดพลาด"
                                  message:nil delegate:self
                                  cancelButtonTitle:@"OK" otherButtonTitles:nil];
-            [alertTextFieldNull show];
+            [errorMessage show];
             break;
         case -3:
-            alertTextFieldNull =[[UIAlertView alloc]
+            errorMessage =[[UIAlertView alloc]
                                  initWithTitle:@"การเชื่อมต่ออินเตอร์เน็ตผิดพลาด"
                                  message:nil delegate:self
                                  cancelButtonTitle:@"OK" otherButtonTitles:nil];
-            [alertTextFieldNull show];
+            [errorMessage show];
             break;
         default:
-            alertTextFieldNull =[[UIAlertView alloc]
-                                 initWithTitle:@"Unknow Error"
-                                 message:nil delegate:self
-                                 cancelButtonTitle:@"OK" otherButtonTitles:nil];
-            [alertTextFieldNull show];
+            NSLog(@"Unknow Error");
             break;
     }
 }

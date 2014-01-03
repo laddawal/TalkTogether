@@ -20,6 +20,7 @@
 @end
 
 @implementation NameContactViewController
+@synthesize showObject;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -69,39 +70,14 @@
     return cell;
 }
 
-//-(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
-//{
-//    if([searchText length] == 0)
-//    {
-//        [displayObject removeAllObjects];
-//        [displayObject addObjectsFromArray:allObject];
-//    }
-//    else
-//    {
-//        [displayObject removeAllObjects];
-//        for(NSString * string in allObject)
-//        {
-//            NSRange r = [string rangeOfString:searchText options:NSCaseInsensitiveSearch];
-//            if(r.location != NSNotFound)
-//            {
-//                [displayObject addObject:string];
-//            }
-//        }
-//    }
-//    
-//    [_showObject reloadData];
-//}
-
 -(void) searchBarSearchButtonClicked:(UISearchBar *)searchBar{
     // clear วัตถุที่ค้นหาครั้งที่แล้วออก
 	[myObject removeAllObjects];
     
     [searchBar setShowsCancelButton:NO animated:YES];
     [searchBar resignFirstResponder]; // hide keyboard เมื่อกด search
-    _showObject.allowsSelection = YES;
-    _showObject.scrollEnabled = YES;
-    
-    NSLog(@"Keyword : %@",[searchBar text]);
+    showObject.allowsSelection = YES;
+    showObject.scrollEnabled = YES;
     
     //ส่ง Keyword ให้ php
     
@@ -109,24 +85,33 @@
     
     NSURL *url = [NSURL URLWithString:@"http://angsila.cs.buu.ac.th/~53160117/TalkTogether/searchObject.php"];
     
-    NSMutableArray * jsonReturn = [sendBox post:post toUrl:url];
+    BOOL error = [sendBox post:post toUrl:url];
     
-    if (jsonReturn != nil) {
-        for (NSDictionary* fetchDict in jsonReturn){
-            [myObject addObject:fetchDict];
+    if (!error) {
+        int returnNum = [sendBox getReturnMessage];
+        if (returnNum == 0) {
+            NSMutableArray *jsonReturn = [sendBox getData];
+            for (NSDictionary* fetchDict in jsonReturn){
+                [myObject addObject:fetchDict];
+            }
+            displayObject =[[NSMutableArray alloc] initWithArray:myObject];
+            [showObject reloadData];
+        }else{
+            UIAlertView *returnMessage = [[UIAlertView alloc]
+                                          initWithTitle:@"ไม่พบข้อมูล"
+                                          message:nil delegate:self
+                                          cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            [returnMessage show];
         }
-        NSLog(@"%@",myObject);
     }else{
         [sendBox getErrorMessage];
     }
-    
-    [_showObject reloadData];
 }
 
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
     [searchBar setShowsCancelButton:YES animated:YES];
-    _showObject.allowsSelection = NO;
-    _showObject.scrollEnabled = NO;
+    showObject.allowsSelection = NO;
+    showObject.scrollEnabled = NO;
 }
 
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
@@ -134,13 +119,17 @@
     
     [searchBar setShowsCancelButton:NO animated:YES];
     [searchBar resignFirstResponder];
-    _showObject.allowsSelection = YES;
-    _showObject.scrollEnabled = YES;
+    showObject.allowsSelection = YES;
+    showObject.scrollEnabled = YES;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
 //    [_searchBar becomeFirstResponder];
     
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [showObject reloadData];
 }
 
 - (void)didReceiveMemoryWarning
@@ -155,17 +144,34 @@
     NSUserDefaults *defaultUserID = [NSUserDefaults standardUserDefaults];
     userID = [defaultUserID stringForKey:@"userID"];
     
-    // ไปหน้า chat
-    ChatViewController *chatView =[self.storyboard instantiateViewControllerWithIdentifier:@"chatView"];
+    // ดึงผู้รับผิดชอบ
+    NSMutableString *post = [NSMutableString stringWithFormat:@"objectID=%@&userID=%@",[[myObject objectAtIndex:indexPath.row] objectForKey:@"objectID"],userID];
+    NSURL *url = [NSURL URLWithString:@"http://angsila.cs.buu.ac.th/~53160117/TalkTogether/randomResponder.php"];
+    BOOL error = [sendBox post:post toUrl:url];
     
-    chatView.recieveObjectID = [[myObject objectAtIndex:indexPath.row] objectForKey:@"objectID"];
-    chatView.recieveUserID = userID;
-    chatView.recieveSender = @"1"; // กำหนดให้ผู้ส่งคือผู้ใช้
-    chatView.navigationItem.title = [[myObject objectAtIndex:indexPath.row] objectForKey:@"objectName"];
-    
-    [chatView setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
-    
-    [self.navigationController pushViewController:chatView animated:YES];
+    if (!error) {
+        NSMutableArray *jsonReturn = [sendBox getData];
+        NSString *responderID;
+        for (NSDictionary* fetchDict in jsonReturn){
+            responderID = [fetchDict objectForKey:@"responder_ID"];
+        }
+        NSLog(@"respon : %@",responderID);
+        
+        // ไปหน้า chat
+        ChatViewController *chatView =[self.storyboard instantiateViewControllerWithIdentifier:@"chatView"];
+        
+        chatView.recieveObjectID = [[myObject objectAtIndex:indexPath.row] objectForKey:@"objectID"];
+        chatView.recieveUserID = userID;
+        chatView.recieveSender = @"1"; // กำหนดให้ผู้ส่งคือผู้ใช้
+        chatView.recieveResponderID = responderID;
+        chatView.navigationItem.title = [[myObject objectAtIndex:indexPath.row] objectForKey:@"objectName"];
+        
+        [chatView setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
+        
+        [self.navigationController pushViewController:chatView animated:YES];
+    }else{
+        [sendBox getErrorMessage];
+    }
 }
 
 @end

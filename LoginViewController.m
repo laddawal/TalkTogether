@@ -59,32 +59,31 @@
 - (void)loginViewFetchedUserInfo:(FBLoginView *)loginView
                             user:(id<FBGraphUser>)user {
     if (flagFacebookID) {
-        NSLog(@"facebookID : %@",user.id);
         
         //Send FacebookID to php เพื่อค้นเอา userID กลับมาใช้งาน
-        
         NSString *post = [NSString stringWithFormat:@"facebookID=%@&userName=%@",user.id,user.name];
-        
         NSURL *url = [NSURL URLWithString:@"http://angsila.cs.buu.ac.th/~53160117/TalkTogether/loginUser.php"];
+        BOOL error = [sendBox post:post toUrl:url];
         
-        NSMutableArray * jsonReturn = [sendBox post:post toUrl:url];
-        
-        if (jsonReturn != nil) {
-            NSString *strUserID;
-            for (NSDictionary* fetchDict in jsonReturn){
-                strUserID = [NSString stringWithFormat:@"%@",[fetchDict objectForKey:@"userID"]];
-            }            
-            
-            NSLog(@"LoginUserID : %@",strUserID);
-            
-            // เก็บ userID ไว้ที่ NSUserDefault
-            NSUserDefaults *defaultUserID = [NSUserDefaults standardUserDefaults];
-            [defaultUserID setObject:strUserID forKey:@"userID"];
-            
-            // ไปหน้า main menu
-            MainMenuViewController *mainMenu =[self.storyboard instantiateViewControllerWithIdentifier:@"mainMenu"];
-            [mainMenu setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
-            [self presentViewController:mainMenu animated:NO completion:nil];
+        if (!error) {
+            int returnNum = [sendBox getReturnMessage];
+            if (returnNum == 0) {
+                NSMutableArray *jsonReturn = [sendBox getData];
+                
+                NSString *strUserID;
+                for (NSDictionary* fetchDict in jsonReturn){
+                    strUserID = [NSString stringWithFormat:@"%@",[fetchDict objectForKey:@"userID"]];
+                }
+                
+                // เก็บ userID ไว้ที่ NSUserDefault
+                NSUserDefaults *defaultUserID = [NSUserDefaults standardUserDefaults];
+                [defaultUserID setObject:strUserID forKey:@"userID"];
+                
+                // ไปหน้า main menu
+                MainMenuViewController *mainMenu =[self.storyboard instantiateViewControllerWithIdentifier:@"mainMenu"];
+                [mainMenu setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
+                [self presentViewController:mainMenu animated:NO completion:nil];
+            }
         }else{
             [sendBox getErrorMessage];
         }

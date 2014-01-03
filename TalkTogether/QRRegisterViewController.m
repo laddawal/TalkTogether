@@ -7,7 +7,7 @@
 //
 
 #import "QRRegisterViewController.h"
-#import "ZBarSDK.h"
+//#import "ZBarSDK.h"
 #import "QRCodeGenerator.h"
 
 @interface QRRegisterViewController ()
@@ -15,6 +15,7 @@
     BOOL insertQRCode;
     
     NSString *userID;
+    NSString *returnObjectID;
 }
 @end
 
@@ -41,7 +42,7 @@
     // border uiImage
     CALayer *borderLayer = [CALayer layer];
     CGRect borderFrame = CGRectMake(0, 0, (qrImage.frame.size.width), (qrImage.frame.size.height));
-    [borderLayer setBackgroundColor:[[UIColor lightGrayColor] CGColor]];
+    [borderLayer setBackgroundColor:[[UIColor clearColor] CGColor]];
     [borderLayer setFrame:borderFrame];
     [borderLayer setBorderWidth:5.0];
     [borderLayer setBorderColor:[[UIColor whiteColor] CGColor]];
@@ -50,12 +51,20 @@
     sendBox = [[postMessage alloc]init];
     
     insertQRCode = false;
+    
+    [nameObject setDelegate:self];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return YES;
 }
 
 - (IBAction)generate:(id)sender {
@@ -75,31 +84,38 @@
         
         //Send ObjectName
         NSMutableString *post = [NSMutableString stringWithFormat:@"objectName=%@&userID=%@",[nameObject text],userID];
-        
         NSURL *url = [NSURL URLWithString:@"http://angsila.cs.buu.ac.th/~53160117/TalkTogether/insertObjectName.php"];
         
-        NSMutableArray * jsonReturn = [sendBox post:post toUrl:url];
+        BOOL error = [sendBox post:post toUrl:url];
         
-        if (jsonReturn != nil) {
-            for (NSDictionary* fetchDict in jsonReturn){
-                NSString *returnObjectID = [NSString stringWithFormat:@"%@",[fetchDict objectForKey:@"objectID"]];
-                NSLog(@"QRRegisterObjectID : %@",returnObjectID);
-
+        if (!error) {
+            int returnNum = [sendBox getReturnMessage];
+            if (returnNum == 0) {
+                NSMutableArray *jsonReturn = [sendBox getData];
+                for (NSDictionary* fetchDict in jsonReturn){
+                    returnObjectID = [NSString stringWithFormat:@"%@",[fetchDict objectForKey:@"objectID"]];
+                }
+                NSLog(@"objectID : %@",returnObjectID);
                 // Generate QR From ObjectID
                 qrImage.image = [QRCodeGenerator qrImageForString:returnObjectID imageSize:qrImage.bounds.size.width];
-//
+
                 // Insert QR To DB
                 NSData *imageData = UIImageJPEGRepresentation(qrImage.image, 100);
-//
-//                NSURL *url = [NSURL URLWithString:@"localhost/TalkTogether/saveQrcode.php"];
                 NSURL *url = [NSURL URLWithString:@"http://angsila.cs.buu.ac.th/~53160117/TalkTogether/saveQrcode.php"];
 
-                [sendBox postImage:imageData withObjectID:returnObjectID toUrl:url];
-                // ตรวจสอบการบันทึกภาพที่นี่
+                error = [sendBox postImage:imageData withObjectID:returnObjectID toUrl:url];
+                if (!error) {
+                    UIAlertView *returnMessage = [[UIAlertView alloc]
+                                                  initWithTitle:@"สำเร็จ!!"
+                                                  message:nil delegate:self
+                                                  cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                    [returnMessage show];
+                }else{
+                    [sendBox getErrorMessage];
+                }
             }
         }else{
-            // ทำเมื่อเกิด error
-            ;
+            [sendBox getErrorMessage];
         }
     }
 }
@@ -114,9 +130,17 @@
 
 - (void)thisImage:(UIImage *)image hasBeenSavedInPhotoAlbumWithError:(NSError *)error usingContextInfo:(void*)ctxInfo {
     if (error) {
-        NSLog(@"Can't Save!!!");
+        UIAlertView *saveQrAlert = [[UIAlertView alloc]
+                                      initWithTitle:@"จัดเก็บ QR Code ไม่สำเร็จ!!!"
+                                      message:nil delegate:self
+                                      cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [saveQrAlert show];
     } else {
-        NSLog(@"Saved");
+        UIAlertView *saveQrAlert = [[UIAlertView alloc]
+                                    initWithTitle:@"จัดเก็บ QR Code สำเร็จ"
+                                    message:nil delegate:self
+                                    cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [saveQrAlert show];
     }
 }
 @end

@@ -39,7 +39,7 @@
     // border uiImage
     CALayer *borderLayer = [CALayer layer];
     CGRect borderFrame = CGRectMake(0, 0, (barCodeImg.frame.size.width), (barCodeImg.frame.size.height));
-    [borderLayer setBackgroundColor:[[UIColor lightGrayColor] CGColor]];
+    [borderLayer setBackgroundColor:[[UIColor clearColor] CGColor]];
     [borderLayer setFrame:borderFrame];
     [borderLayer setBorderWidth:5.0];
     [borderLayer setBorderColor:[[UIColor whiteColor] CGColor]];
@@ -67,7 +67,7 @@
                        to: 0];
     
     // present and release the controller
-    [self.navigationController pushViewController:reader animated:YES];
+    [self presentViewController:reader animated:YES completion:nil];
 }
 
 - (void) imagePickerController: (UIImagePickerController*) reader
@@ -82,24 +82,25 @@
     barCodeImg.image = [info objectForKey: UIImagePickerControllerOriginalImage];
     barCodeID =  symbol.data ;
     
+    [reader dismissViewControllerAnimated:YES completion:nil]; // กลับหน้าลงทะเบียนด้วย Barcode
+    
     // ดึง userID จาก NSUserDefault
     NSUserDefaults *defaultUserID = [NSUserDefaults standardUserDefaults];
     userID = [defaultUserID stringForKey:@"userID"];
     
     //ส่ง ObjectName & UserID ให้ php
-    
     NSMutableString *post = [NSMutableString stringWithFormat:@"barCodeID=%@&userID=%@",barCodeID,userID];
-    
     NSURL *url = [NSURL URLWithString:@"http://angsila.cs.buu.ac.th/~53160117/TalkTogether/insertBarcode.php"];
-    
-    [sendBox post:post toUrl:url];
-            
-    // clear UIImage
-    barCodeImg.image = NULL;
-    
-//    [sendBox getErrorMessage];
-    
-    [reader.navigationController popViewControllerAnimated:YES];
+    BOOL error = [sendBox post:post toUrl:url];
+    if (!error) {
+        UIAlertView *returnMessage = [[UIAlertView alloc]
+                                      initWithTitle:@"สำเร็จ!!"
+                                      message:nil delegate:self
+                                      cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [returnMessage show];
+    }else{
+        [sendBox getErrorMessage];
+    }
 }
 
 @end
