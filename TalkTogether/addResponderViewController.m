@@ -159,14 +159,16 @@
 }
 
 - (IBAction)submitRequest:(id)sender {
-    post = [NSString stringWithFormat:@"objectID=%@&userID=%@",objectID,[selectedUserID JSONRepresentation]];
-    url = [NSURL URLWithString:@"http://angsila.cs.buu.ac.th/~53160117/TalkTogether/confirmRequest.php"];
-    error = [sendBox post:post toUrl:url];
-    
-    if (!error) {
+    for (int i = 0; i <= [selectedUserID count]; i++) {
+        post = [NSString stringWithFormat:@"objectID=%@&userID=%@",objectID,selectedUserID[i]];
+        url = [NSURL URLWithString:@"http://angsila.cs.buu.ac.th/~53160117/TalkTogether/confirmRequest.php"];
+        error = [sendBox post:post toUrl:url];
         
-    }else{
-        [sendBox getErrorMessage];
+//        if (!error) {
+//            
+//        }else{
+//            [sendBox getErrorMessage];
+//        }
     }
 }
 @end
