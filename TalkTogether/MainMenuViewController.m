@@ -14,10 +14,14 @@
 @interface MainMenuViewController ()
 {
     NSString *userID;
+    
+    UIImageView *badgeImageView;
+    NSString *iconNum;
 }
 @end
 
 @implementation MainMenuViewController
+@synthesize chatHistoryBtn;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -32,6 +36,61 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+}
+
+- (void) viewWillAppear:(BOOL)animated{
+    sendBox = [[postMessage alloc]init];
+    
+    // ดึง userID จาก NSUserDefault
+    NSUserDefaults *defaultUserID = [NSUserDefaults standardUserDefaults];
+    userID = [defaultUserID stringForKey:@"userID"];
+    
+    // เช็คข้อความใหม่
+    NSMutableString *post = [NSMutableString stringWithFormat:@"userID=%@",userID];
+    NSURL *url = [NSURL URLWithString:@"http://angsila.cs.buu.ac.th/~53160117/TalkTogether/getNotification.php"];
+    BOOL error = [sendBox post:post toUrl:url];
+    
+    // hide notification
+    badgeImageView.hidden = YES;
+    if (!error) {
+        int returnNum = [sendBox getReturnMessage];
+        if (returnNum == 0) {
+            NSMutableArray *jsonReturn = [sendBox getData];
+            for (NSDictionary* fetchDict in jsonReturn){
+                iconNum = [NSString stringWithFormat:@"%@",fetchDict];
+            }
+            // Bunton Badge Number
+            //Create a label (width/height not important at this stage)
+            UILabel *yourLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 1, 1)];
+            yourLabel.text = iconNum;
+            yourLabel.textColor = [UIColor whiteColor];
+            [yourLabel sizeToFit];
+            
+            CGRect labelFrame = yourLabel.frame;
+            
+            //Here we create a UIImage that is resizable, but will not resize the areas concerned with the cap insets you've defined
+            UIImage *badgeImage = [[UIImage imageNamed:@"badge.png"]resizableImageWithCapInsets:UIEdgeInsetsMake(0, 10, 0, 10)];
+            badgeImageView = [[UIImageView alloc]initWithImage:badgeImage];
+            
+            badgeImageView.contentMode = UIViewContentModeScaleToFill;
+            badgeImageView.backgroundColor = [UIColor clearColor];
+            
+            labelFrame.size.width += 13; // padding ซ้าย ขวา
+            
+            badgeImageView.frame = labelFrame; //The badge is now the right width with padding taken into account
+            
+            //Center the label on the badge image view
+            yourLabel.center = CGPointMake(badgeImageView.frame.size.width/2, badgeImageView.frame.size.height/2);
+            
+            //Finally we add the label to the badge image view
+            [badgeImageView addSubview:yourLabel];
+            
+            badgeImageView.frame = CGRectOffset(badgeImageView.frame, 80, 0);
+            
+            //Add your badge to the main view
+            [chatHistoryBtn addSubview:badgeImageView];
+        }
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -59,8 +118,6 @@
     EverChatViewController *everChatView =[self.storyboard instantiateViewControllerWithIdentifier:@"everChatView"];
     
     everChatView.recieveUserID = userID;
-    //    detailView.recieveUserID = userID;
-    //    detailView.recieveSender = @"1"; // กำหนดให้ผู้ส่งคือผู้ใช้
     
     [everChatView setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
     

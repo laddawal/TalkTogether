@@ -95,7 +95,7 @@
             [jsonObject addObject:dataDict];
         }else{
             headerNumber = [[dataDict objectForKey:@"header"]intValue];
-            if (headerNumber == -1 || headerNumber == -2 || headerNumber == -3) { // ติดลบ
+            if (headerNumber == -1 || headerNumber == -2 || headerNumber == -3 || headerNumber == -4) { // ติดลบ
                 return YES;
             }
             checkedHeader = YES;
@@ -130,6 +130,13 @@
                                  initWithTitle:@"การเชื่อมต่ออินเตอร์เน็ตผิดพลาด"
                                  message:nil delegate:self
                                  cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            [errorMessage show];
+            break;
+        case -4:
+            errorMessage =[[UIAlertView alloc]
+                           initWithTitle:@"ชื่อนี้ถูกใช้แล้ว"
+                           message:nil delegate:self
+                           cancelButtonTitle:@"OK" otherButtonTitles:nil];
             [errorMessage show];
             break;
         default:

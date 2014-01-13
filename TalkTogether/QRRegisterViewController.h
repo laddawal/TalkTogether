@@ -17,6 +17,7 @@
 
 @property (strong, nonatomic) IBOutlet UITextField *nameObject;
 @property (strong, nonatomic) IBOutlet UIImageView *qrImage;
+@property (strong, nonatomic) IBOutlet UIButton *saveQrBtn;
 
 - (IBAction)generate:(id)sender;
 - (IBAction)saveQrImg:(id)sender;

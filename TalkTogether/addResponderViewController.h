@@ -14,9 +14,9 @@
     postMessage *sendBox;
 }
 @property (strong, nonatomic) IBOutlet UITableView *myTable;
-@property (strong, nonatomic) IBOutlet UISearchBar *searchResponder;
 
 //@property (strong, nonatomic) id recieveUserID;
 @property (strong, nonatomic) id recieveObjectID;
 
+- (IBAction)submitRequest:(id)sender;
 @end

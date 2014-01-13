@@ -12,9 +12,8 @@
 {
 //    NSString *userID;
     NSMutableArray *myObject;
-    NSMutableArray *displayObject;
+    NSMutableArray *selectedUserID;
     NSString *objectID;
-    NSString *selectedUserID;
     
     NSString *post;
     NSURL *url;
@@ -25,7 +24,6 @@
 @implementation addResponderViewController
 //@synthesize recieveUserID;
 @synthesize myTable;
-@synthesize searchResponder;
 @synthesize recieveObjectID;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -56,10 +54,11 @@
     
     // Create array to hold dictionaries
     myObject = [[NSMutableArray alloc] init];
+    selectedUserID = [[NSMutableArray alloc] init];
     
-    //ส่ง objectID ให้ php เพื่อเอารายละเอียดวัตถุ
+    //ส่ง objectID ให้ php เพื่อเอาคำร้องขอเป็นผู้ดูแล
     post = [NSString stringWithFormat:@"objectID=%@",objectID];
-    url = [NSURL URLWithString:@"http://angsila.cs.buu.ac.th/~53160117/TalkTogether/getUserAddResponder.php"];
+    url = [NSURL URLWithString:@"http://angsila.cs.buu.ac.th/~53160117/TalkTogether/getRequest.php"];
     error = [sendBox post:post toUrl:url];
     
     if (!error) {
@@ -69,7 +68,6 @@
             for (NSDictionary* fetchDict in jsonReturn){
                 [myObject addObject:fetchDict];
             }
-            displayObject =[[NSMutableArray alloc] initWithArray:myObject];
         }else{
             UIAlertView *returnMessage = [[UIAlertView alloc]
                                           initWithTitle:@"ไม่พบข้อมูล"
@@ -85,7 +83,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [displayObject count];
+    return [myObject count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -94,11 +92,6 @@
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
-    // selected cell color
-    UIView *bgColorView = [[UIView alloc] init];
-    [bgColorView setBackgroundColor:[UIColor colorWithRed:134.0/255.0 green:114.0/255.0 blue:93.0/255.0 alpha:1.0]];
-    [cell setSelectedBackgroundView:bgColorView];
-    
     if (cell == nil) {
         // Use the default cell style.
         cell = [[UITableViewCell alloc] initWithStyle : UITableViewCellStyleDefault
@@ -106,100 +99,57 @@
     }
     
     // ObjectName
-    cell.textLabel.text = [[displayObject objectAtIndex:indexPath.row] objectForKey:@"userName"];
+    cell.textLabel.text = [[myObject objectAtIndex:indexPath.row] objectForKey:@"userName"];
+    
+    // Check Mark
+    cell.accessoryType = UITableViewCellAccessoryNone;
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    selectedUserID = [[displayObject objectAtIndex:indexPath.row] objectForKey:@"userID"];
-    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"หน้าที่"
-                                                       delegate:self
-                                              cancelButtonTitle:@"ยกเลิก"
-                                         destructiveButtonTitle:nil
-                                              otherButtonTitles:@"เจ้าของ", @"ผู้ดูแล", nil];
-    // Show the sheet
-    [sheet showInView:self.view];
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    if (cell.accessoryType == UITableViewCellAccessoryCheckmark) {
+        cell.accessoryType = UITableViewCellAccessoryNone;
+        [selectedUserID removeObject:[[myObject objectAtIndex:indexPath.row] objectForKey:@"userID"]];
+    }
+    else {
+        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+        [selectedUserID addObject:[[myObject objectAtIndex:indexPath.row] objectForKey:@"userID"]];
+    }
 }
 
-- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    switch (buttonIndex) {
-        case 0:{
-            // กำหนดให้ ผู้ที่ถูกเลือก เป็นเจ้าของ
-            post = [NSString stringWithFormat:@"userID=%@&objectID=%@&permission=1",selectedUserID,objectID];
-            
-            url = [NSURL URLWithString:@"http://angsila.cs.buu.ac.th/~53160117/TalkTogether/insertPermission.php"];
-            
-            error = [sendBox post:post toUrl:url];
-            
-            if (!error) {
-                [self.navigationController popViewControllerAnimated:YES];
-            }else{
-                [sendBox getErrorMessage];
-            }
-        }
-            break;
-        case 1:{
-            // กำหนดให้ ผู้ที่ถูกเลือก เป็นผู้ดูแล
-            post = [NSString stringWithFormat:@"userID=%@&objectID=%@&permission=2",selectedUserID,objectID];
-            
-            url = [NSURL URLWithString:@"http://angsila.cs.buu.ac.th/~53160117/TalkTogether/insertPermission.php"];
-            
-            error = [sendBox post:post toUrl:url];
-            
-            if (!error) {
-                [self.navigationController popViewControllerAnimated:YES];
-            }else{
-                [sendBox getErrorMessage];
-            }
-        }
-            break;
-    }
+    // Return NO if you do not want the specified item to be editable.
+    return YES;
 }
 
--(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if([searchText length] == 0)
-    {
-        [displayObject removeAllObjects];
-        [displayObject addObjectsFromArray:myObject];
-    }
-    else{
-        [displayObject removeAllObjects];
-        for (NSDictionary *item in myObject) {
-            NSString *string = [item objectForKey:@"userName"];
-            NSRange range = [string rangeOfString:searchText options:NSCaseInsensitiveSearch];
-            if (range.location !=  NSNotFound) {
-                [displayObject addObject:item];
-            }
-        }
-    }
-    
-    [myTable reloadData];
-}
-
--(void) searchBarSearchButtonClicked:(UISearchBar *)searchBar{
-	
-    [searchBar setShowsCancelButton:NO animated:YES];
-    [searchBar resignFirstResponder];
-    myTable.allowsSelection = YES;
-    myTable.scrollEnabled = YES;
-}
-
-- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
-    [searchBar setShowsCancelButton:YES animated:YES];
-    // tableViewObj.allowsSelection = NO;
-    myTable.scrollEnabled = NO;
-}
-
-- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
-    searchBar.text=@"";
-    
-    [searchBar setShowsCancelButton:NO animated:YES];
-    [searchBar resignFirstResponder];
-    myTable.allowsSelection = YES;
-    myTable.scrollEnabled = YES;
+//    if (editingStyle == UITableViewCellEditingStyleDelete) {
+//        
+//        // ลบวัตถุใน database
+//        // ส่ง objectID ให้ php
+//        NSString *post = [NSString stringWithFormat:@"objectID=%@",[[displayObject objectAtIndex:indexPath.row] objectForKey:@"objectID"]];
+//        NSURL *url = [NSURL URLWithString:@"http://angsila.cs.buu.ac.th/~53160117/TalkTogether/deleteObject.php"];
+//        BOOL error = [sendBox post:post toUrl:url];
+//        
+//        if (!error) {
+//            UIAlertView *returnMessage = [[UIAlertView alloc]
+//                                          initWithTitle:@"สำเร็จ!!"
+//                                          message:nil delegate:self
+//                                          cancelButtonTitle:@"OK" otherButtonTitles:nil];
+//            [returnMessage show];
+//            [showObj reloadData];
+//            
+//            // ลบวัตถุใน table
+//            [displayObject removeObjectAtIndex:indexPath.row];
+//            [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+//        }else{
+//            [sendBox getErrorMessage];
+//        }
+//    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -208,4 +158,15 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (IBAction)submitRequest:(id)sender {
+    post = [NSString stringWithFormat:@"objectID=%@&userID=%@",objectID,[selectedUserID JSONRepresentation]];
+    url = [NSURL URLWithString:@"http://angsila.cs.buu.ac.th/~53160117/TalkTogether/confirmRequest.php"];
+    error = [sendBox post:post toUrl:url];
+    
+    if (!error) {
+        
+    }else{
+        [sendBox getErrorMessage];
+    }
+}
 @end

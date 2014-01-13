@@ -18,9 +18,10 @@
 @property (strong, nonatomic) IBOutlet UIBubbleTableView *myTable;
 @property (strong, nonatomic) IBOutlet UIView *textViewInput;
 @property (strong, nonatomic) IBOutlet UITextField *message;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *detailObjectBtn;
 
 @property (strong, nonatomic) id recieveObjectID;
-@property (strong, nonatomic) id recieveUserID;
+@property (strong, nonatomic) id recieveContactID;
 @property (strong, nonatomic) id recieveSender;
 @property (strong, nonatomic) id recieveResponderID;
 

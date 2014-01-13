@@ -7,7 +7,6 @@
 //
 
 #import "QRRegisterViewController.h"
-//#import "ZBarSDK.h"
 #import "QRCodeGenerator.h"
 
 @interface QRRegisterViewController ()
@@ -22,6 +21,7 @@
 @implementation QRRegisterViewController
 @synthesize qrImage;
 @synthesize nameObject;
+@synthesize saveQrBtn;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -53,6 +53,8 @@
     insertQRCode = false;
     
     [nameObject setDelegate:self];
+    
+    saveQrBtn.hidden = YES;
 }
 
 - (void)didReceiveMemoryWarning
@@ -93,25 +95,29 @@
             if (returnNum == 0) {
                 NSMutableArray *jsonReturn = [sendBox getData];
                 for (NSDictionary* fetchDict in jsonReturn){
-                    returnObjectID = [NSString stringWithFormat:@"%@",[fetchDict objectForKey:@"objectID"]];
+                    returnObjectID = [NSString stringWithFormat:@"%@",fetchDict];
                 }
-                NSLog(@"objectID : %@",returnObjectID);
-                // Generate QR From ObjectID
-                qrImage.image = [QRCodeGenerator qrImageForString:returnObjectID imageSize:qrImage.bounds.size.width];
-
-                // Insert QR To DB
-                NSData *imageData = UIImageJPEGRepresentation(qrImage.image, 100);
-                NSURL *url = [NSURL URLWithString:@"http://angsila.cs.buu.ac.th/~53160117/TalkTogether/saveQrcode.php"];
-
-                error = [sendBox postImage:imageData withObjectID:returnObjectID toUrl:url];
-                if (!error) {
-                    UIAlertView *returnMessage = [[UIAlertView alloc]
-                                                  initWithTitle:@"สำเร็จ!!"
-                                                  message:nil delegate:self
-                                                  cancelButtonTitle:@"OK" otherButtonTitles:nil];
-                    [returnMessage show];
-                }else{
-                    [sendBox getErrorMessage];
+                
+                if (![returnObjectID isEqualToString:@"<null>"]) { // ถ้า insertObjectName ได้
+                    // Generate QR From ObjectID
+                    saveQrBtn.hidden = NO;
+                    qrImage.image = [QRCodeGenerator qrImageForString:returnObjectID imageSize:qrImage.bounds.size.width];
+                    
+                    // save QR Code ลง database
+                    NSData *imageData = UIImageJPEGRepresentation(qrImage.image, 100);
+                    NSURL *url = [NSURL URLWithString:@"http://angsila.cs.buu.ac.th/~53160117/TalkTogether/saveQrcode.php"];
+                    
+                    error = [sendBox postImage:imageData withObjectID:returnObjectID toUrl:url];
+                    if (error) { // สร้าง QR Code ไม่ได้
+                        [sendBox getErrorMessage];
+                    }
+                }else{ // ถ้า insertObjectName ไม่ได้
+                    saveQrBtn.hidden = YES;
+                    UIAlertView *errorMessage =[[UIAlertView alloc]
+                                   initWithTitle:@"การส่งข้อมูลผิดพลาด"
+                                   message:nil delegate:self
+                                   cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                    [errorMessage show];
                 }
             }
         }else{
@@ -137,7 +143,7 @@
         [saveQrAlert show];
     } else {
         UIAlertView *saveQrAlert = [[UIAlertView alloc]
-                                    initWithTitle:@"จัดเก็บ QR Code สำเร็จ"
+                                    initWithTitle:@"จัดเก็บ QR Code เรียบร้อย"
                                     message:nil delegate:self
                                     cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [saveQrAlert show];

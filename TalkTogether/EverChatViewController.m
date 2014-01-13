@@ -34,11 +34,6 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    
-    // รับ userID จากหน้า mainMenu
-    userID = [recieveUserID description];
-    
-//    NSLog(@"EverChatUserID : %@",userID);
 }
 
 - (void) viewWillAppear:(BOOL)animated
@@ -110,6 +105,11 @@
     cell.textLabel.text = text;
     if ([[[displayObject objectAtIndex:indexPath.row] objectForKey:@"responder_ID"] isEqualToString:userID]) {
         cell.detailTextLabel.text = @"วัตถุ -> ผู้ใช้";
+        // รูปด้านซ้าย
+        cell.imageView.image = [UIImage imageNamed:@"woman.png"];
+        // รูปด้านขวา
+        cell.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"woman.png"]];
+        [cell.accessoryView setFrame:CGRectMake(0, 0, 42, 42)];
     }else{
         cell.detailTextLabel.text = @"ผู้ใช้ -> วัตถุ";
     }
@@ -125,11 +125,11 @@
     if ([[[displayObject objectAtIndex:indexPath.row] objectForKey:@"responder_ID"] isEqualToString:userID]) {
         chatView.recieveSender = @"2"; // กำหนดให้ผู้ส่งคือวัตถุ
         chatView.recieveResponderID = userID;
-        chatView.recieveUserID = [[displayObject objectAtIndex:indexPath.row] objectForKey:@"contact_ID"];
+        chatView.recieveContactID = [[displayObject objectAtIndex:indexPath.row] objectForKey:@"contact_ID"];
     }else{
         chatView.recieveSender = @"1"; // กำหนดให้ผู้ส่งคือผู้ใช้
         chatView.recieveResponderID = [[displayObject objectAtIndex:indexPath.row] objectForKey:@"responder_ID"];
-        chatView.recieveUserID = userID;
+        chatView.recieveContactID = userID;
     }
     chatView.navigationItem.title = [[displayObject objectAtIndex:indexPath.row] objectForKey:@"objectName"];
     

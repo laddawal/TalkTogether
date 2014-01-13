@@ -165,7 +165,7 @@
         ChatViewController *chatView =[self.storyboard instantiateViewControllerWithIdentifier:@"chatView"];
         
         chatView.recieveObjectID = [[myObject objectAtIndex:indexPath.row] objectForKey:@"objectID"];
-        chatView.recieveUserID = userID;
+        chatView.recieveContactID = userID;
         chatView.recieveSender = @"1"; // กำหนดให้ผู้ส่งคือผู้ใช้
         chatView.recieveResponderID = responderID;
         chatView.navigationItem.title = [[myObject objectAtIndex:indexPath.row] objectForKey:@"objectName"];

@@ -7,8 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "postMessage.h"
 
 @interface MainMenuViewController : UIViewController
+{
+    postMessage *sendBox;
+}
+
+@property (strong, nonatomic) IBOutlet UIButton *chatHistoryBtn;
+
 - (IBAction)logout:(id)sender;
 - (IBAction)everChat:(id)sender;
 

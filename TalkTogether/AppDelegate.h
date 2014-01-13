@@ -8,8 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import <FacebookSDK/FacebookSDK.h>
+#import "postMessage.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
+{
+    postMessage *sendBox;
+}
 
 @property (strong, nonatomic) UIWindow *window;
 

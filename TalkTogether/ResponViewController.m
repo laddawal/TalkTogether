@@ -142,11 +142,11 @@
     
     // ObjectName
     cell.textLabel.text = [[myObject objectAtIndex:indexPath.row] objectForKey:@"userName"];
-    if ([[[myObject objectAtIndex:indexPath.row] objectForKey:@"permission"] isEqualToString:@"1"]) {
-        cell.detailTextLabel.text = @"เจ้าของ";
-    }else{
-        cell.detailTextLabel.text = @"ผู้ดูแล";
-    }
+//    if ([[[myObject objectAtIndex:indexPath.row] objectForKey:@"permission"] isEqualToString:@"1"]) {
+//        cell.detailTextLabel.text = @"เจ้าของ";
+//    }else{
+//        cell.detailTextLabel.text = @"ผู้ดูแล";
+//    }
     return cell;
 }
 
@@ -156,13 +156,46 @@
     EditResponderViewController *editRespobderView =[self.storyboard instantiateViewControllerWithIdentifier:@"editRespobderView"];
     
     editRespobderView.recieveUserID = [[myObject objectAtIndex:indexPath.row] objectForKey:@"userID"];
-    editRespobderView.recievePermission = [[myObject objectAtIndex:indexPath.row] objectForKey:@"permission"];
+//    editRespobderView.recievePermission = [[myObject objectAtIndex:indexPath.row] objectForKey:@"permission"];
     editRespobderView.recieveObjectID = objectID;
     editRespobderView.recieveResponderName = [[myObject objectAtIndex:indexPath.row] objectForKey:@"userName"];
     
     [editRespobderView setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
     
     [self.navigationController pushViewController:editRespobderView animated:YES];
+}
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // Return NO if you do not want the specified item to be editable.
+    return YES;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+//    if (editingStyle == UITableViewCellEditingStyleDelete) {
+//        
+//        // ลบวัตถุใน database
+//        // ส่ง objectID ให้ php
+//        NSString *post = [NSString stringWithFormat:@"objectID=%@",[[displayObject objectAtIndex:indexPath.row] objectForKey:@"objectID"]];
+//        NSURL *url = [NSURL URLWithString:@"http://angsila.cs.buu.ac.th/~53160117/TalkTogether/deleteObject.php"];
+//        BOOL error = [sendBox post:post toUrl:url];
+//        
+//        if (!error) {
+//            UIAlertView *returnMessage = [[UIAlertView alloc]
+//                                          initWithTitle:@"สำเร็จ!!"
+//                                          message:nil delegate:self
+//                                          cancelButtonTitle:@"OK" otherButtonTitles:nil];
+//            [returnMessage show];
+//            [showObj reloadData];
+//            
+//            // ลบวัตถุใน table
+//            [displayObject removeObjectAtIndex:indexPath.row];
+//            [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+//        }else{
+//            [sendBox getErrorMessage];
+//        }
+//    }
 }
 
 - (void)didReceiveMemoryWarning

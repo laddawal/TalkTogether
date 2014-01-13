@@ -60,6 +60,38 @@
     [objectName setDelegate:self];
 }
 
+//- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
+//    
+//    CLLocationCoordinate2D currentCoordinates = newLocation.coordinate;
+//    
+//    NSLog(@"Entered new Location with the coordinates Latitude: %f Longitude: %f", currentCoordinates.latitude, currentCoordinates.longitude);
+//    
+//    //Optional: turn off location services once we've gotten a good location
+//    [manager stopUpdatingLocation];
+//    
+//    latitude = currentCoordinates.latitude;
+//    longitude = currentCoordinates.longitude;
+//    
+//    // กำหนด latitude longtitude ลงในแผนที่
+//    mapView.hidden = NO;
+//    [mapView setMapType:MKMapTypeStandard];
+//    [mapView setZoomEnabled:YES];
+//    [mapView setScrollEnabled:YES];
+//    MKCoordinateRegion region = { {0.0, 0.0 }, { 0.0, 0.0 } };
+//    region.center.latitude = latitude;
+//    region.center.longitude = longitude;
+//    region.span.longitudeDelta = 0.01f;
+//    region.span.latitudeDelta = 0.01f;
+//    [mapView setRegion:region animated:YES];
+//    
+//    [mapView setDelegate:self];
+//    
+//    DisplayMap *ann = [[DisplayMap alloc] init];
+//    ann.title = @"ตำแหน่งของคุณ";
+//    ann.coordinate = region.center;
+//    [mapView addAnnotation:ann];
+//}
+
 -(void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation{
     
     NSDate* eventDate = newLocation.timestamp;
@@ -77,7 +109,7 @@
             
             //Optional: turn off location services once we've gotten a good location
             [manager stopUpdatingLocation];
-            
+
             latitude = newLocation.coordinate.latitude;
             longitude = newLocation.coordinate.longitude;
             
