@@ -9,6 +9,7 @@
 #import "DetailObjectViewController.h"
 #import "ResponViewController.h"
 #import "addFAQViewController.h"
+#import "EditFAQViewController.h"
 #import "DisplayMap.h"
 
 @interface DetailObjectViewController ()
@@ -20,6 +21,8 @@
     NSString *userID;
     NSString *urlQR;
     NSString *request;
+    
+    BOOL flagResponder;
     
     NSMutableArray *myObject;
     
@@ -33,10 +36,7 @@
 @synthesize recieveObjectID;
 @synthesize scrollView;
 @synthesize viewName,viewQR,viewBarcode,viewGPS,viewFAQ,viewRequestResponder;
-@synthesize mapView;
-@synthesize barcodeIDLabel;
-@synthesize nameDetail;
-@synthesize qrImage;
+@synthesize mapView,barcodeIDLabel,nameDetail,qrImage,faqTable;
 @synthesize saveQR,editGPS,save,setting,editFAQBtn,requestResponder,editBarcode;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -85,9 +85,30 @@
 - (void) viewWillAppear:(BOOL)animated{
     myObject = [[NSMutableArray alloc] init];
     
-    // ส่ง objectID เพื่อเอา faq
+    // ส่ง objectID เพื่อเอา FAQ
     post = [NSString stringWithFormat:@"objectID=%@",objectID];
-    url = [NSURL URLWithString:@"http://angsila.cs.buu.ac.th/~53160117/TalkTogether/.php"];
+    url = [NSURL URLWithString:@"http://angsila.cs.buu.ac.th/~53160117/TalkTogether/getFAQ.php"];
+    error = [sendBox post:post toUrl:url];
+    
+    if (!error) {
+        int returnNum = [sendBox getReturnMessage];
+        if (returnNum == 0) {
+            NSMutableArray *jsonReturn = [sendBox getData];
+            for (NSDictionary* fetchDict in jsonReturn){
+                [myObject addObject:fetchDict];
+            }
+        }
+    }else{
+        [sendBox getErrorMessage];
+    }
+    [faqTable reloadData];
+    
+    // ถ้าไม่มี FAQ ให้ซ่อน faqTable
+    if ([myObject count] == 0) {
+        faqTable.hidden = YES;
+    }else{
+        faqTable.hidden = NO;
+    }
     
     //ส่ง objectID ให้ php เพื่อเอารายละเอียดวัตถุ
     post = [NSString stringWithFormat:@"objectID=%@&userID=%@",objectID,userID];
@@ -163,6 +184,8 @@
             if (!error) {
                 int returnNum = [sendBox getReturnMessage];
                 if (returnNum == 0) { // เป็นผู้ดูแล
+                    flagResponder = YES;
+                    
                     [nameDetail setBorderStyle:UITextBorderStyleRoundedRect];
                     [nameDetail setEnabled:YES];
                     [setting setEnabled:YES];
@@ -171,6 +194,8 @@
                     viewRequestResponder.hidden = YES;
                     editBarcode.hidden = NO;
                 }else{ // เป็นผู้ติดต่อ
+                    flagResponder = NO;
+                    
                     if ([request isEqualToString:@"1"]) { // เคยส่งคำขอเป็นผู้ดูแลแล้ว
                         requestResponder.enabled = NO;
                         [requestResponder setTitle:@"ส่งคำขอเป็นผู้ดูแลแล้ว" forState:UIControlStateNormal];
@@ -231,6 +256,10 @@
     [self.navigationController pushViewController:addFAQView animated:YES];
 }
 
+- (IBAction)editDetail:(id)sender {
+    
+}
+
 - (IBAction)goToResponView:(id)sender {
     // ไปหน้า Respon (รายชื่อผู้ดูแล)
     ResponViewController *responView =[self.storyboard instantiateViewControllerWithIdentifier:@"responView"];
@@ -268,21 +297,35 @@
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
-//    // selected cell color
-//    UIView *bgColorView = [[UIView alloc] init];
-//    [bgColorView setBackgroundColor:[UIColor colorWithRed:134.0/255.0 green:114.0/255.0 blue:93.0/255.0 alpha:1.0]];
-//    [cell setSelectedBackgroundView:bgColorView];
-//    
-//    if (cell == nil) {
-//        // Use the default cell style.
-//        cell = [[UITableViewCell alloc] initWithStyle : UITableViewCellStyleDefault
-//                                      reuseIdentifier : CellIdentifier];
-//    }
-//    
-//    // ObjectName
-//    cell.textLabel.text = [[myObject objectAtIndex:indexPath.row] objectForKey:@"objectName"];
-    cell.textLabel.text = @"ไม่พบคำถามที่ถามบ่อย";
+    if (cell == nil) {
+        // Use the default cell style.
+        cell = [[UITableViewCell alloc] initWithStyle : UITableViewCellStyleDefault
+                                      reuseIdentifier : CellIdentifier];
+    }
+    
+    // ถ้าเป็นผู้ดูแลสามารถเลือก cell ได้
+    if (flagResponder) {
+        cell.userInteractionEnabled = YES;
+    }else{
+        cell.userInteractionEnabled = NO;
+    }
+    
+    // คำถาม - คำตอบ
+    cell.textLabel.text = [[myObject objectAtIndex:indexPath.row] objectForKey:@"question"];
+    cell.detailTextLabel.text = [[myObject objectAtIndex:indexPath.row] objectForKey:@"answer"];
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // ไปหน้า แก้ไข FAQ
+    EditFAQViewController *editFAQView =[self.storyboard instantiateViewControllerWithIdentifier:@"editFAQView"];
+    
+    editFAQView.recieveFaqID = [[myObject objectAtIndex:indexPath.row] objectForKey:@"faqID"];
+    
+    [editFAQView setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
+    
+    [self.navigationController pushViewController:editFAQView animated:YES];
 }
 
 

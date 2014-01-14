@@ -100,6 +100,10 @@
 		C9EE8CD4187D53AF00B53236 /* setting@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C9EE8CD2187D53AF00B53236 /* setting@2x.png */; };
 		C9EE8CD8187D5D2200B53236 /* submit.png in Resources */ = {isa = PBXBuildFile; fileRef = C9EE8CD7187D5D2200B53236 /* submit.png */; };
 		C9EE8CE2187D65A300B53236 /* addRespon.png in Resources */ = {isa = PBXBuildFile; fileRef = C9EE8CE1187D65A300B53236 /* addRespon.png */; };
+		C9F07A8B18850BD9001CCFBD /* EditFAQViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9F07A8A18850BD9001CCFBD /* EditFAQViewController.m */; };
+		C9F07A8D18851A9C001CCFBD /* noFAQ.png in Resources */ = {isa = PBXBuildFile; fileRef = C9F07A8C18851A9C001CCFBD /* noFAQ.png */; };
+		C9F07A90188524E8001CCFBD /* EditGPSViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9F07A8F188524E8001CCFBD /* EditGPSViewController.m */; };
+		C9F07A9318852504001CCFBD /* EditBarcodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9F07A9218852504001CCFBD /* EditBarcodeViewController.m */; };
 		C9F2E02E1863F74000F22FE8 /* EverChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9F2E02D1863F74000F22FE8 /* EverChatViewController.m */; };
 		C9F2E03A18640BFD00F22FE8 /* logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C9F2E03118640BFD00F22FE8 /* logo@2x.png */; };
 		C9F2E03B18640BFD00F22FE8 /* chatBtn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C9F2E03218640BFD00F22FE8 /* chatBtn@2x.png */; };
@@ -273,6 +277,13 @@
 		C9EE8CD2187D53AF00B53236 /* setting@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "setting@2x.png"; sourceTree = "<group>"; };
 		C9EE8CD7187D5D2200B53236 /* submit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = submit.png; sourceTree = "<group>"; };
 		C9EE8CE1187D65A300B53236 /* addRespon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = addRespon.png; sourceTree = "<group>"; };
+		C9F07A8918850BD9001CCFBD /* EditFAQViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditFAQViewController.h; sourceTree = "<group>"; };
+		C9F07A8A18850BD9001CCFBD /* EditFAQViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditFAQViewController.m; sourceTree = "<group>"; };
+		C9F07A8C18851A9C001CCFBD /* noFAQ.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = noFAQ.png; sourceTree = "<group>"; };
+		C9F07A8E188524E8001CCFBD /* EditGPSViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EditGPSViewController.h; path = TalkTogether/EditGPSViewController.h; sourceTree = "<group>"; };
+		C9F07A8F188524E8001CCFBD /* EditGPSViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EditGPSViewController.m; path = TalkTogether/EditGPSViewController.m; sourceTree = "<group>"; };
+		C9F07A9118852504001CCFBD /* EditBarcodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EditBarcodeViewController.h; path = TalkTogether/EditBarcodeViewController.h; sourceTree = "<group>"; };
+		C9F07A9218852504001CCFBD /* EditBarcodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EditBarcodeViewController.m; path = TalkTogether/EditBarcodeViewController.m; sourceTree = "<group>"; };
 		C9F2E02C1863F74000F22FE8 /* EverChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EverChatViewController.h; path = TalkTogether/EverChatViewController.h; sourceTree = "<group>"; };
 		C9F2E02D1863F74000F22FE8 /* EverChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EverChatViewController.m; path = TalkTogether/EverChatViewController.m; sourceTree = "<group>"; };
 		C9F2E03118640BFD00F22FE8 /* logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo@2x.png"; sourceTree = "<group>"; };
@@ -323,10 +334,16 @@
 		C93E4384182226A600DC8104 = {
 			isa = PBXGroup;
 			children = (
+				C9F07A8E188524E8001CCFBD /* EditGPSViewController.h */,
+				C9F07A8F188524E8001CCFBD /* EditGPSViewController.m */,
+				C9F07A9118852504001CCFBD /* EditBarcodeViewController.h */,
+				C9F07A9218852504001CCFBD /* EditBarcodeViewController.m */,
 				C97E7EE81855C27300CE58E0 /* DetailObjectViewController.h */,
 				C97E7EE91855C27300CE58E0 /* DetailObjectViewController.m */,
 				C9335E2C1884656900601A74 /* addFAQViewController.h */,
 				C9335E2D1884656900601A74 /* addFAQViewController.m */,
+				C9F07A8918850BD9001CCFBD /* EditFAQViewController.h */,
+				C9F07A8A18850BD9001CCFBD /* EditFAQViewController.m */,
 				C99D3910185C2C2500F09455 /* MainMenuViewController.h */,
 				C99D3911185C2C2500F09455 /* MainMenuViewController.m */,
 				C9F2E02C1863F74000F22FE8 /* EverChatViewController.h */,
@@ -447,6 +464,7 @@
 		C93E43CD182229E800DC8104 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				C9F07A8C18851A9C001CCFBD /* noFAQ.png */,
 				C93BECE018842E8400E03576 /* logout@2x.png */,
 				C93BECE118842E8400E03576 /* logout.png */,
 				C90625891881E0740026EAEA /* woman.png */,
@@ -724,6 +742,7 @@
 				C90B75A818585CA30058C4D7 /* navBarBlue@2x.png in Resources */,
 				C9B8B54E187461280037DCCE /* keywordBtn@2x.png in Resources */,
 				C9F2E04018640BFD00F22FE8 /* nav.png in Resources */,
+				C9F07A8D18851A9C001CCFBD /* noFAQ.png in Resources */,
 				C9EE8CD4187D53AF00B53236 /* setting@2x.png in Resources */,
 				C9F2E03B18640BFD00F22FE8 /* chatBtn@2x.png in Resources */,
 				C9A3BBD71854CE8A00CC040D /* bg@2x.png in Resources */,
@@ -753,7 +772,9 @@
 				C9460ED5183F23A00043A5F1 /* ChatViewController.m in Sources */,
 				C9460EE5183F23FB0043A5F1 /* UIBubbleTableViewCell.m in Sources */,
 				C9F2E02E1863F74000F22FE8 /* EverChatViewController.m in Sources */,
+				C9F07A90188524E8001CCFBD /* EditGPSViewController.m in Sources */,
 				C925EF3A183BAFEF00ACB687 /* BarcodeContactViewController.m in Sources */,
+				C9F07A9318852504001CCFBD /* EditBarcodeViewController.m in Sources */,
 				C9460EE6183F23FB0043A5F1 /* UIBubbleTypingTableViewCell.m in Sources */,
 				C9460EE3183F23FB0043A5F1 /* UIBubbleHeaderTableViewCell.m in Sources */,
 				C92820EF1831F1DF007EEBD5 /* NameRegisterViewController.m in Sources */,
@@ -779,6 +800,7 @@
 				C9A2CDBD1839F99A00F69533 /* QRContactViewController.m in Sources */,
 				C93E43C71822277D00DC8104 /* LoginViewController.m in Sources */,
 				C99B15E41835D64100B68BAC /* qrspec.c in Sources */,
+				C9F07A8B18850BD9001CCFBD /* EditFAQViewController.m in Sources */,
 				C99B15E01835D64100B68BAC /* mask.c in Sources */,
 				C9460EE4183F23FB0043A5F1 /* UIBubbleTableView.m in Sources */,
 				C9237F3118407D77007FC209 /* postMessage.m in Sources */,

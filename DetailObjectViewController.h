@@ -41,6 +41,7 @@
 - (IBAction)saveQrImg:(id)sender;
 - (IBAction)sendResponder:(id)sender;
 - (IBAction)addFAQ:(id)sender;
+- (IBAction)editDetail:(id)sender;
 - (IBAction)goToResponView:(id)sender;
 @property (strong, nonatomic) IBOutlet UIButton *requestResponder;
 @end

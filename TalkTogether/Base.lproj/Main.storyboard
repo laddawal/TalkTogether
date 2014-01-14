@@ -499,19 +499,107 @@
             </objects>
             <point key="canvasLocation" x="-3762" y="558"/>
         </scene>
-        <!--View Controller-->
+        <!--EditFAQ View Controller - แก้ไขคำถามที่ถามบ่อย-->
         <scene sceneID="Gl2-mt-mMw">
             <objects>
-                <viewController id="5xh-ap-BOa" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="editFAQView" id="5xh-ap-BOa" customClass="EditFAQViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Lxg-ZQ-hnS">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="spF-p5-jOv">
+                                <rect key="frame" x="106" y="275" width="177" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="Vit-YR-gFu">
+                                <rect key="frame" x="106" y="237" width="177" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="คำถาม : " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1Ze-39-cDZ">
+                                <rect key="frame" x="38" y="240" width="60" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="คำตอบ : " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="qAb-N9-hBv">
+                                <rect key="frame" x="38" y="278" width="63" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="ZU8-7M-8Ll">
+                                <rect key="frame" x="161" y="313" width="35" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="บันทึก">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="saveFAQ:" destination="5xh-ap-BOa" eventType="touchUpInside" id="f0L-n3-VOe"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="แก้ไขคำถามที่ถามบ่อย" id="Ge6-IU-pru"/>
+                    <connections>
+                        <outlet property="answerTextField" destination="spF-p5-jOv" id="LDC-Z4-Y91"/>
+                        <outlet property="questionTextField" destination="Vit-YR-gFu" id="zsm-x4-Qk7"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="x2E-Q4-Hco" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-4812" y="767"/>
+        </scene>
+        <!--EditGPS View Controller - แก้ไขตำแหน่ง GPS-->
+        <scene sceneID="qTn-pw-pVd">
+            <objects>
+                <viewController id="vTH-Ja-1e9" customClass="EditGPSViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="vh6-Xw-Q74">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" id="S93-e4-owK">
+                                <rect key="frame" x="40" y="164" width="240" height="240"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </mapView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ตำแหน่งใหม่คือ" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="SFV-yr-OYd">
+                                <rect key="frame" x="111" y="135" width="98" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="แก้ไขตำแหน่ง GPS" id="tk4-0k-P41"/>
+                    <connections>
+                        <outlet property="mapView" destination="S93-e4-owK" id="343-EO-ywn"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JeQ-NS-grg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-5613" y="115"/>
+        </scene>
+        <!--Edit Barcode View Controller - แก้ไข Barcode-->
+        <scene sceneID="hc0-cy-Bdw">
+            <objects>
+                <viewController id="ZSK-a1-SK0" customClass="EditBarcodeViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="g9Y-hu-kcG">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <navigationItem key="navigationItem" title="แก้ไข Barcode" id="mF6-4Z-FvF"/>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="x2E-Q4-Hco" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="J6t-4o-H4i" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-5647" y="115"/>
+            <point key="canvasLocation" x="-5244" y="767"/>
         </scene>
         <!--Detail Object View Controller - รายละเอียด-->
         <scene sceneID="zL8-ZO-qrA">
@@ -522,7 +610,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsVerticalScrollIndicator="NO" id="hAh-GU-nwx">
-                                <rect key="frame" x="0.0" y="-636" width="320" height="1235"/>
+                                <rect key="frame" x="0.0" y="-204" width="320" height="1235"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" id="asB-jC-oPA">
@@ -597,6 +685,9 @@
                                                 <state key="normal" title="แก้ไข">
                                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
+                                                <connections>
+                                                    <segue destination="ZSK-a1-SK0" kind="push" id="VQ0-Nf-Wzj"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" red="1" green="0.96078437569999997" blue="0.88235300780000003" alpha="1" colorSpace="deviceRGB"/>
@@ -617,6 +708,9 @@
                                                 <state key="normal" title="แก้ไข">
                                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
+                                                <connections>
+                                                    <segue destination="vTH-Ja-1e9" kind="push" id="Rq2-4Q-P4A"/>
+                                                </connections>
                                             </button>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="noGPS.png" id="nTq-Nx-59X">
                                                 <rect key="frame" x="20" y="49" width="240" height="240"/>
@@ -635,33 +729,42 @@
                                         <state key="normal" title="บันทึก">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="editDetail:" destination="98K-4T-dl9" eventType="touchUpInside" id="bDu-xZ-nNH"/>
+                                        </connections>
                                     </button>
                                     <view contentMode="scaleToFill" id="Uns-xQ-0ew">
                                         <rect key="frame" x="20" y="773" width="280" height="336"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
-                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="ccg-sy-kRL">
-                                                <rect key="frame" x="20" y="49" width="240" height="242"/>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="noFAQ.png" id="M9j-sZ-5ns">
+                                                <rect key="frame" x="20" y="47" width="240" height="242"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            </imageView>
+                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="ccg-sy-kRL">
+                                                <rect key="frame" x="20" y="47" width="240" height="242"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <color key="backgroundColor" red="0.97254908080000002" green="0.93725496529999996" blue="0.87058830259999997" alpha="1" colorSpace="deviceRGB"/>
+                                                <color key="separatorColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                 <color key="sectionIndexTrackingBackgroundColor" red="0.97254908080000002" green="0.93725496529999996" blue="0.87058830259999997" alpha="1" colorSpace="deviceRGB"/>
                                                 <prototypes>
-                                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="faqCell" textLabel="tOI-rG-yj9" detailTextLabel="Uy4-MH-70B" style="IBUITableViewCellStyleSubtitle" id="Qr8-xo-qvx">
-                                                        <rect key="frame" x="0.0" y="22" width="240" height="44"/>
+                                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="faqCell" textLabel="tOI-rG-yj9" detailTextLabel="Uy4-MH-70B" rowHeight="52" style="IBUITableViewCellStyleSubtitle" id="Qr8-xo-qvx">
+                                                        <rect key="frame" x="0.0" y="22" width="240" height="52"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Qr8-xo-qvx" id="9ka-qd-Aen">
-                                                            <rect key="frame" x="0.0" y="0.0" width="240" height="43"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="240" height="51"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
                                                                 <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="tOI-rG-yj9">
-                                                                    <rect key="frame" x="15" y="3" width="34" height="22"/>
+                                                                    <rect key="frame" x="15" y="7" width="34" height="22"/>
                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Detail" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Uy4-MH-70B">
-                                                                    <rect key="frame" x="15" y="25" width="32" height="15"/>
+                                                                    <rect key="frame" x="15" y="29" width="32" height="15"/>
                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -669,7 +772,7 @@
                                                                 </label>
                                                             </subviews>
                                                         </tableViewCellContentView>
-                                                        <color key="backgroundColor" red="0.97254908080000002" green="0.93725496529999996" blue="0.87058830259999997" alpha="1" colorSpace="deviceRGB"/>
+                                                        <color key="backgroundColor" red="0.7725490927696228" green="0.71764707565307617" blue="0.64313727617263794" alpha="1" colorSpace="deviceRGB"/>
                                                     </tableViewCell>
                                                 </prototypes>
                                                 <sections/>
@@ -762,32 +865,32 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="คำถาม : " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="2kL-jw-RDy">
-                                <rect key="frame" x="49" y="230" width="60" height="21"/>
+                                <rect key="frame" x="39" y="242" width="60" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="คำตอบ : " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="YEt-77-BG9">
-                                <rect key="frame" x="46" y="273" width="63" height="21"/>
+                                <rect key="frame" x="36" y="285" width="63" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="KHI-5R-NER">
-                                <rect key="frame" x="117" y="227" width="158" height="30"/>
+                                <rect key="frame" x="107" y="239" width="177" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="fr6-BR-eO4">
-                                <rect key="frame" x="117" y="264" width="158" height="30"/>
+                                <rect key="frame" x="107" y="276" width="177" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="XQN-o5-Usx">
-                                <rect key="frame" x="143" y="311" width="35" height="30"/>
+                                <rect key="frame" x="143" y="314" width="35" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="บันทึก">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -1193,6 +1296,7 @@
         <image name="keywordBtn.png" width="100" height="100"/>
         <image name="logo.png" width="163" height="24"/>
         <image name="logout.png" width="24" height="24"/>
+        <image name="noFAQ.png" width="240" height="242"/>
         <image name="noGPS.png" width="240" height="240"/>
         <image name="noQrCode.png" width="170" height="168"/>
         <image name="qrCodeBtn.png" width="100" height="100"/>
