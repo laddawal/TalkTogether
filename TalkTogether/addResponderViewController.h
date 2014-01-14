@@ -15,8 +15,8 @@
 }
 @property (strong, nonatomic) IBOutlet UITableView *myTable;
 
-//@property (strong, nonatomic) id recieveUserID;
 @property (strong, nonatomic) id recieveObjectID;
 
 - (IBAction)submitRequest:(id)sender;
+- (IBAction)deleteRequest:(id)sender;
 @end

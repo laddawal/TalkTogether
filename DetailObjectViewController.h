@@ -40,7 +40,7 @@
 
 - (IBAction)saveQrImg:(id)sender;
 - (IBAction)sendResponder:(id)sender;
-- (IBAction)editFAQ:(id)sender;
+- (IBAction)addFAQ:(id)sender;
 - (IBAction)goToResponView:(id)sender;
 @property (strong, nonatomic) IBOutlet UIButton *requestResponder;
 @end

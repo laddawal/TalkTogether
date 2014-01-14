@@ -37,6 +37,7 @@
 		C925EF3D183BB9BD00ACB687 /* BarcodeRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C925EF3C183BB9BD00ACB687 /* BarcodeRegisterViewController.m */; };
 		C92820EF1831F1DF007EEBD5 /* NameRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C92820EE1831F1DF007EEBD5 /* NameRegisterViewController.m */; };
 		C92BD0B0186C15EB00E0FDAF /* addResponderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C92BD0AF186C15EB00E0FDAF /* addResponderViewController.m */; };
+		C9335E2E1884656900601A74 /* addFAQViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9335E2D1884656900601A74 /* addFAQViewController.m */; };
 		C936C251187C655500B2DCE3 /* badge.png in Resources */ = {isa = PBXBuildFile; fileRef = C936C250187C655500B2DCE3 /* badge.png */; };
 		C93BECE218842E8400E03576 /* logout@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C93BECE018842E8400E03576 /* logout@2x.png */; };
 		C93BECE318842E8400E03576 /* logout.png in Resources */ = {isa = PBXBuildFile; fileRef = C93BECE118842E8400E03576 /* logout.png */; };
@@ -74,7 +75,6 @@
 		C99B15E51835D64100B68BAC /* rscode.c in Sources */ = {isa = PBXBuildFile; fileRef = C99B15DB1835D64100B68BAC /* rscode.c */; };
 		C99B15E61835D64100B68BAC /* split.c in Sources */ = {isa = PBXBuildFile; fileRef = C99B15DD1835D64100B68BAC /* split.c */; };
 		C99D3912185C2C2500F09455 /* MainMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C99D3911185C2C2500F09455 /* MainMenuViewController.m */; };
-		C99D3E58186ABEFE00CDF3DE /* EditResponderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C99D3E57186ABEFE00CDF3DE /* EditResponderViewController.m */; };
 		C9A25395184B1929006FF37C /* IdentifyBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = C9A25394184B1929006FF37C /* IdentifyBtn.png */; };
 		C9A2539B184B1E29006FF37C /* MyObjectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9A2539A184B1E29006FF37C /* MyObjectViewController.m */; };
 		C9A2CD6C1839EF5900F69533 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9A2CD6B1839EF5900F69533 /* FacebookSDK.framework */; };
@@ -161,6 +161,8 @@
 		C92820EE1831F1DF007EEBD5 /* NameRegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NameRegisterViewController.m; sourceTree = "<group>"; };
 		C92BD0AE186C15EB00E0FDAF /* addResponderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = addResponderViewController.h; path = TalkTogether/addResponderViewController.h; sourceTree = "<group>"; };
 		C92BD0AF186C15EB00E0FDAF /* addResponderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = addResponderViewController.m; path = TalkTogether/addResponderViewController.m; sourceTree = "<group>"; };
+		C9335E2C1884656900601A74 /* addFAQViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = addFAQViewController.h; sourceTree = "<group>"; };
+		C9335E2D1884656900601A74 /* addFAQViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = addFAQViewController.m; sourceTree = "<group>"; };
 		C936C250187C655500B2DCE3 /* badge.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = badge.png; sourceTree = "<group>"; };
 		C93BECE018842E8400E03576 /* logout@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logout@2x.png"; sourceTree = "<group>"; };
 		C93BECE118842E8400E03576 /* logout.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logout.png; sourceTree = "<group>"; };
@@ -246,8 +248,6 @@
 		C99B15DE1835D64100B68BAC /* split.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = split.h; sourceTree = "<group>"; };
 		C99D3910185C2C2500F09455 /* MainMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainMenuViewController.h; path = TalkTogether/MainMenuViewController.h; sourceTree = "<group>"; };
 		C99D3911185C2C2500F09455 /* MainMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MainMenuViewController.m; path = TalkTogether/MainMenuViewController.m; sourceTree = "<group>"; };
-		C99D3E56186ABEFE00CDF3DE /* EditResponderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditResponderViewController.h; sourceTree = "<group>"; };
-		C99D3E57186ABEFE00CDF3DE /* EditResponderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditResponderViewController.m; sourceTree = "<group>"; };
 		C9A25394184B1929006FF37C /* IdentifyBtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = IdentifyBtn.png; sourceTree = "<group>"; };
 		C9A25399184B1E29006FF37C /* MyObjectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyObjectViewController.h; sourceTree = "<group>"; };
 		C9A2539A184B1E29006FF37C /* MyObjectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyObjectViewController.m; sourceTree = "<group>"; };
@@ -323,16 +323,16 @@
 		C93E4384182226A600DC8104 = {
 			isa = PBXGroup;
 			children = (
-				C99D3E56186ABEFE00CDF3DE /* EditResponderViewController.h */,
-				C99D3E57186ABEFE00CDF3DE /* EditResponderViewController.m */,
 				C97E7EE81855C27300CE58E0 /* DetailObjectViewController.h */,
 				C97E7EE91855C27300CE58E0 /* DetailObjectViewController.m */,
-				C9FB649A185716D70077AFFF /* ResponViewController.h */,
-				C9FB649B185716D70077AFFF /* ResponViewController.m */,
+				C9335E2C1884656900601A74 /* addFAQViewController.h */,
+				C9335E2D1884656900601A74 /* addFAQViewController.m */,
 				C99D3910185C2C2500F09455 /* MainMenuViewController.h */,
 				C99D3911185C2C2500F09455 /* MainMenuViewController.m */,
 				C9F2E02C1863F74000F22FE8 /* EverChatViewController.h */,
 				C9F2E02D1863F74000F22FE8 /* EverChatViewController.m */,
+				C9FB649A185716D70077AFFF /* ResponViewController.h */,
+				C9FB649B185716D70077AFFF /* ResponViewController.m */,
 				C92BD0AE186C15EB00E0FDAF /* addResponderViewController.h */,
 				C92BD0AF186C15EB00E0FDAF /* addResponderViewController.m */,
 				C9460ED6183F23EA0043A5F1 /* Bubble */,
@@ -772,13 +772,13 @@
 				C9F31783183C77B000B6882C /* GPSRegisterViewController.m in Sources */,
 				C99B15E61835D64100B68BAC /* split.c in Sources */,
 				C9FB649C185716D70077AFFF /* ResponViewController.m in Sources */,
+				C9335E2E1884656900601A74 /* addFAQViewController.m in Sources */,
 				C914E1C91828D7FE00A3A11D /* NameContactViewController.m in Sources */,
 				C93E439D182226A600DC8104 /* main.m in Sources */,
 				C92BD0B0186C15EB00E0FDAF /* addResponderViewController.m in Sources */,
 				C9A2CDBD1839F99A00F69533 /* QRContactViewController.m in Sources */,
 				C93E43C71822277D00DC8104 /* LoginViewController.m in Sources */,
 				C99B15E41835D64100B68BAC /* qrspec.c in Sources */,
-				C99D3E58186ABEFE00CDF3DE /* EditResponderViewController.m in Sources */,
 				C99B15E01835D64100B68BAC /* mask.c in Sources */,
 				C9460EE4183F23FB0043A5F1 /* UIBubbleTableView.m in Sources */,
 				C9237F3118407D77007FC209 /* postMessage.m in Sources */,

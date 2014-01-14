@@ -20,4 +20,5 @@
 @property (strong, nonatomic) id recieveObjectID;
 
 - (IBAction)addResponder:(id)sender;
+- (IBAction)deleteResponder:(id)sender;
 @end

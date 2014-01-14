@@ -8,6 +8,7 @@
 
 #import "DetailObjectViewController.h"
 #import "ResponViewController.h"
+#import "addFAQViewController.h"
 #import "DisplayMap.h"
 
 @interface DetailObjectViewController ()
@@ -83,7 +84,10 @@
 
 - (void) viewWillAppear:(BOOL)animated{
     myObject = [[NSMutableArray alloc] init];
-    [myObject addObject:@"ไม่พบคำถามที่ถามบ่อย"];
+    
+    // ส่ง objectID เพื่อเอา faq
+    post = [NSString stringWithFormat:@"objectID=%@",objectID];
+    url = [NSURL URLWithString:@"http://angsila.cs.buu.ac.th/~53160117/TalkTogether/.php"];
     
     //ส่ง objectID ให้ php เพื่อเอารายละเอียดวัตถุ
     post = [NSString stringWithFormat:@"objectID=%@&userID=%@",objectID,userID];
@@ -217,7 +221,14 @@
     }
 }
 
-- (IBAction)editFAQ:(id)sender {
+- (IBAction)addFAQ:(id)sender {
+    // ไปหน้าเพิ่ม FAQ
+    addFAQViewController *addFAQView =[self.storyboard instantiateViewControllerWithIdentifier:@"addFAQView"];
+    addFAQView.recieveObjectID = objectID;
+    
+    [addFAQView setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
+    
+    [self.navigationController pushViewController:addFAQView animated:YES];
 }
 
 - (IBAction)goToResponView:(id)sender {

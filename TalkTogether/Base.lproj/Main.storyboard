@@ -322,12 +322,12 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="rFN-4X-uuz" kind="relationship" relationship="rootViewController" id="pEv-Xk-2ew"/>
+                        <segue destination="rFN-4X-uuz" kind="relationship" relationship="rootViewController" id="xYy-3G-CAx"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HmF-3h-xOg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-4812" y="-601"/>
+            <point key="canvasLocation" x="-4812" y="-607"/>
         </scene>
         <!--Main Menu View Controller - เมนูหลัก-->
         <scene sceneID="SsV-8a-RWd">
@@ -522,7 +522,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsVerticalScrollIndicator="NO" id="hAh-GU-nwx">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="1235"/>
+                                <rect key="frame" x="0.0" y="-636" width="320" height="1235"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" id="asB-jC-oPA">
@@ -653,15 +653,15 @@
                                                             <rect key="frame" x="0.0" y="0.0" width="240" height="43"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
-                                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="ไม่พบคำถามที่ถามบ่อย" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="tOI-rG-yj9">
-                                                                    <rect key="frame" x="15" y="3" width="156" height="22"/>
+                                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="tOI-rG-yj9">
+                                                                    <rect key="frame" x="15" y="3" width="34" height="22"/>
                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Uy4-MH-70B">
-                                                                    <rect key="frame" x="15" y="25" width="43" height="15"/>
+                                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Detail" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Uy4-MH-70B">
+                                                                    <rect key="frame" x="15" y="25" width="32" height="15"/>
                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -686,13 +686,13 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Wax-7V-2nY">
-                                                <rect key="frame" x="84" y="299" width="112" height="30"/>
+                                                <rect key="frame" x="80" y="299" width="121" height="30"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <state key="normal" title="+ คำถามที่ถามบ่อย">
+                                                <state key="normal" title="เพิ่มคำถามที่ถามบ่อย">
                                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="editFAQ:" destination="98K-4T-dl9" eventType="touchUpInside" id="k6V-Kq-OLG"/>
+                                                    <action selector="addFAQ:" destination="98K-4T-dl9" eventType="touchUpInside" id="Uxh-gQ-l8Y"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -753,10 +753,10 @@
             </objects>
             <point key="canvasLocation" x="-5244" y="115"/>
         </scene>
-        <!--Edit Responder View Controller - แก้ไขคำถามที่ถามบ่อย-->
+        <!--AddFAQ View Controller - เพิ่มคำถามที่ถามบ่อย-->
         <scene sceneID="SJD-hC-a1h">
             <objects>
-                <viewController storyboardIdentifier="editRespobderView" id="jso-D8-CFO" customClass="EditResponderViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="addFAQView" id="jso-D8-CFO" customClass="addFAQViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="L4X-tG-asp">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -792,11 +792,18 @@
                                 <state key="normal" title="บันทึก">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="saveFAQ:" destination="jso-D8-CFO" eventType="touchUpInside" id="ghZ-c5-Jnb"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="แก้ไขคำถามที่ถามบ่อย" id="JSd-Qm-csW"/>
+                    <navigationItem key="navigationItem" title="เพิ่มคำถามที่ถามบ่อย" id="JSd-Qm-csW"/>
+                    <connections>
+                        <outlet property="answerTextField" destination="fr6-BR-eO4" id="Spm-LM-1KF"/>
+                        <outlet property="questionTextField" destination="KHI-5R-NER" id="JkK-bI-mPK"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Uo2-9u-1D9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -982,20 +989,20 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="tht-vw-nEy">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="510"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" red="0.97254908080000002" green="0.93725496529999996" blue="0.87058830259999997" alpha="1" colorSpace="deviceRGB"/>
                                 <color key="sectionIndexTrackingBackgroundColor" red="0.97254908080000002" green="0.93725496529999996" blue="0.87058830259999997" alpha="1" colorSpace="deviceRGB"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="responCell" textLabel="Ypl-Aa-yaG" style="IBUITableViewCellStyleDefault" id="uIN-Dd-j69">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" accessoryType="checkmark" indentationWidth="10" reuseIdentifier="responCell" textLabel="Ypl-Aa-yaG" style="IBUITableViewCellStyleDefault" id="uIN-Dd-j69">
                                         <rect key="frame" x="0.0" y="22" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="uIN-Dd-j69" id="Gfk-3F-UO0">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="281" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Ypl-Aa-yaG">
-                                                    <rect key="frame" x="15" y="0.0" width="290" height="43"/>
+                                                    <rect key="frame" x="15" y="0.0" width="266" height="43"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -1011,8 +1018,20 @@
                                     <outlet property="delegate" destination="S3M-UM-LlI" id="iKT-9z-TwY"/>
                                 </connections>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="rag-KH-b2G">
+                                <rect key="frame" x="20" y="518" width="280" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.84705889229999998" green="0.36078432199999999" blue="0.066666670139999995" alpha="1" colorSpace="deviceRGB"/>
+                                <state key="normal" title="ลบผู้ดูแล">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="deleteResponder:" destination="S3M-UM-LlI" eventType="touchUpInside" id="Ybf-PT-1QV"/>
+                                </connections>
+                            </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.97254908080000002" green="0.93725496529999996" blue="0.87058830259999997" alpha="1" colorSpace="deviceRGB"/>
                     </view>
                     <navigationItem key="navigationItem" title="ผู้ดูแล" id="iq1-Pp-W8C">
                         <barButtonItem key="rightBarButtonItem" image="addRespon.png" id="86T-55-tj7">
@@ -1060,14 +1079,26 @@
                                 </connections>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="59z-TL-FGV">
-                                <rect key="frame" x="20" y="518" width="280" height="30"/>
+                                <rect key="frame" x="20" y="518" width="135" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <state key="normal" image="submit.png">
+                                <color key="backgroundColor" red="0.45098042488098145" green="0.71764707565307617" blue="0.086274512112140656" alpha="1" colorSpace="deviceRGB"/>
+                                <state key="normal" title="อนุมัติคำขอ">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <action selector="submitRequest:" destination="Bt4-qf-VAE" eventType="touchUpInside" id="PUN-fY-Dpz"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="V1t-jO-fV4">
+                                <rect key="frame" x="163" y="518" width="137" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.84705889225006104" green="0.36078432202339172" blue="0.066666670143604279" alpha="1" colorSpace="deviceRGB"/>
+                                <state key="normal" title="ลบคำขอ">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="deleteRequest:" destination="Bt4-qf-VAE" eventType="touchUpInside" id="syz-XQ-kzg"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -1166,7 +1197,6 @@
         <image name="noQrCode.png" width="170" height="168"/>
         <image name="qrCodeBtn.png" width="100" height="100"/>
         <image name="setting.png" width="20" height="20"/>
-        <image name="submit.png" width="280" height="30"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

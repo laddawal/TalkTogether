@@ -40,10 +40,6 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
-//    // รับ userID
-//    userID = [recieveUserID description];
-//    NSLog(@"userID : %@",userID);
-    
     // รับ objectID
     objectID = [recieveObjectID description];
 }
@@ -119,39 +115,6 @@
     }
 }
 
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-//    if (editingStyle == UITableViewCellEditingStyleDelete) {
-//        
-//        // ลบวัตถุใน database
-//        // ส่ง objectID ให้ php
-//        NSString *post = [NSString stringWithFormat:@"objectID=%@",[[displayObject objectAtIndex:indexPath.row] objectForKey:@"objectID"]];
-//        NSURL *url = [NSURL URLWithString:@"http://angsila.cs.buu.ac.th/~53160117/TalkTogether/deleteObject.php"];
-//        BOOL error = [sendBox post:post toUrl:url];
-//        
-//        if (!error) {
-//            UIAlertView *returnMessage = [[UIAlertView alloc]
-//                                          initWithTitle:@"สำเร็จ!!"
-//                                          message:nil delegate:self
-//                                          cancelButtonTitle:@"OK" otherButtonTitles:nil];
-//            [returnMessage show];
-//            [showObj reloadData];
-//            
-//            // ลบวัตถุใน table
-//            [displayObject removeObjectAtIndex:indexPath.row];
-//            [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-//        }else{
-//            [sendBox getErrorMessage];
-//        }
-//    }
-}
-
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -159,16 +122,42 @@
 }
 
 - (IBAction)submitRequest:(id)sender {
-    for (int i = 0; i <= [selectedUserID count]; i++) {
-        post = [NSString stringWithFormat:@"objectID=%@&userID=%@",objectID,selectedUserID[i]];
+    for (int i = 0; i < [selectedUserID count]; i++) {
+        post = [NSString stringWithFormat:@"objectID=%@&userID=%@",objectID,[selectedUserID objectAtIndex:i]];
         url = [NSURL URLWithString:@"http://angsila.cs.buu.ac.th/~53160117/TalkTogether/confirmRequest.php"];
-        error = [sendBox post:post toUrl:url];
+        [sendBox post:post toUrl:url];
         
-//        if (!error) {
-//            
-//        }else{
-//            [sendBox getErrorMessage];
-//        }
+        NSLog(@"%@",[selectedUserID objectAtIndex:i]);
+    }
+    
+    if (!error) {
+        UIAlertView *submitRequestAlert = [[UIAlertView alloc]
+                                           initWithTitle:@"อนุมัติคำขอเรียบร้อย"
+                                           message:nil delegate:self
+                                           cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [submitRequestAlert show];
+        [self viewWillAppear:YES];
+    }else{
+        [sendBox getErrorMessage];
+    }
+}
+
+- (IBAction)deleteRequest:(id)sender {
+    for (int i = 0; i < [selectedUserID count]; i++) {
+        post = [NSString stringWithFormat:@"objectID=%@&userID=%@",objectID,[selectedUserID objectAtIndex:i]];
+        url = [NSURL URLWithString:@"http://angsila.cs.buu.ac.th/~53160117/TalkTogether/deleteRequest.php"];
+        [sendBox post:post toUrl:url];
+    }
+    
+    if (!error) {
+        UIAlertView *deleteRequestAlert = [[UIAlertView alloc]
+                                           initWithTitle:@"ลบคำขอเรียบร้อย"
+                                           message:nil delegate:self
+                                           cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [deleteRequestAlert show];
+        [self viewWillAppear:YES];
+    }else{
+        [sendBox getErrorMessage];
     }
 }
 @end
