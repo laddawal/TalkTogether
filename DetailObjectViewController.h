@@ -37,11 +37,14 @@
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *setting;
 @property (strong, nonatomic) IBOutlet UIButton *editFAQBtn;
 @property (strong, nonatomic) IBOutlet UIButton *editBarcode;
+@property (strong, nonatomic) IBOutlet UIButton *generateQr;
+@property (strong, nonatomic) IBOutlet UIImageView *bgQr;
 
 - (IBAction)saveQrImg:(id)sender;
 - (IBAction)sendResponder:(id)sender;
 - (IBAction)addFAQ:(id)sender;
 - (IBAction)editDetail:(id)sender;
 - (IBAction)goToResponView:(id)sender;
+- (IBAction)generateQr:(id)sender;
 @property (strong, nonatomic) IBOutlet UIButton *requestResponder;
 @end

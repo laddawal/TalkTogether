@@ -11,6 +11,7 @@
 #import "addFAQViewController.h"
 #import "EditFAQViewController.h"
 #import "DisplayMap.h"
+#import "QRCodeGenerator.h"
 
 @interface DetailObjectViewController ()
 {
@@ -37,9 +38,9 @@
 @implementation DetailObjectViewController
 @synthesize recieveObjectID;
 @synthesize scrollView;
-@synthesize viewName,viewQR,viewBarcode,viewGPS,viewFAQ,viewRequestResponder;
+@synthesize viewName,viewQR,viewBarcode,viewGPS,viewFAQ,viewRequestResponder,bgQr;
 @synthesize mapView,barcodeIDLabel,nameDetail,qrImage,faqTable;
-@synthesize saveQR,editGPS,save,setting,editFAQBtn,requestResponder,editBarcode;
+@synthesize saveQR,editGPS,save,setting,editFAQBtn,requestResponder,editBarcode,generateQr;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -126,7 +127,7 @@
                 latitude = [NSString stringWithFormat:@"%@",[fetchDict objectForKey:@"latitude"]];
                 longitude = [NSString stringWithFormat:@"%@",[fetchDict objectForKey:@"longitude"]];
                 barcodeID = [NSString stringWithFormat:@"%@",[fetchDict objectForKey:@"barcodeID"]];
-//                urlQR = [NSString stringWithFormat:@"%@",[fetchDict objectForKey:@"QRcodeImg"]];
+                urlQR = [NSString stringWithFormat:@"%@",[fetchDict objectForKey:@"QRcodeImg"]];
                 request = [NSString stringWithFormat:@"%@",[fetchDict objectForKey:@"request"]];
             }
             
@@ -138,18 +139,19 @@
             }
             
             // QR Code
-            urlQR = [NSString stringWithFormat:@"http://angsila.cs.buu.ac.th/~53160117/TalkTogether/uploads/%@.jpg",objectID];
-            NSLog(@"%@",urlQR);
-            url = [NSURL URLWithString:urlQR];
+            NSString *qrPart = [NSString stringWithFormat:@"http://angsila.cs.buu.ac.th/~53160117/TalkTogether/uploads/%@.jpg",objectID];
+            url = [NSURL URLWithString:qrPart];
             NSData *data = [NSData dataWithContentsOfURL:url];
             UIImage *img = [[UIImage alloc] initWithData:data];
             qrImage.image = img;
-            if ([urlQR isEqualToString:@"<null>"]) {
+            if ([urlQR isEqualToString:@"0"]) {
                 qrImage.hidden = YES;
-                saveQR.hidden = YES;
+                saveQR.enabled = NO;
+                generateQr.enabled = YES;
             }else{
                 qrImage.hidden = NO;
-                saveQR.hidden = NO;
+                saveQR.enabled = YES;
+                generateQr.enabled = NO;
             }
             
             // Map
@@ -239,6 +241,7 @@
                     [nameDetail setEnabled:NO];
                     [setting setEnabled:NO];
                     saveQR.hidden = YES;
+                    generateQr.hidden = YES;
                     editGPS.hidden = YES;
                     save.hidden = YES;
                     editFAQBtn.hidden = YES;
@@ -310,6 +313,11 @@
     NSString *postEdit;
     NSURL *urlEdit;
     BOOL errorEdit;
+    if (bgQr.hidden == YES) { // แก้ QR Code
+        NSData *imageData = UIImageJPEGRepresentation(qrImage.image, 100);
+        url = [NSURL URLWithString:@"http://angsila.cs.buu.ac.th/~53160117/TalkTogether/saveQrcode.php"];
+        errorEdit = [sendBox postImage:imageData withObjectID:objectID toUrl:url];
+    }
     if (newBarcodeID != NULL){ // แก้ barcode
         postEdit = [NSMutableString stringWithFormat:@"objectID=%@&barcodeID=%@",objectID,newBarcodeID];
         urlEdit = [NSURL URLWithString:@"http://angsila.cs.buu.ac.th/~53160117/TalkTogether/editObjectBarcode.php"];
@@ -346,6 +354,12 @@
     [responView setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
     
     [self.navigationController pushViewController:responView animated:YES];
+}
+
+- (IBAction)generateQr:(id)sender {
+    bgQr.hidden = YES;
+    qrImage.hidden = NO;
+    qrImage.image = [QRCodeGenerator qrImageForString:objectID imageSize:qrImage.bounds.size.width];
 }
 
 - (void)thisImage:(UIImage *)image hasBeenSavedInPhotoAlbumWithError:(NSError *)err usingContextInfo:(void*)ctxInfo {

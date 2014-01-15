@@ -56,11 +56,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DetailObjectViewController.m"
-            timestampString = "411384698.205425"
+            timestampString = "411503374.310562"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "20"
-            endingLineNumber = "20"
+            startingLineNumber = "21"
+            endingLineNumber = "21"
             landmarkName = "@interface DetailObjectViewController()"
             landmarkType = "2">
          </BreakpointContent>

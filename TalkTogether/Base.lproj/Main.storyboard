@@ -695,6 +695,9 @@
                                                 <state key="normal" title="สร้าง QR Code">
                                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="generateQr:" destination="98K-4T-dl9" eventType="touchUpInside" id="6K5-DG-cQ4"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" red="1" green="0.96078437569999997" blue="0.88235300780000003" alpha="1" colorSpace="deviceRGB"/>
@@ -868,10 +871,12 @@
                     </navigationItem>
                     <connections>
                         <outlet property="barcodeIDLabel" destination="P0g-9k-fhu" id="F75-C5-vgO"/>
+                        <outlet property="bgQr" destination="hDw-Ui-KUP" id="1Me-FC-fJ2"/>
                         <outlet property="editBarcode" destination="Zqi-RS-LIF" id="hRA-lz-kTT"/>
                         <outlet property="editFAQBtn" destination="Wax-7V-2nY" id="Oea-2z-UNn"/>
                         <outlet property="editGPS" destination="Ka6-wC-OGe" id="PFH-tD-MZY"/>
                         <outlet property="faqTable" destination="ccg-sy-kRL" id="IwF-ko-Yhs"/>
+                        <outlet property="generateQr" destination="Y13-hD-Qdr" id="bOH-s5-zXH"/>
                         <outlet property="mapView" destination="V8i-ql-fZb" id="ddE-ty-XGA"/>
                         <outlet property="nameDetail" destination="vF3-Zv-WdH" id="Yyp-TD-0J8"/>
                         <outlet property="qrImage" destination="AJG-vw-B17" id="CmP-HM-xVk"/>
