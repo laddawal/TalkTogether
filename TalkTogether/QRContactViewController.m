@@ -82,6 +82,12 @@
     objectID =  symbol.data ;
     
     [reader dismissViewControllerAnimated:YES completion:nil]; // กลับหน้าระบุวัตถุด้วย QR Code
+//    [reader dismissViewControllerAnimated:YES completion:^{
+//        [(UINavigationController *)self.presentingViewController popToRootViewControllerAnimated:YES];
+//    }];
+//    [self.navigationController popViewControllerAnimated:YES];
+    
+    NSLog(@"objectID : %@",objectID);
     
     //ส่ง objectID ให้ php เพื่อหา objectName
     NSString *post = [NSString stringWithFormat:@"objectID=%@",objectID];
@@ -93,7 +99,7 @@
         if (returnNum == 0) {
             NSMutableArray *jsonReturn = [sendBox getData];
             for (NSDictionary* fetchDict in jsonReturn){
-                objectName = [fetchDict objectForKey:objectName];
+                objectName = [fetchDict objectForKey:@"objectName"];
             }
             // ดึง userID จาก NSUserDefault
             NSUserDefaults *defaultUserID = [NSUserDefaults standardUserDefaults];

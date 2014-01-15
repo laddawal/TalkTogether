@@ -10,7 +10,7 @@
 #import "UIBubbleTableViewDataSource.h"
 #import "postMessage.h"
 
-@interface ChatViewController : UIViewController
+@interface ChatViewController : UIViewController <UITextFieldDelegate>
 {
     postMessage *sendBox;
 }

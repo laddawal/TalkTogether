@@ -89,6 +89,8 @@
                                                     userInfo: nil
                                                      repeats: YES];
     [timer fire];
+    
+    [message setDelegate:self];
 }
 
 - (void) viewWillAppear:(BOOL)animated{
@@ -240,6 +242,12 @@
 
 - (void)viewDidDisappear:(BOOL)animated{
     [timer invalidate];
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return YES;
 }
 
 @end

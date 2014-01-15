@@ -126,7 +126,7 @@
                 latitude = [NSString stringWithFormat:@"%@",[fetchDict objectForKey:@"latitude"]];
                 longitude = [NSString stringWithFormat:@"%@",[fetchDict objectForKey:@"longitude"]];
                 barcodeID = [NSString stringWithFormat:@"%@",[fetchDict objectForKey:@"barcodeID"]];
-                urlQR = [NSString stringWithFormat:@"%@",[fetchDict objectForKey:@"QRcodeImg"]];
+//                urlQR = [NSString stringWithFormat:@"%@",[fetchDict objectForKey:@"QRcodeImg"]];
                 request = [NSString stringWithFormat:@"%@",[fetchDict objectForKey:@"request"]];
             }
             
@@ -138,6 +138,8 @@
             }
             
             // QR Code
+            urlQR = [NSString stringWithFormat:@"http://angsila.cs.buu.ac.th/~53160117/TalkTogether/uploads/%@.jpg",objectID];
+            NSLog(@"%@",urlQR);
             url = [NSURL URLWithString:urlQR];
             NSData *data = [NSData dataWithContentsOfURL:url];
             UIImage *img = [[UIImage alloc] initWithData:data];
