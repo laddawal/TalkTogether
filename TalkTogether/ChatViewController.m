@@ -83,7 +83,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillBeHidden:) name:UIKeyboardWillHideNotification object:nil];
     
     // กำหนดเวลา
-    timer = [NSTimer scheduledTimerWithTimeInterval: 5
+    timer = [NSTimer scheduledTimerWithTimeInterval: 3
                                                       target: self
                                                     selector: @selector(updateMessage)
                                                     userInfo: nil

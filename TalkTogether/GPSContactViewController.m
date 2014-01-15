@@ -66,53 +66,90 @@
     [nearObject reloadData];
 }
 
--(void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation{
+- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
     
-    NSDate *eventDate = newLocation.timestamp;
-    NSTimeInterval howRecent = [eventDate timeIntervalSinceNow];
+    CLLocationCoordinate2D currentCoordinates = newLocation.coordinate;
     
-    if (abs(howRecent) < 15.0)
-    {
-        //Location timestamp is within the last 15.0 seconds, let's use it!
-        if(newLocation.horizontalAccuracy<35.0){
-            //Location seems pretty accurate, let's use it!
-            NSLog(@"latitude %.7f, longitude %.7f\n",
-                  newLocation.coordinate.latitude,
-                  newLocation.coordinate.longitude);
-            NSLog(@"Horizontal Accuracy:%f", newLocation.horizontalAccuracy);
-            
-            //Optional: turn off location services once we've gotten a good location
-            [manager stopUpdatingLocation];
-            
-            latitude = newLocation.coordinate.latitude;
-            longitude = newLocation.coordinate.longitude;
-            
-            //ส่ง latitude & longtitude ให้ php เพื่อหาวัตถุที่อยู่ในตำแหน่งใกล้เคียง
-            NSMutableString *post = [NSMutableString stringWithFormat:@"latitude=%.7f&longitude=%.7f",latitude,longitude];
-            NSURL *url = [NSURL URLWithString:@"http://angsila.cs.buu.ac.th/~53160117/TalkTogether/searchGPS.php"];
-            BOOL error = [sendBox post:post toUrl:url];
-            
-            if (!error) {
-                int returnNum = [sendBox getReturnMessage];
-                if (returnNum == 0) {
-                    NSMutableArray *jsonReturn = [sendBox getData];
-                    for (NSDictionary* fetchDict in jsonReturn){
-                        [myObject addObject:fetchDict];
-                    }
-                    [nearObject reloadData];
-                }else{
-                    UIAlertView *returnMessage = [[UIAlertView alloc]
-                                                  initWithTitle:@"ไม่พบข้อมูล"
-                                                  message:nil delegate:self
-                                                  cancelButtonTitle:@"OK" otherButtonTitles:nil];
-                    [returnMessage show];
-                }
-            }else{
-                [sendBox getErrorMessage];
+    NSLog(@"Entered new Location with the coordinates Latitude: %f Longitude: %f", currentCoordinates.latitude, currentCoordinates.longitude);
+    
+    //Optional: turn off location services once we've gotten a good location
+    [manager stopUpdatingLocation];
+    
+    latitude = currentCoordinates.latitude;
+    longitude = currentCoordinates.longitude;
+    
+    //ส่ง latitude & longtitude ให้ php เพื่อหาวัตถุที่อยู่ในตำแหน่งใกล้เคียง
+    NSMutableString *post = [NSMutableString stringWithFormat:@"latitude=%.7f&longitude=%.7f",latitude,longitude];
+    NSURL *url = [NSURL URLWithString:@"http://angsila.cs.buu.ac.th/~53160117/TalkTogether/searchGPS.php"];
+    BOOL error = [sendBox post:post toUrl:url];
+    
+    if (!error) {
+        int returnNum = [sendBox getReturnMessage];
+        if (returnNum == 0) {
+            NSMutableArray *jsonReturn = [sendBox getData];
+            for (NSDictionary* fetchDict in jsonReturn){
+                [myObject addObject:fetchDict];
             }
+            [nearObject reloadData];
+        }else{
+            UIAlertView *returnMessage = [[UIAlertView alloc]
+                                          initWithTitle:@"ไม่พบข้อมูล"
+                                          message:nil delegate:self
+                                          cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            [returnMessage show];
         }
+    }else{
+        [sendBox getErrorMessage];
     }
 }
+
+//-(void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation{
+//    
+//    NSDate *eventDate = newLocation.timestamp;
+//    NSTimeInterval howRecent = [eventDate timeIntervalSinceNow];
+//    
+//    if (abs(howRecent) < 15.0)
+//    {
+//        //Location timestamp is within the last 15.0 seconds, let's use it!
+//        if(newLocation.horizontalAccuracy<35.0){
+//            //Location seems pretty accurate, let's use it!
+//            NSLog(@"latitude %.7f, longitude %.7f\n",
+//                  newLocation.coordinate.latitude,
+//                  newLocation.coordinate.longitude);
+//            NSLog(@"Horizontal Accuracy:%f", newLocation.horizontalAccuracy);
+//            
+//            //Optional: turn off location services once we've gotten a good location
+//            [manager stopUpdatingLocation];
+//            
+//            latitude = newLocation.coordinate.latitude;
+//            longitude = newLocation.coordinate.longitude;
+//            
+//            //ส่ง latitude & longtitude ให้ php เพื่อหาวัตถุที่อยู่ในตำแหน่งใกล้เคียง
+//            NSMutableString *post = [NSMutableString stringWithFormat:@"latitude=%.7f&longitude=%.7f",latitude,longitude];
+//            NSURL *url = [NSURL URLWithString:@"http://angsila.cs.buu.ac.th/~53160117/TalkTogether/searchGPS.php"];
+//            BOOL error = [sendBox post:post toUrl:url];
+//            
+//            if (!error) {
+//                int returnNum = [sendBox getReturnMessage];
+//                if (returnNum == 0) {
+//                    NSMutableArray *jsonReturn = [sendBox getData];
+//                    for (NSDictionary* fetchDict in jsonReturn){
+//                        [myObject addObject:fetchDict];
+//                    }
+//                    [nearObject reloadData];
+//                }else{
+//                    UIAlertView *returnMessage = [[UIAlertView alloc]
+//                                                  initWithTitle:@"ไม่พบข้อมูล"
+//                                                  message:nil delegate:self
+//                                                  cancelButtonTitle:@"OK" otherButtonTitles:nil];
+//                    [returnMessage show];
+//                }
+//            }else{
+//                [sendBox getErrorMessage];
+//            }
+//        }
+//    }
+//}
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
