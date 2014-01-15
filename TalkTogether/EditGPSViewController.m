@@ -63,7 +63,7 @@
         //Location timestamp is within the last 15.0 seconds, let's use it!
         if(newLocation.horizontalAccuracy<35.0){
             //Location seems pretty accurate, let's use it!
-            NSLog(@"latitude %+.7f, longitude %+.7f\n",
+            NSLog(@"latitude %.7f, longitude %.7f\n",
                   newLocation.coordinate.latitude,
                   newLocation.coordinate.longitude);
             NSLog(@"Horizontal Accuracy:%f", newLocation.horizontalAccuracy);
@@ -102,4 +102,15 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (IBAction)submit:(id)sender {
+    NSString *latitudeStr = [NSString stringWithFormat:@"%.7f",latitude];
+    NSString *longitudeStr = [NSString stringWithFormat:@"%.7f",longitude];
+    
+    // เก็บ latitude,longitude ไว้ที่ NSUserDefault
+    NSUserDefaults *gps = [NSUserDefaults standardUserDefaults];
+    [gps setObject:latitudeStr forKey:@"latitude"];
+    [gps setObject:longitudeStr forKey:@"longitude"];
+    
+    [self.navigationController popViewControllerAnimated:YES]; // กลับหน้ารายละเอียดวัตถุ
+}
 @end

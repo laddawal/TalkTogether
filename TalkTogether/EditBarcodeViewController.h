@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ZBarSDK.h"
 
-@interface EditBarcodeViewController : UIViewController
+@interface EditBarcodeViewController : UIViewController <ZBarReaderDelegate>
+
+@property (strong, nonatomic) IBOutlet UIImageView *barCodeImg;
+- (IBAction)scan:(id)sender;
 
 @end

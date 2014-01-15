@@ -21,6 +21,8 @@
     NSString *userID;
     NSString *urlQR;
     NSString *request;
+    NSString *newLatitude,*newLongitude;
+    NSString *newBarcodeID;
     
     BOOL flagResponder;
     
@@ -129,7 +131,11 @@
             }
             
             // Name
-            nameDetail.text = objectName;
+            if ([[NSUserDefaults standardUserDefaults] stringForKey:@"objectName"] == NULL) { // เช็คว่ามี objectName ที่จะแก้ไหม ถ้าไม่แสดงอันที่มาจาก DB
+                nameDetail.text = objectName;
+            }else{ // ถ้ามีแสดงอันที่จะแก้
+                nameDetail.text = [[NSUserDefaults standardUserDefaults] stringForKey:@"objectName"];
+            }
             
             // QR Code
             url = [NSURL URLWithString:urlQR];
@@ -145,16 +151,37 @@
             }
             
             // Map
-            if ([latitude isEqualToString:@"<null>"] && [longitude isEqualToString:@"<null>"]) {
-                mapView.hidden = YES;
-            }else{
+            if ([[NSUserDefaults standardUserDefaults] stringForKey:@"latitude"] == NULL &&
+                [[NSUserDefaults standardUserDefaults] stringForKey:@"longitude"] == NULL) { // เช็คว่ามี GPS ที่จะแก้ไหม ถ้าไม่มีแสดงอันที่มาจาก DB
+                if ([latitude isEqualToString:@"<null>"] && [longitude isEqualToString:@"<null>"]) {
+                    mapView.hidden = YES;
+                }else{
+                    mapView.hidden = NO;
+                    [mapView setMapType:MKMapTypeStandard];
+                    [mapView setZoomEnabled:YES];
+                    [mapView setScrollEnabled:YES];
+                    MKCoordinateRegion region = { {0.0, 0.0 }, { 0.0, 0.0 } };
+                    region.center.latitude = [latitude doubleValue];
+                    region.center.longitude = [longitude doubleValue];
+                    region.span.longitudeDelta = 0.01f;
+                    region.span.latitudeDelta = 0.01f;
+                    [mapView setRegion:region animated:YES];
+                    
+                    [mapView setDelegate:self];
+                    
+                    DisplayMap *ann = [[DisplayMap alloc] init];
+                    ann.title = objectName; // objectName
+                    ann.coordinate = region.center;
+                    [mapView addAnnotation:ann];
+                }
+            }else{ // ถ้ามี แสดงอันที่จะแก้
                 mapView.hidden = NO;
                 [mapView setMapType:MKMapTypeStandard];
                 [mapView setZoomEnabled:YES];
                 [mapView setScrollEnabled:YES];
                 MKCoordinateRegion region = { {0.0, 0.0 }, { 0.0, 0.0 } };
-                region.center.latitude = [latitude doubleValue];
-                region.center.longitude = [longitude doubleValue];
+                region.center.latitude = [[[NSUserDefaults standardUserDefaults] stringForKey:@"latitude"] doubleValue];
+                region.center.longitude = [[[NSUserDefaults standardUserDefaults] stringForKey:@"longitude"] doubleValue];
                 region.span.longitudeDelta = 0.01f;
                 region.span.latitudeDelta = 0.01f;
                 [mapView setRegion:region animated:YES];
@@ -168,10 +195,14 @@
             }
             
             // Barcode
-            if ([barcodeID isEqualToString:@"<null>"]) {
-                barcodeIDLabel.text = @"ไม่มี Barcode";
-            }else{
-                barcodeIDLabel.text = barcodeID;
+            if ([[NSUserDefaults standardUserDefaults] stringForKey:@"barCodeID"] == NULL) { // เช็คว่ามี Barcode ที่ต้องแก้ไหมถ้า ไม่มีแสดงอันที่เอามาจาก DB
+                if ([barcodeID isEqualToString:@"<null>"]) {
+                    barcodeIDLabel.text = @"ไม่มี Barcode";
+                }else{
+                    barcodeIDLabel.text = barcodeID;
+                }
+            }else{ // ถ้ามี แสดงอันที่จะแก้
+                barcodeIDLabel.text = [[NSUserDefaults standardUserDefaults] stringForKey:@"barCodeID"];
             }
             
             // Check Permission
@@ -225,6 +256,12 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(void)textFieldDidEndEditing:(UITextField *)textField{
+    // เก็บ objectName ไว้ที่ NSUserDefault
+    NSUserDefaults *name = [NSUserDefaults standardUserDefaults];
+    [name setObject:[nameDetail text] forKey:@"objectName"];
+}
+
 // Save QR Code to Gallery
 - (IBAction)saveQrImg:(id)sender {
     UIImageWriteToSavedPhotosAlbum(qrImage.image,
@@ -257,7 +294,46 @@
 }
 
 - (IBAction)editDetail:(id)sender {
+    // ดึง barCodeID,latitude,longitude จาก NSUserDefault
+    newBarcodeID = [[NSUserDefaults standardUserDefaults] stringForKey:@"barCodeID"];
+    newLatitude = [[NSUserDefaults standardUserDefaults] stringForKey:@"latitude"];
+    newLongitude = [[NSUserDefaults standardUserDefaults] stringForKey:@"longitude"];
     
+    // ลบ barCodeID,latitude,longitude จาก NSUserDefault
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"latitude"];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"longitude"];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"barCodeID"];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"objectName"];
+
+    NSString *postEdit;
+    NSURL *urlEdit;
+    BOOL errorEdit;
+    if (newBarcodeID != NULL){ // แก้ barcode
+        postEdit = [NSMutableString stringWithFormat:@"objectID=%@&barcodeID=%@",objectID,newBarcodeID];
+        urlEdit = [NSURL URLWithString:@"http://angsila.cs.buu.ac.th/~53160117/TalkTogether/editObjectBarcode.php"];
+        errorEdit = [sendBox post:postEdit toUrl:urlEdit];
+    }
+    if(newLatitude != NULL && newLongitude != NULL){ // แก้ GPS
+        postEdit = [NSMutableString stringWithFormat:@"objectID=%@&latitude=%@&longitude=%@",objectID,newLatitude,newLongitude];
+        urlEdit = [NSURL URLWithString:@"http://angsila.cs.buu.ac.th/~53160117/TalkTogether/editObjectGPS.php"];
+        errorEdit = [sendBox post:postEdit toUrl:urlEdit];
+    }
+    if(![objectName isEqualToString:nameDetail.text]){ // แก้ชื่อ
+        postEdit = [NSMutableString stringWithFormat:@"objectID=%@&objectName=%@",objectID,nameDetail.text];
+        urlEdit = [NSURL URLWithString:@"http://angsila.cs.buu.ac.th/~53160117/TalkTogether/editObjectName.php"];
+        errorEdit = [sendBox post:postEdit toUrl:urlEdit];
+    }
+    
+    if (!errorEdit) {
+        UIAlertView *returnMessage = [[UIAlertView alloc]
+                                      initWithTitle:@"แก้ไขรายละเอียดวัตถุเรียบร้อย"
+                                      message:nil delegate:self
+                                      cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [returnMessage show];
+        [self viewWillAppear:YES];
+    }else{
+        [sendBox getErrorMessage];
+    }
 }
 
 - (IBAction)goToResponView:(id)sender {
@@ -327,7 +403,6 @@
     
     [self.navigationController pushViewController:editFAQView animated:YES];
 }
-
 
 @end
 

@@ -46,7 +46,7 @@
     userID = [defaultUserID stringForKey:@"userID"];
     
     // เช็คข้อความใหม่
-    NSMutableString *post = [NSMutableString stringWithFormat:@"userID=%@",userID];
+    NSString *post = [NSString stringWithFormat:@"userID=%@",userID];
     NSURL *url = [NSURL URLWithString:@"http://angsila.cs.buu.ac.th/~53160117/TalkTogether/getNotification.php"];
     BOOL error = [sendBox post:post toUrl:url];
     

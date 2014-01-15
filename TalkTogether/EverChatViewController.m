@@ -96,22 +96,13 @@
                                       reuseIdentifier : CellIdentifier];
     }
     
-    NSDictionary *tmpDict = [displayObject objectAtIndex:indexPath.row];
-    
-    // ObjectName
-    NSString *text;
-    text = [NSString stringWithFormat:@"%@",[tmpDict objectForKey:@"objectName"]];
-    
-    cell.textLabel.text = text;
-    if ([[[displayObject objectAtIndex:indexPath.row] objectForKey:@"responder_ID"] isEqualToString:userID]) {
-        cell.detailTextLabel.text = @"วัตถุ -> ผู้ใช้";
-        // รูปด้านซ้าย
-        cell.imageView.image = [UIImage imageNamed:@"woman.png"];
-        // รูปด้านขวา
-        cell.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"woman.png"]];
-        [cell.accessoryView setFrame:CGRectMake(0, 0, 42, 42)];
-    }else{
-        cell.detailTextLabel.text = @"ผู้ใช้ -> วัตถุ";
+    if ([[[displayObject objectAtIndex:indexPath.row] objectForKey:@"responder_ID"] isEqualToString:userID]) { // เป็นผู้ดูแล
+        cell.textLabel.text = [[displayObject objectAtIndex:indexPath.row] objectForKey:@"userName"];
+        cell.detailTextLabel.text = [[displayObject objectAtIndex:indexPath.row] objectForKey:@"objectName"];
+
+    }else{ // เป็นผู้ติดต่อ
+        cell.textLabel.text = [[displayObject objectAtIndex:indexPath.row] objectForKey:@"objectName"];
+        cell.detailTextLabel.text = @"";
     }
     return cell;
 }
