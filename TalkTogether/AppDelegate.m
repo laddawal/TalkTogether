@@ -133,7 +133,7 @@
                 
                 [[UIApplication sharedApplication] scheduleLocalNotification:localNotification]; //Schedule the notification with the system
                 
-                [NSThread sleepForTimeInterval:60]; //wait for 60 sec
+                [NSThread sleepForTimeInterval:10]; //wait for 60 sec
             }
             //#### background task ends
 

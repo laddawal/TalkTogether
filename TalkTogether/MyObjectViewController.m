@@ -134,11 +134,7 @@
                                           message:nil delegate:self
                                           cancelButtonTitle:@"OK" otherButtonTitles:nil];
             [returnMessage show];
-            [showObj reloadData];
-            
-            // ลบวัตถุใน table
-            [displayObject removeObjectAtIndex:indexPath.row];
-            [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            [self viewWillAppear:NO];
         }else{
             [sendBox getErrorMessage];
         }
