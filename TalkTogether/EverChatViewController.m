@@ -99,11 +99,14 @@
     if ([[[displayObject objectAtIndex:indexPath.row] objectForKey:@"responder_ID"] isEqualToString:userID]) { // เป็นผู้ดูแล
         cell.textLabel.text = [[displayObject objectAtIndex:indexPath.row] objectForKey:@"userName"];
         cell.detailTextLabel.text = [[displayObject objectAtIndex:indexPath.row] objectForKey:@"objectName"];
+        cell.imageView.image = [UIImage imageNamed:@"user.png"];
 
     }else{ // เป็นผู้ติดต่อ
         cell.textLabel.text = [[displayObject objectAtIndex:indexPath.row] objectForKey:@"objectName"];
         cell.detailTextLabel.text = @"";
+        cell.imageView.image = [UIImage imageNamed:@"car1.png"];
     }
+    
     return cell;
 }
 
