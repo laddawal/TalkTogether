@@ -8,6 +8,7 @@
 
 #import "GPSContactViewController.h"
 #import "ChatViewController.h"
+#import "DisplayMap.h"
 
 @interface GPSContactViewController ()
 {
@@ -23,6 +24,7 @@
 @implementation GPSContactViewController
 @synthesize locationManager;
 @synthesize nearObject;
+@synthesize nearObjMap;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -70,7 +72,7 @@
     
     CLLocationCoordinate2D currentCoordinates = newLocation.coordinate;
     
-    NSLog(@"Entered new Location with the coordinates Latitude: %f Longitude: %f", currentCoordinates.latitude, currentCoordinates.longitude);
+//    NSLog(@"Entered new Location with the coordinates Latitude: %f Longitude: %f", currentCoordinates.latitude, currentCoordinates.longitude);
     
     //Optional: turn off location services once we've gotten a good location
     [manager stopUpdatingLocation];
@@ -89,6 +91,25 @@
             NSMutableArray *jsonReturn = [sendBox getData];
             for (NSDictionary* fetchDict in jsonReturn){
                 [myObject addObject:fetchDict];
+                // กำหนด latitude longtitude ลงในแผนที่
+                nearObjMap.hidden = NO;
+                [nearObjMap setMapType:MKMapTypeStandard];
+                [nearObjMap setZoomEnabled:YES];
+                [nearObjMap setScrollEnabled:YES];
+                MKCoordinateRegion region = { {0.0, 0.0 }, { 0.0, 0.0 } };
+                region.center.latitude = [[fetchDict objectForKey:@"latitude"] doubleValue];
+                region.center.longitude = [[fetchDict objectForKey:@"longitude"] doubleValue];
+                region.span.longitudeDelta = 0.01f;
+                region.span.latitudeDelta = 0.01f;
+                [nearObjMap setRegion:region animated:YES];
+                
+                [nearObjMap setDelegate:self];
+                
+                DisplayMap *ann = [[DisplayMap alloc] init];
+                ann.title = [fetchDict objectForKey:@"objectName"];
+                ann.coordinate = region.center;
+                ann.subtitle = [fetchDict objectForKey:@"objectID"];
+                [nearObjMap addAnnotation:ann];
             }
             [nearObject reloadData];
         }else{
@@ -103,54 +124,40 @@
     }
 }
 
-//-(void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation{
-//    
-//    NSDate *eventDate = newLocation.timestamp;
-//    NSTimeInterval howRecent = [eventDate timeIntervalSinceNow];
-//    
-//    if (abs(howRecent) < 15.0)
-//    {
-//        //Location timestamp is within the last 15.0 seconds, let's use it!
-//        if(newLocation.horizontalAccuracy<35.0){
-//            //Location seems pretty accurate, let's use it!
-//            NSLog(@"latitude %.7f, longitude %.7f\n",
-//                  newLocation.coordinate.latitude,
-//                  newLocation.coordinate.longitude);
-//            NSLog(@"Horizontal Accuracy:%f", newLocation.horizontalAccuracy);
-//            
-//            //Optional: turn off location services once we've gotten a good location
-//            [manager stopUpdatingLocation];
-//            
-//            latitude = newLocation.coordinate.latitude;
-//            longitude = newLocation.coordinate.longitude;
-//            
-//            //ส่ง latitude & longtitude ให้ php เพื่อหาวัตถุที่อยู่ในตำแหน่งใกล้เคียง
-//            NSMutableString *post = [NSMutableString stringWithFormat:@"latitude=%.7f&longitude=%.7f",latitude,longitude];
-//            NSURL *url = [NSURL URLWithString:@"http://angsila.cs.buu.ac.th/~53160117/TalkTogether/searchGPS.php"];
-//            BOOL error = [sendBox post:post toUrl:url];
-//            
-//            if (!error) {
-//                int returnNum = [sendBox getReturnMessage];
-//                if (returnNum == 0) {
-//                    NSMutableArray *jsonReturn = [sendBox getData];
-//                    for (NSDictionary* fetchDict in jsonReturn){
-//                        [myObject addObject:fetchDict];
-//                    }
-//                    [nearObject reloadData];
-//                }else{
-//                    UIAlertView *returnMessage = [[UIAlertView alloc]
-//                                                  initWithTitle:@"ไม่พบข้อมูล"
-//                                                  message:nil delegate:self
-//                                                  cancelButtonTitle:@"OK" otherButtonTitles:nil];
-//                    [returnMessage show];
-//                }
-//            }else{
-//                [sendBox getErrorMessage];
-//            }
-//        }
-//    }
-//}
-
+- (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view{
+    
+    // ดึง userID จาก NSUserDefault
+    NSUserDefaults *defaultUserID = [NSUserDefaults standardUserDefaults];
+    userID = [defaultUserID stringForKey:@"userID"];
+    
+    // ดึงผู้รับผิดชอบ
+    NSMutableString *post = [NSMutableString stringWithFormat:@"objectID=%@&userID=%@",view.annotation.subtitle,userID];
+    NSURL *url = [NSURL URLWithString:@"http://angsila.cs.buu.ac.th/~53160117/TalkTogether/randomResponder.php"];
+    BOOL error = [sendBox post:post toUrl:url];
+    
+    if (!error) {
+        NSMutableArray *jsonReturn = [sendBox getData];
+        NSString *responderID;
+        for (NSDictionary* fetchDict in jsonReturn){
+            responderID = [fetchDict objectForKey:@"responder_ID"];
+        }
+        
+        // ไปหน้า chat
+        ChatViewController *chatView =[self.storyboard instantiateViewControllerWithIdentifier:@"chatView"];
+        
+        chatView.recieveObjectID = view.annotation.subtitle;
+        chatView.recieveContactID = userID;
+        chatView.recieveSender = @"1"; // กำหนดให้ผู้ส่งคือผู้ใช้
+        chatView.recieveResponderID = responderID;
+        chatView.navigationItem.title = view.annotation.title;
+        
+        [chatView setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
+        
+        [self.navigationController pushViewController:chatView animated:YES];
+    }else{
+        [sendBox getErrorMessage];
+    }
+}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
