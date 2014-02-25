@@ -9,12 +9,13 @@
 #import <UIKit/UIKit.h>
 #import "postMessage.h"
 
-@interface NameRegisterViewController : UIViewController <UITextFieldDelegate>
+@interface NameRegisterViewController : UIViewController <UITextFieldDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 {
     postMessage *sendBox;
 }
 
 @property (strong, nonatomic) IBOutlet UITextField *objectName;
+@property (strong, nonatomic) IBOutlet UIImageView *imgView;
 
 - (IBAction)nameRegisterBtn:(id)sender;
 

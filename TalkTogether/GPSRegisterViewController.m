@@ -170,11 +170,14 @@
             UIAlertView *returnMessage = [[UIAlertView alloc]
                                           initWithTitle:@"สำเร็จ!!"
                                           message:nil delegate:self
-                                          cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                                          cancelButtonTitle:nil otherButtonTitles:nil];
             [returnMessage show];
+            [returnMessage dismissWithClickedButtonIndex:0 animated:YES];
             
             // clear TextField
             objectName.text = NULL;
+            
+            [self.navigationController popViewControllerAnimated:YES]; // กลับหน้าลงทะเบียน
         }else{
             [sendBox getErrorMessage];
         }

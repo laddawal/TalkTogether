@@ -81,7 +81,6 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"myObjectCell";
-    
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     // selected cell color
@@ -97,6 +96,20 @@
     
     // ObjectName
     cell.textLabel.text = [[displayObject objectAtIndex:indexPath.row] objectForKey:@"objectName"];
+    
+    // ObjectImg
+    if (![[NSString stringWithFormat:@"%@",[[displayObject objectAtIndex:indexPath.row] objectForKey:@"image"]] isEqualToString:@"<null>"]) {
+        NSString *qrPart = [NSString stringWithFormat:@"http://angsila.cs.buu.ac.th/~53160117/TalkTogether/objectImage/%@.jpg",[[displayObject objectAtIndex:indexPath.row] objectForKey:@"objectID"]];
+        NSURL *url = [NSURL URLWithString:qrPart];
+        NSData *data = [NSData dataWithContentsOfURL:url];
+        UIImage *img = [[UIImage alloc] initWithData:data];
+        NSLog(@"%@",[[displayObject objectAtIndex:indexPath.row] objectForKey:@"image"]);
+        
+        cell.imageView.image = img;
+    }else{
+        cell.imageView.image = [UIImage imageNamed:@"noFaq.png"];
+    }
+
     return cell;
 }
 

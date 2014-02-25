@@ -11,11 +11,16 @@
 @interface NameRegisterViewController ()
 {
     NSString *userID;
+    NSString *objectID;
 }
 @end
 
 @implementation NameRegisterViewController
 @synthesize objectName;
+@synthesize imgView;
+
+UIImagePickerController *picker;
+UIImage *pickedImage;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -44,6 +49,41 @@
     return YES;
 }
 
+-(IBAction)getPhoto:(id)sender{
+    UIImagePickerController *picker = [[UIImagePickerController alloc]init];
+    picker.delegate = self;
+    
+    //    if ((UIBarButtonItem *)sender == choosePhotoBtn) {
+    picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    //    }else{
+    //        picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+    //    }
+    [self presentViewController:picker animated:YES completion:Nil];
+}
+
+-(UIImage*)imageWithImage:(UIImage*)pickedImage scaledToSize:(CGSize)newSize;
+{
+    UIGraphicsBeginImageContext(newSize);
+    [pickedImage drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
+    UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return newImage;
+}
+
+-(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    [picker dismissViewControllerAnimated:YES completion:Nil];
+    
+    pickedImage = [info objectForKey:@"UIImagePickerControllerOriginalImage"];
+    
+    CGSize newSize;
+    newSize.width = 200;
+    newSize.height = 200;
+    pickedImage = [self imageWithImage:pickedImage scaledToSize:newSize];
+    
+    imgView.image = pickedImage;
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -70,17 +110,52 @@
         BOOL error = [sendBox post:post toUrl:url];
         
         if (!error) {
-            UIAlertView *returnMessage = [[UIAlertView alloc]
-                                          initWithTitle:@"สำเร็จ!!"
-                                          message:nil delegate:self
-                                          cancelButtonTitle:@"OK" otherButtonTitles:nil];
-            [returnMessage show];
-            
-            // clear TextField
-            objectName.text = NULL;
+            if (imgView.image != NULL) { // save objectImg ลง database
+                int returnNum = [sendBox getReturnMessage];
+                if (returnNum == 0) {
+                    NSMutableArray *jsonReturn = [sendBox getData];
+                    for (NSDictionary *dataDict in jsonReturn) {
+                        objectID = [NSString stringWithFormat:@"%@",dataDict];
+                    }
+                    NSData *imageData = UIImageJPEGRepresentation(imgView.image, 100);
+                    NSURL *url = [NSURL URLWithString:@"http://angsila.cs.buu.ac.th/~53160117/TalkTogether/saveObjectImg.php"];
+                    
+                    error = [sendBox postImage:imageData withObjectID:objectID toUrl:url];
+                    if (!error) { // save objectImg สำเร็จ
+                        UIAlertView *returnMessage = [[UIAlertView alloc]
+                                                      initWithTitle:@"สำเร็จ!!"
+                                                      message:nil delegate:self
+                                                      cancelButtonTitle:nil otherButtonTitles:nil];
+                        [returnMessage show];
+                        [returnMessage dismissWithClickedButtonIndex:0 animated:YES];
+                        
+                        // clear TextField
+                        objectName.text = NULL;
+                        imgView.image = NULL;
+                        
+                        [self.navigationController popViewControllerAnimated:YES]; // กลับหน้าลงทะเบียน
+                    }else{ // save objectImg ไม่สำเร็จ
+                        [sendBox getErrorMessage];
+                    }
+                }
+            }else{
+                UIAlertView *returnMessage = [[UIAlertView alloc]
+                                              initWithTitle:@"สำเร็จ!!"
+                                              message:nil delegate:self
+                                              cancelButtonTitle:nil otherButtonTitles:nil];
+                [returnMessage show];
+                [returnMessage dismissWithClickedButtonIndex:0 animated:YES];
+                
+                // clear TextField
+                objectName.text = NULL;
+                imgView.image = NULL;
+                
+                [self.navigationController popViewControllerAnimated:YES]; // กลับหน้าลงทะเบียน
+            }
         }else{
             [sendBox getErrorMessage];
         }
     }
 }
+
 @end
