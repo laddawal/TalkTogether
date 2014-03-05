@@ -82,6 +82,18 @@
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
+    // selected cell background color
+    UIView *bgColorView = [[UIView alloc] init];
+    [bgColorView setBackgroundColor:[UIColor colorWithRed:134.0/255.0 green:114.0/255.0 blue:93.0/255.0 alpha:1.0]];
+    [cell setSelectedBackgroundView:bgColorView];
+    
+    // selected cell text color
+    cell.textLabel.highlightedTextColor = [UIColor whiteColor];
+    cell.detailTextLabel.highlightedTextColor = [UIColor whiteColor];
+    
+    // cell text color
+    cell.textLabel.textColor = [UIColor brownColor];
+    
     if (cell == nil) {
         // Use the default cell style.
         cell = [[UITableViewCell alloc] initWithStyle : UITableViewCellStyleDefault
@@ -134,6 +146,12 @@
                                            initWithTitle:@"วัตถุต้องมีผู้ดูแลอย่างน้อย 1 คน"
                                            message:nil delegate:self
                                            cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [cantDelete show];
+    }else if([selectedUserID count] == 0){
+        UIAlertView *cantDelete = [[UIAlertView alloc]
+                                   initWithTitle:@"กรุณาเลือกผู้ดูแลที่ต้องการลบ"
+                                   message:nil delegate:self
+                                   cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [cantDelete show];
     }else{ // ลบได้
         for (int i = 0; i < [selectedUserID count]; i++) {

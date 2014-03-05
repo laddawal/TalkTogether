@@ -88,6 +88,18 @@
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
+    // selected cell background color
+    UIView *bgColorView = [[UIView alloc] init];
+    [bgColorView setBackgroundColor:[UIColor colorWithRed:134.0/255.0 green:114.0/255.0 blue:93.0/255.0 alpha:1.0]];
+    [cell setSelectedBackgroundView:bgColorView];
+    
+    // selected cell text color
+    cell.textLabel.highlightedTextColor = [UIColor whiteColor];
+    cell.detailTextLabel.highlightedTextColor = [UIColor whiteColor];
+    
+    // cell text color
+    cell.textLabel.textColor = [UIColor brownColor];
+    
     if (cell == nil) {
         // Use the default cell style.
         cell = [[UITableViewCell alloc] initWithStyle : UITableViewCellStyleDefault
@@ -122,42 +134,60 @@
 }
 
 - (IBAction)submitRequest:(id)sender {
-    for (int i = 0; i < [selectedUserID count]; i++) {
-        post = [NSString stringWithFormat:@"objectID=%@&userID=%@",objectID,[selectedUserID objectAtIndex:i]];
-        url = [NSURL URLWithString:@"http://angsila.cs.buu.ac.th/~53160117/TalkTogether/confirmRequest.php"];
-        [sendBox post:post toUrl:url];
+    if ([selectedUserID count] != 0) {
+        for (int i = 0; i < [selectedUserID count]; i++) {
+            post = [NSString stringWithFormat:@"objectID=%@&userID=%@",objectID,[selectedUserID objectAtIndex:i]];
+            url = [NSURL URLWithString:@"http://angsila.cs.buu.ac.th/~53160117/TalkTogether/confirmRequest.php"];
+            [sendBox post:post toUrl:url];
+            
+            NSLog(@"%@",[selectedUserID objectAtIndex:i]);
+        }
         
-        NSLog(@"%@",[selectedUserID objectAtIndex:i]);
-    }
-    
-    if (!error) {
-        UIAlertView *submitRequestAlert = [[UIAlertView alloc]
-                                           initWithTitle:@"อนุมัติคำขอเรียบร้อย"
+        if (!error) {
+            UIAlertView *submitRequestAlert = [[UIAlertView alloc]
+                                               initWithTitle:@"อนุมัติคำขอเรียบร้อย"
+                                               message:nil delegate:self
+                                               cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            [submitRequestAlert show];
+            [self viewWillAppear:YES];
+        }else{
+            [sendBox getErrorMessage];
+        }
+    }else{
+        UIAlertView *cantSubmit = [[UIAlertView alloc]
+                                           initWithTitle:@"กรุณาเลือกคำขอที่ต้องการอนุมัติ"
                                            message:nil delegate:self
                                            cancelButtonTitle:@"OK" otherButtonTitles:nil];
-        [submitRequestAlert show];
-        [self viewWillAppear:YES];
-    }else{
-        [sendBox getErrorMessage];
+        [cantSubmit show];
     }
+    
 }
 
 - (IBAction)deleteRequest:(id)sender {
-    for (int i = 0; i < [selectedUserID count]; i++) {
-        post = [NSString stringWithFormat:@"objectID=%@&userID=%@",objectID,[selectedUserID objectAtIndex:i]];
-        url = [NSURL URLWithString:@"http://angsila.cs.buu.ac.th/~53160117/TalkTogether/deleteRequest.php"];
-        [sendBox post:post toUrl:url];
+    if ([selectedUserID count] != 0) {
+        for (int i = 0; i < [selectedUserID count]; i++) {
+            post = [NSString stringWithFormat:@"objectID=%@&userID=%@",objectID,[selectedUserID objectAtIndex:i]];
+            url = [NSURL URLWithString:@"http://angsila.cs.buu.ac.th/~53160117/TalkTogether/deleteRequest.php"];
+            [sendBox post:post toUrl:url];
+        }
+        
+        if (!error) {
+            UIAlertView *deleteRequestAlert = [[UIAlertView alloc]
+                                               initWithTitle:@"ลบคำขอเรียบร้อย"
+                                               message:nil delegate:self
+                                               cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            [deleteRequestAlert show];
+            [self viewWillAppear:YES];
+        }else{
+            [sendBox getErrorMessage];
+        }
+    }else{
+        UIAlertView *cantDelete = [[UIAlertView alloc]
+                                   initWithTitle:@"กรุณาเลือกคำขอที่ต้องการลบ"
+                                   message:nil delegate:self
+                                   cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [cantDelete show];
     }
     
-    if (!error) {
-        UIAlertView *deleteRequestAlert = [[UIAlertView alloc]
-                                           initWithTitle:@"ลบคำขอเรียบร้อย"
-                                           message:nil delegate:self
-                                           cancelButtonTitle:@"OK" otherButtonTitles:nil];
-        [deleteRequestAlert show];
-        [self viewWillAppear:YES];
-    }else{
-        [sendBox getErrorMessage];
-    }
 }
 @end

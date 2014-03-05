@@ -200,7 +200,7 @@
             </objects>
             <point key="canvasLocation" x="-2898" y="-934"/>
         </scene>
-        <!--Ever Chat View Controller - Chat-->
+        <!--Ever Chat View Controller - ประวัติการสนทนา-->
         <scene sceneID="jCu-UL-4Bw">
             <objects>
                 <viewController storyboardIdentifier="everChatView" id="Xq6-Aa-Sin" customClass="EverChatViewController" sceneMemberID="viewController">
@@ -260,7 +260,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Chat" id="T9r-Qx-4Jd"/>
+                    <navigationItem key="navigationItem" title="ประวัติการสนทนา" id="T9r-Qx-4Jd"/>
                     <connections>
                         <outlet property="myTable" destination="Rxg-YS-oGR" id="Fjm-zK-98m"/>
                         <outlet property="searchBar" destination="nr9-p0-KL3" id="Zsp-eW-ZD7"/>
@@ -343,12 +343,12 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="rFN-4X-uuz" kind="relationship" relationship="rootViewController" id="9Eh-l9-LKt"/>
+                        <segue destination="rFN-4X-uuz" kind="relationship" relationship="rootViewController" id="Mkf-y1-E5V"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HmF-3h-xOg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-4812" y="-607"/>
+            <point key="canvasLocation" x="-4778" y="-607"/>
         </scene>
         <!--Main Menu View Controller - เมนูหลัก-->
         <scene sceneID="SsV-8a-RWd">
@@ -639,20 +639,26 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="border.png" id="9Tt-kB-Nf6">
+                                <rect key="frame" x="50" y="187" width="220" height="220"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" id="S93-e4-owK">
-                                <rect key="frame" x="40" y="164" width="240" height="240"/>
+                                <rect key="frame" x="55" y="192" width="210" height="210"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </mapView>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ตำแหน่งใหม่คือ" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="SFV-yr-OYd">
-                                <rect key="frame" x="111" y="135" width="98" height="21"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ตำแหน่งใหม่" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="SFV-yr-OYd">
+                                <rect key="frame" x="121" y="150" width="79" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="z4i-cG-0Um">
-                                <rect key="frame" x="143" y="430" width="35" height="30"/>
+                                <rect key="frame" x="129" y="430" width="62" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.5411764979" green="0.76862752440000004" blue="0.078431375319999996" alpha="1" colorSpace="deviceRGB"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <state key="normal" title="ตกลง">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
