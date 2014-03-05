@@ -106,33 +106,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="aBa-lh-8jx">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="214"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" red="0.97254908080000002" green="0.93725496529999996" blue="0.87058830259999997" alpha="1" colorSpace="deviceRGB"/>
-                                <color key="separatorColor" red="0.46274513010000001" green="0.38823533059999998" blue="0.33333334329999997" alpha="1" colorSpace="deviceRGB"/>
-                                <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="gpsContactCell" id="GMq-ua-Rhc">
-                                        <rect key="frame" x="0.0" y="86" width="320" height="44"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="GMq-ua-Rhc" id="FbW-Ef-aIh">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </tableViewCellContentView>
-                                        <color key="backgroundColor" red="0.97254908080000002" green="0.93725496529999996" blue="0.87058830259999997" alpha="1" colorSpace="deviceRGB"/>
-                                    </tableViewCell>
-                                </prototypes>
-                                <connections>
-                                    <outlet property="dataSource" destination="0pg-BY-oWT" id="fR2-Uy-tw9"/>
-                                    <outlet property="delegate" destination="0pg-BY-oWT" id="2Pm-Hb-VOA"/>
-                                </connections>
-                            </tableView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="borderMap.png" id="9d0-T4-75G">
-                                <rect key="frame" x="30" y="217" width="260" height="260"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" id="CzS-gg-UsT">
-                                <rect key="frame" x="35" y="222" width="250" height="250"/>
+                                <rect key="frame" x="0.0" y="63" width="320" height="505"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             </mapView>
                         </subviews>
@@ -141,7 +116,6 @@
                     <navigationItem key="navigationItem" title="วัตถุใกล้เคียง" id="l1H-jE-9NN"/>
                     <connections>
                         <outlet property="nearObjMap" destination="CzS-gg-UsT" id="PTj-f1-eyo"/>
-                        <outlet property="nearObject" destination="aBa-lh-8jx" id="gZW-GS-1py"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="khy-U8-g33" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1511,7 +1485,6 @@
         <image name="addRespon.png" width="20" height="18"/>
         <image name="barCodeBtn.png" width="100" height="100"/>
         <image name="border.png" width="220" height="220"/>
-        <image name="borderMap.png" width="260" height="260"/>
         <image name="chatBtn.png" width="100" height="100"/>
         <image name="gpsBtn.png" width="100" height="100"/>
         <image name="info.png" width="25" height="25"/>

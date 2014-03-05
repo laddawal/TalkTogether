@@ -16,7 +16,6 @@
     postMessage *sendBox;
 }
 
-@property (strong, nonatomic) IBOutlet UITableView *nearObject;
 @property (strong, nonatomic) IBOutlet MKMapView *nearObjMap;
 
 //Add a location manager property to this app delegate

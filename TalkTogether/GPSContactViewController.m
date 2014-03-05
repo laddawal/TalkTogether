@@ -23,7 +23,6 @@
 
 @implementation GPSContactViewController
 @synthesize locationManager;
-@synthesize nearObject;
 @synthesize nearObjMap;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -62,10 +61,6 @@
     if([CLLocationManager locationServicesEnabled]){
         [self.locationManager startUpdatingLocation];
     }
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    [nearObject reloadData];
 }
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
@@ -111,7 +106,6 @@
                 ann.subtitle = [fetchDict objectForKey:@"objectID"];
                 [nearObjMap addAnnotation:ann];
             }
-            [nearObject reloadData];
         }else{
             UIAlertView *returnMessage = [[UIAlertView alloc]
                                           initWithTitle:@"ไม่พบข้อมูล"
@@ -150,76 +144,6 @@
         chatView.recieveSender = @"1"; // กำหนดให้ผู้ส่งคือผู้ใช้
         chatView.recieveResponderID = responderID;
         chatView.navigationItem.title = view.annotation.title;
-        
-        [chatView setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
-        
-        [self.navigationController pushViewController:chatView animated:YES];
-    }else{
-        [sendBox getErrorMessage];
-    }
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    return [myObject count];
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    
-    static NSString *CellIdentifier = @"gpsContactCell";
-    
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    
-    // selected cell color
-    UIView *bgColorView = [[UIView alloc] init];
-    [bgColorView setBackgroundColor:[UIColor colorWithRed:134.0/255.0 green:114.0/255.0 blue:93.0/255.0 alpha:1.0]];
-    [cell setSelectedBackgroundView:bgColorView];
-    
-    // selected cell text color
-    cell.textLabel.highlightedTextColor = [UIColor whiteColor];
-    cell.detailTextLabel.highlightedTextColor = [UIColor whiteColor];
-    
-    // cell text color
-    cell.textLabel.textColor = [UIColor brownColor];
-    
-    if (cell == nil) {
-        // Use the default cell style.
-        cell = [[UITableViewCell alloc] initWithStyle : UITableViewCellStyleDefault
-                                      reuseIdentifier : CellIdentifier];
-    }
-    
-    // ObjectName
-    cell.textLabel.text = [[myObject objectAtIndex:indexPath.row] objectForKey:@"objectName"];
-    return cell;
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // ดึง userID จาก NSUserDefault
-    NSUserDefaults *defaultUserID = [NSUserDefaults standardUserDefaults];
-    userID = [defaultUserID stringForKey:@"userID"];
-    
-    // ดึงผู้รับผิดชอบ
-    NSMutableString *post = [NSMutableString stringWithFormat:@"objectID=%@&userID=%@",[[myObject objectAtIndex:indexPath.row] objectForKey:@"objectID"],userID];
-    NSURL *url = [NSURL URLWithString:@"http://angsila.cs.buu.ac.th/~53160117/TalkTogether/randomResponder.php"];
-    BOOL error = [sendBox post:post toUrl:url];
-    
-    if (!error) {
-        NSMutableArray *jsonReturn = [sendBox getData];
-        NSString *responderID;
-        for (NSDictionary* fetchDict in jsonReturn){
-            responderID = [fetchDict objectForKey:@"responder_ID"];
-        }
-    
-        // ไปหน้า chat
-        ChatViewController *chatView =[self.storyboard instantiateViewControllerWithIdentifier:@"chatView"];
-        
-        chatView.recieveObjectID = [[myObject objectAtIndex:indexPath.row] objectForKey:@"objectID"];
-        chatView.recieveContactID = userID;
-        chatView.recieveSender = @"1"; // กำหนดให้ผู้ส่งคือผู้ใช้
-        chatView.recieveResponderID = responderID;
-        chatView.navigationItem.title = [[myObject objectAtIndex:indexPath.row] objectForKey:@"objectName"];
         
         [chatView setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
         
