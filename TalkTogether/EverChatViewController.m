@@ -38,8 +38,6 @@
 
 - (void) viewWillAppear:(BOOL)animated
 {
-    NSLog(@"viewWillAppear");
-    
     sendBox = [[postMessage alloc]init];
     
     // Create array to hold dictionaries
@@ -85,8 +83,6 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
-    NSLog(@"cellForRoll");
     static NSString *CellIdentifier = @"everChatCell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -118,7 +114,6 @@
     }
     
     if ([[[displayObject objectAtIndex:indexPath.row] objectForKey:@"readed"] isEqualToString:@"0"]) { // ยังไม่ได้อ่าน
-        NSLog(@"color");
         // cell color
         [cell setBackgroundColor:[UIColor colorWithRed:35.0/255.0 green:145.0/255.0 blue:216.0/255.0 alpha:0.5]];
         // text color
