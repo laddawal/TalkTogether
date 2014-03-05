@@ -57,6 +57,9 @@
 		C92BD0B0186C15EB00E0FDAF /* addResponderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C92BD0AF186C15EB00E0FDAF /* addResponderViewController.m */; };
 		C9335E2E1884656900601A74 /* addFAQViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9335E2D1884656900601A74 /* addFAQViewController.m */; };
 		C936C251187C655500B2DCE3 /* badge.png in Resources */ = {isa = PBXBuildFile; fileRef = C936C250187C655500B2DCE3 /* badge.png */; };
+		C93B6D6A18C2F44800D8285B /* QRRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C93B6D6918C2F44800D8285B /* QRRegisterViewController.m */; };
+		C93B6D6C18C2FE2D00D8285B /* noImage.png in Resources */ = {isa = PBXBuildFile; fileRef = C93B6D6B18C2FE2D00D8285B /* noImage.png */; };
+		C93B6D6E18C31E1700D8285B /* borderMap.png in Resources */ = {isa = PBXBuildFile; fileRef = C93B6D6D18C31E1700D8285B /* borderMap.png */; };
 		C93BECE218842E8400E03576 /* logout@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C93BECE018842E8400E03576 /* logout@2x.png */; };
 		C93BECE318842E8400E03576 /* logout.png in Resources */ = {isa = PBXBuildFile; fileRef = C93BECE118842E8400E03576 /* logout.png */; };
 		C93E4391182226A600DC8104 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C93E4390182226A600DC8104 /* Foundation.framework */; };
@@ -79,7 +82,6 @@
 		C959F7EC183CF8740042CAAB /* GPSContactViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C959F7EB183CF8730042CAAB /* GPSContactViewController.m */; };
 		C96F261F1886B12D0089F32B /* noFaq.png in Resources */ = {isa = PBXBuildFile; fileRef = C96F261E1886B12D0089F32B /* noFaq.png */; };
 		C97E7EEA1855C27300CE58E0 /* DetailObjectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C97E7EE91855C27300CE58E0 /* DetailObjectViewController.m */; };
-		C998227018279C2B0026B0EC /* QRRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C998226F18279C2B0026B0EC /* QRRegisterViewController.m */; };
 		C99ABF99185CA33D0098FDAD /* nav@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C99ABF98185CA33D0098FDAD /* nav@2x.png */; };
 		C99B15CA1835D63000B68BAC /* zbar-back.png in Resources */ = {isa = PBXBuildFile; fileRef = C99B15C51835D63000B68BAC /* zbar-back.png */; };
 		C99B15CB1835D63000B68BAC /* zbar-help.html in Resources */ = {isa = PBXBuildFile; fileRef = C99B15C61835D63000B68BAC /* zbar-help.html */; };
@@ -115,6 +117,8 @@
 		C9CC613F185465DB00E956AF /* RegisIdentifyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9CC613E185465DB00E956AF /* RegisIdentifyViewController.m */; };
 		C9DD292F1878576D007E8055 /* tabBar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C9DD292D1878576D007E8055 /* tabBar@2x.png */; };
 		C9DD29301878576D007E8055 /* tabBar.png in Resources */ = {isa = PBXBuildFile; fileRef = C9DD292E1878576D007E8055 /* tabBar.png */; };
+		C9EBC28818C0D0C000B3B776 /* Polaroid.png in Resources */ = {isa = PBXBuildFile; fileRef = C9EBC28718C0D0C000B3B776 /* Polaroid.png */; };
+		C9EBC28A18C0D52700B3B776 /* border.png in Resources */ = {isa = PBXBuildFile; fileRef = C9EBC28918C0D52700B3B776 /* border.png */; };
 		C9EE8CD3187D53AF00B53236 /* setting.png in Resources */ = {isa = PBXBuildFile; fileRef = C9EE8CD1187D53AF00B53236 /* setting.png */; };
 		C9EE8CD4187D53AF00B53236 /* setting@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C9EE8CD2187D53AF00B53236 /* setting@2x.png */; };
 		C9EE8CE2187D65A300B53236 /* addRespon.png in Resources */ = {isa = PBXBuildFile; fileRef = C9EE8CE1187D65A300B53236 /* addRespon.png */; };
@@ -204,6 +208,10 @@
 		C9335E2C1884656900601A74 /* addFAQViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = addFAQViewController.h; sourceTree = "<group>"; };
 		C9335E2D1884656900601A74 /* addFAQViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = addFAQViewController.m; sourceTree = "<group>"; };
 		C936C250187C655500B2DCE3 /* badge.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = badge.png; sourceTree = "<group>"; };
+		C93B6D6818C2F44800D8285B /* QRRegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = QRRegisterViewController.h; path = ../QRRegisterViewController.h; sourceTree = "<group>"; };
+		C93B6D6918C2F44800D8285B /* QRRegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = QRRegisterViewController.m; path = ../QRRegisterViewController.m; sourceTree = "<group>"; };
+		C93B6D6B18C2FE2D00D8285B /* noImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = noImage.png; sourceTree = "<group>"; };
+		C93B6D6D18C31E1700D8285B /* borderMap.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = borderMap.png; sourceTree = "<group>"; };
 		C93BECE018842E8400E03576 /* logout@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logout@2x.png"; sourceTree = "<group>"; };
 		C93BECE118842E8400E03576 /* logout.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logout.png; sourceTree = "<group>"; };
 		C93E438D182226A600DC8104 /* TalkTogether.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TalkTogether.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -243,8 +251,6 @@
 		C96F261E1886B12D0089F32B /* noFaq.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = noFaq.png; sourceTree = "<group>"; };
 		C97E7EE81855C27300CE58E0 /* DetailObjectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailObjectViewController.h; sourceTree = "<group>"; };
 		C97E7EE91855C27300CE58E0 /* DetailObjectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailObjectViewController.m; sourceTree = "<group>"; };
-		C998226E18279C2B0026B0EC /* QRRegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRRegisterViewController.h; sourceTree = "<group>"; };
-		C998226F18279C2B0026B0EC /* QRRegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRRegisterViewController.m; sourceTree = "<group>"; };
 		C99ABF98185CA33D0098FDAD /* nav@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nav@2x.png"; sourceTree = "<group>"; };
 		C99B15AF1835D63000B68BAC /* Decoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Decoder.h; sourceTree = "<group>"; };
 		C99B15B01835D63000B68BAC /* Exception.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Exception.h; sourceTree = "<group>"; };
@@ -310,6 +316,8 @@
 		C9CC613E185465DB00E956AF /* RegisIdentifyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RegisIdentifyViewController.m; path = ../RegisIdentifyViewController.m; sourceTree = "<group>"; };
 		C9DD292D1878576D007E8055 /* tabBar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabBar@2x.png"; sourceTree = "<group>"; };
 		C9DD292E1878576D007E8055 /* tabBar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tabBar.png; sourceTree = "<group>"; };
+		C9EBC28718C0D0C000B3B776 /* Polaroid.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Polaroid.png; sourceTree = "<group>"; };
+		C9EBC28918C0D52700B3B776 /* border.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = border.png; sourceTree = "<group>"; };
 		C9EE8CD1187D53AF00B53236 /* setting.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = setting.png; sourceTree = "<group>"; };
 		C9EE8CD2187D53AF00B53236 /* setting@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "setting@2x.png"; sourceTree = "<group>"; };
 		C9EE8CE1187D65A300B53236 /* addRespon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = addRespon.png; sourceTree = "<group>"; };
@@ -473,8 +481,8 @@
 				C9460ED4183F23A00043A5F1 /* ChatViewController.m */,
 				C92820ED1831F1DF007EEBD5 /* NameRegisterViewController.h */,
 				C92820EE1831F1DF007EEBD5 /* NameRegisterViewController.m */,
-				C998226E18279C2B0026B0EC /* QRRegisterViewController.h */,
-				C998226F18279C2B0026B0EC /* QRRegisterViewController.m */,
+				C93B6D6818C2F44800D8285B /* QRRegisterViewController.h */,
+				C93B6D6918C2F44800D8285B /* QRRegisterViewController.m */,
 				C925EF3B183BB9BD00ACB687 /* BarcodeRegisterViewController.h */,
 				C925EF3C183BB9BD00ACB687 /* BarcodeRegisterViewController.m */,
 				C9F31781183C77B000B6882C /* GPSRegisterViewController.h */,
@@ -526,6 +534,10 @@
 		C93E43CD182229E800DC8104 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				C93B6D6D18C31E1700D8285B /* borderMap.png */,
+				C93B6D6B18C2FE2D00D8285B /* noImage.png */,
+				C9EBC28918C0D52700B3B776 /* border.png */,
+				C9EBC28718C0D0C000B3B776 /* Polaroid.png */,
 				C96F261E1886B12D0089F32B /* noFaq.png */,
 				C93BECE018842E8400E03576 /* logout@2x.png */,
 				C93BECE118842E8400E03576 /* logout.png */,
@@ -770,8 +782,10 @@
 				C9095C6A1853119600A7CC07 /* bubbleSomeone@2x.png in Resources */,
 				C90796981866050900A1C41B /* noGPS.png in Resources */,
 				C90BEBD618B1E8770087A533 /* hamburger.jpg in Resources */,
+				C93B6D6E18C31E1700D8285B /* borderMap.png in Resources */,
 				C99ABF99185CA33D0098FDAD /* nav@2x.png in Resources */,
 				C9095C681853119600A7CC07 /* bubbleMine@2x.png in Resources */,
+				C93B6D6C18C2FE2D00D8285B /* noImage.png in Resources */,
 				C93E43A4182226A600DC8104 /* Main.storyboard in Resources */,
 				C906258A1881E0740026EAEA /* woman.png in Resources */,
 				C90BEBDD18B1E8770087A533 /* thai_shrimp_cake.jpg in Resources */,
@@ -786,6 +800,7 @@
 				C9095C6E1853119600A7CC07 /* typingMine@2x.png in Resources */,
 				C9095C6F1853119600A7CC07 /* typingSomeone.png in Resources */,
 				C93BECE218842E8400E03576 /* logout@2x.png in Resources */,
+				C9EBC28818C0D0C000B3B776 /* Polaroid.png in Resources */,
 				C99B15CD1835D63000B68BAC /* zbar-samples.png in Resources */,
 				C90BEBD918B1E8770087A533 /* mushroom_risotto.jpg in Resources */,
 				C99B15CB1835D63000B68BAC /* zbar-help.html in Resources */,
@@ -806,6 +821,7 @@
 				C90BEBDE18B1E8770087A533 /* vegetable_curry.jpg in Resources */,
 				C9095C6C1853119600A7CC07 /* missingAvatar@2x.png in Resources */,
 				C91B52F8185F5000003BFED8 /* viewName.png in Resources */,
+				C9EBC28A18C0D52700B3B776 /* border.png in Resources */,
 				C90BEBD818B1E8770087A533 /* japanese_noodle_with_pork.jpg in Resources */,
 				C9DD29301878576D007E8055 /* tabBar.png in Resources */,
 				C9B842DB185998A300C87E29 /* loginView1.png in Resources */,
@@ -852,6 +868,7 @@
 				C90BEBBC18B1E7860087A533 /* MyObjectCollectionViewController.m in Sources */,
 				C9F07A90188524E8001CCFBD /* EditGPSViewController.m in Sources */,
 				C925EF3A183BAFEF00ACB687 /* BarcodeContactViewController.m in Sources */,
+				C93B6D6A18C2F44800D8285B /* QRRegisterViewController.m in Sources */,
 				C9F07A9318852504001CCFBD /* EditBarcodeViewController.m in Sources */,
 				C9460EE6183F23FB0043A5F1 /* UIBubbleTypingTableViewCell.m in Sources */,
 				C9460EE3183F23FB0043A5F1 /* UIBubbleHeaderTableViewCell.m in Sources */,
@@ -861,7 +878,6 @@
 				C9CC613F185465DB00E956AF /* RegisIdentifyViewController.m in Sources */,
 				C959F7EC183CF8740042CAAB /* GPSContactViewController.m in Sources */,
 				C925EF3D183BB9BD00ACB687 /* BarcodeRegisterViewController.m in Sources */,
-				C998227018279C2B0026B0EC /* QRRegisterViewController.m in Sources */,
 				C99B15E51835D64100B68BAC /* rscode.c in Sources */,
 				C9460EE2183F23FB0043A5F1 /* NSBubbleData.m in Sources */,
 				C9A2539B184B1E29006FF37C /* MyObjectViewController.m in Sources */,

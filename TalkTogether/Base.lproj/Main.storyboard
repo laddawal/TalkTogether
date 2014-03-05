@@ -26,8 +26,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="Am1-nl-rQg">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="border.png" id="NEb-Fm-N69">
                                 <rect key="frame" x="50" y="134" width="220" height="220"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="Am1-nl-rQg">
+                                <rect key="frame" x="55" y="139" width="210" height="210"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="bcp-ay-7xf">
@@ -60,8 +64,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="u4V-66-8IE">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="border.png" id="blf-KY-Yq2">
                                 <rect key="frame" x="50" y="134" width="220" height="220"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="u4V-66-8IE">
+                                <rect key="frame" x="55" y="139" width="210" height="210"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="LKc-kb-Mdf">
@@ -115,8 +123,12 @@
                                     <outlet property="delegate" destination="0pg-BY-oWT" id="2Pm-Hb-VOA"/>
                                 </connections>
                             </tableView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="borderMap.png" id="9d0-T4-75G">
+                                <rect key="frame" x="30" y="217" width="260" height="260"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" id="CzS-gg-UsT">
-                                <rect key="frame" x="20" y="245" width="280" height="267"/>
+                                <rect key="frame" x="35" y="222" width="250" height="250"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             </mapView>
                         </subviews>
@@ -699,11 +711,11 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsVerticalScrollIndicator="NO" id="hAh-GU-nwx">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="1235"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="1508"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" id="asB-jC-oPA">
-                                        <rect key="frame" x="20" y="20" width="280" height="60"/>
+                                        <rect key="frame" x="20" y="293" width="280" height="60"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <subviews>
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ชื่อ : " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="H2h-Eh-922">
@@ -722,7 +734,7 @@
                                         <color key="backgroundColor" red="1" green="0.96078437569999997" blue="0.88235300780000003" alpha="1" colorSpace="deviceRGB"/>
                                     </view>
                                     <view contentMode="scaleToFill" id="BJp-pk-4qp">
-                                        <rect key="frame" x="20" y="88" width="280" height="265"/>
+                                        <rect key="frame" x="20" y="361" width="280" height="265"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="QR Code :" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="2Gk-7Q-lG6">
@@ -763,7 +775,7 @@
                                         <color key="backgroundColor" red="1" green="0.96078437569999997" blue="0.88235300780000003" alpha="1" colorSpace="deviceRGB"/>
                                     </view>
                                     <view contentMode="scaleToFill" id="5b1-0f-1vg">
-                                        <rect key="frame" x="20" y="361" width="280" height="60"/>
+                                        <rect key="frame" x="20" y="634" width="280" height="60"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Barcode : " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="OUc-kS-tSt">
@@ -792,7 +804,7 @@
                                         <color key="backgroundColor" red="1" green="0.96078437569999997" blue="0.88235300780000003" alpha="1" colorSpace="deviceRGB"/>
                                     </view>
                                     <view contentMode="scaleToFill" id="hsR-Gf-Hcf">
-                                        <rect key="frame" x="20" y="429" width="280" height="336"/>
+                                        <rect key="frame" x="20" y="702" width="280" height="336"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ตำแหน่ง GPS :" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Igb-Kg-Bes">
@@ -823,9 +835,11 @@
                                         <color key="backgroundColor" red="0.97254908080000002" green="0.93725496529999996" blue="0.87058830259999997" alpha="1" colorSpace="deviceRGB"/>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="WQF-ca-wVi">
-                                        <rect key="frame" x="143" y="1185" width="35" height="30"/>
+                                        <rect key="frame" x="108" y="1458" width="105" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="0.5411764979" green="0.76862752440000004" blue="0.078431375319999996" alpha="1" colorSpace="deviceRGB"/>
                                         <state key="normal" title="บันทึก">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
@@ -833,7 +847,7 @@
                                         </connections>
                                     </button>
                                     <view contentMode="scaleToFill" id="Uns-xQ-0ew">
-                                        <rect key="frame" x="20" y="773" width="280" height="336"/>
+                                        <rect key="frame" x="20" y="1046" width="280" height="336"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="noFaq.png" id="M9j-sZ-5ns">
@@ -901,7 +915,7 @@
                                         <color key="backgroundColor" red="0.97254908080000002" green="0.93725496529999996" blue="0.87058830259999997" alpha="1" colorSpace="deviceRGB"/>
                                     </view>
                                     <view contentMode="scaleToFill" id="RJf-lc-Zwg">
-                                        <rect key="frame" x="20" y="1117" width="280" height="60"/>
+                                        <rect key="frame" x="20" y="1390" width="280" height="60"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="axz-fF-pGo">
@@ -917,6 +931,31 @@
                                         </subviews>
                                         <color key="backgroundColor" red="0.97254908080000002" green="0.93725496529999996" blue="0.87058830259999997" alpha="1" colorSpace="deviceRGB"/>
                                     </view>
+                                    <view contentMode="scaleToFill" id="7Bk-sj-icK">
+                                        <rect key="frame" x="20" y="20" width="280" height="265"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="noImage.png" id="SQr-Hz-qii">
+                                                <rect key="frame" x="55" y="37" width="170" height="170"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            </imageView>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="nr6-kL-c0B">
+                                                <rect key="frame" x="55" y="37" width="170" height="170"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            </imageView>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="cl2-6S-zVN">
+                                                <rect key="frame" x="100" y="215" width="80" height="30"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <state key="normal" title="เปลี่ยนรูปภาพ">
+                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="changeObjImg:" destination="98K-4T-dl9" eventType="touchUpInside" id="qZr-eX-WmK"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" red="1" green="0.96078437569999997" blue="0.88235300780000003" alpha="1" colorSpace="deviceRGB"/>
+                                    </view>
                                 </subviews>
                             </scrollView>
                         </subviews>
@@ -931,7 +970,8 @@
                     </navigationItem>
                     <connections>
                         <outlet property="barcodeIDLabel" destination="P0g-9k-fhu" id="F75-C5-vgO"/>
-                        <outlet property="bgQr" destination="hDw-Ui-KUP" id="1Me-FC-fJ2"/>
+                        <outlet property="bgQr" destination="hDw-Ui-KUP" id="7Vd-79-Jaa"/>
+                        <outlet property="changeObjImg" destination="cl2-6S-zVN" id="bHh-QB-k3d"/>
                         <outlet property="editBarcode" destination="Zqi-RS-LIF" id="hRA-lz-kTT"/>
                         <outlet property="editFAQBtn" destination="Wax-7V-2nY" id="Oea-2z-UNn"/>
                         <outlet property="editGPS" destination="Ka6-wC-OGe" id="PFH-tD-MZY"/>
@@ -939,6 +979,7 @@
                         <outlet property="generateQr" destination="Y13-hD-Qdr" id="bOH-s5-zXH"/>
                         <outlet property="mapView" destination="V8i-ql-fZb" id="ddE-ty-XGA"/>
                         <outlet property="nameDetail" destination="vF3-Zv-WdH" id="Yyp-TD-0J8"/>
+                        <outlet property="objectImg" destination="nr6-kL-c0B" id="8Mx-4S-5cD"/>
                         <outlet property="qrImage" destination="AJG-vw-B17" id="CmP-HM-xVk"/>
                         <outlet property="requestResponder" destination="axz-fF-pGo" id="kiP-cc-MXQ"/>
                         <outlet property="save" destination="WQF-ca-wVi" id="L7G-B7-fov"/>
@@ -948,6 +989,7 @@
                         <outlet property="viewBarcode" destination="5b1-0f-1vg" id="ftt-hC-BxS"/>
                         <outlet property="viewFAQ" destination="Uns-xQ-0ew" id="oo6-ft-u8x"/>
                         <outlet property="viewGPS" destination="hsR-Gf-Hcf" id="dPr-lI-5wd"/>
+                        <outlet property="viewImageObj" destination="7Bk-sj-icK" id="N4U-xM-ceP"/>
                         <outlet property="viewName" destination="asB-jC-oPA" id="AHM-bh-cbC"/>
                         <outlet property="viewQR" destination="BJp-pk-4qp" id="9L0-Z5-gbS"/>
                         <outlet property="viewRequestResponder" destination="RJf-lc-Zwg" id="Hwl-nA-s1n"/>
@@ -1102,8 +1144,12 @@
                                     <action selector="generate:" destination="ERd-04-yYr" eventType="touchUpInside" id="WXc-Jj-s72"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="Ath-Cq-J4E">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="border.png" id="80n-kT-ycP">
                                 <rect key="frame" x="50" y="192" width="220" height="220"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="Ath-Cq-J4E">
+                                <rect key="frame" x="55" y="197" width="210" height="210"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="w3Z-fg-x3M">
@@ -1167,8 +1213,12 @@
                                     <action selector="register:" destination="738-5s-zbM" eventType="touchUpInside" id="6yE-2q-Hbw"/>
                                 </connections>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="border.png" id="pV7-8B-5zJ">
+                                <rect key="frame" x="50" y="213" width="220" height="220"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" id="bSL-ja-bEk">
-                                <rect key="frame" x="60" y="218" width="200" height="200"/>
+                                <rect key="frame" x="55" y="218" width="210" height="210"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             </mapView>
                         </subviews>
@@ -1335,8 +1385,12 @@
                                     <action selector="scanBtn:" destination="b4J-31-W4N" eventType="touchUpInside" id="mTE-8f-0yS"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="xwi-eh-mMd">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="border.png" id="GwK-OB-F0Q">
                                 <rect key="frame" x="50" y="134" width="220" height="220"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="xwi-eh-mMd">
+                                <rect key="frame" x="55" y="139" width="210" height="210"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                         </subviews>
@@ -1360,7 +1414,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="X07-DP-z9o">
-                                <rect key="frame" x="70" y="518" width="181" height="30"/>
+                                <rect key="frame" x="70" y="453" width="181" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.5411764979" green="0.76862752440000004" blue="0.078431375319999996" alpha="1" colorSpace="deviceRGB"/>
                                 <state key="normal" title="ลงทะเบียน">
@@ -1372,17 +1426,21 @@
                                 </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" clearButtonMode="whileEditing" id="6fX-El-pMG">
-                                <rect key="frame" x="46" y="348" width="181" height="30"/>
+                                <rect key="frame" x="140" y="398" width="120" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Polaroid.png" id="znt-I5-Li5">
+                                <rect key="frame" x="60" y="134" width="200" height="239"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="6s6-fN-PMW">
-                                <rect key="frame" x="46" y="190" width="150" height="150"/>
+                                <rect key="frame" x="72" y="146" width="176" height="176"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="ZIH-Cw-Cru">
-                                <rect key="frame" x="204" y="250" width="71" height="30"/>
+                                <rect key="frame" x="131" y="330" width="71" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="เลือกรูปภาพ">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -1391,6 +1449,13 @@
                                     <action selector="getPhoto:" destination="gMV-3f-OCK" eventType="touchUpInside" id="K9m-wm-N1a"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ใส่ชื่อวัตถุ :" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="CUc-f7-fRo">
+                                <rect key="frame" x="60" y="402" width="72" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -1406,8 +1471,11 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Polaroid.png" width="197" height="236"/>
         <image name="addRespon.png" width="20" height="18"/>
         <image name="barCodeBtn.png" width="100" height="100"/>
+        <image name="border.png" width="220" height="220"/>
+        <image name="borderMap.png" width="260" height="260"/>
         <image name="chatBtn.png" width="100" height="100"/>
         <image name="gpsBtn.png" width="100" height="100"/>
         <image name="info.png" width="25" height="25"/>
@@ -1416,6 +1484,7 @@
         <image name="logout.png" width="24" height="24"/>
         <image name="noFaq.png" width="240" height="237"/>
         <image name="noGPS.png" width="240" height="240"/>
+        <image name="noImage.png" width="240" height="242"/>
         <image name="noQrCode.png" width="170" height="168"/>
         <image name="qrCodeBtn.png" width="100" height="100"/>
         <image name="setting.png" width="20" height="20"/>

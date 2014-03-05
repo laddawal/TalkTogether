@@ -93,14 +93,6 @@
     [message setDelegate:self];
 }
 
-- (void) viewWillAppear:(BOOL)animated{
-//    if ([responderID isEqualToString:userID]) {
-//        [detailObjectBtn setEnabled:NO];
-//    }else{
-//        [detailObjectBtn setEnabled:YES];
-//    }
-}
-
 - (NSInteger)rowsForBubbleTable:(UIBubbleTableView *)tableView
 {
     return [bubbleData count];

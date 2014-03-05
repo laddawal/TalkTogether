@@ -83,10 +83,17 @@
     static NSString *CellIdentifier = @"myObjectCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
-    // selected cell color
+    // selected cell background color
     UIView *bgColorView = [[UIView alloc] init];
     [bgColorView setBackgroundColor:[UIColor colorWithRed:134.0/255.0 green:114.0/255.0 blue:93.0/255.0 alpha:1.0]];
     [cell setSelectedBackgroundView:bgColorView];
+    
+    // selected cell text color
+    cell.textLabel.highlightedTextColor = [UIColor whiteColor];
+    cell.detailTextLabel.highlightedTextColor = [UIColor whiteColor];
+    
+    // cell text color
+    cell.textLabel.textColor = [UIColor brownColor];
     
     if (cell == nil) {
         // Use the default cell style.
@@ -98,18 +105,16 @@
     cell.textLabel.text = [[displayObject objectAtIndex:indexPath.row] objectForKey:@"objectName"];
     
     // ObjectImg
-    if (![[NSString stringWithFormat:@"%@",[[displayObject objectAtIndex:indexPath.row] objectForKey:@"image"]] isEqualToString:@"<null>"]) {
-        NSString *qrPart = [NSString stringWithFormat:@"http://angsila.cs.buu.ac.th/~53160117/TalkTogether/objectImage/%@.jpg",[[displayObject objectAtIndex:indexPath.row] objectForKey:@"objectID"]];
-        NSURL *url = [NSURL URLWithString:qrPart];
+    if ([[NSString stringWithFormat:@"%@",[[displayObject objectAtIndex:indexPath.row] objectForKey:@"image"]] isEqualToString:@"1"]) { // มี Object Image
+        NSString *part = [NSString stringWithFormat:@"http://angsila.cs.buu.ac.th/~53160117/TalkTogether/objectImage/%@.jpg",[[displayObject objectAtIndex:indexPath.row] objectForKey:@"objectID"]];
+        NSURL *url = [NSURL URLWithString:part];
         NSData *data = [NSData dataWithContentsOfURL:url];
         UIImage *img = [[UIImage alloc] initWithData:data];
-        NSLog(@"%@",[[displayObject objectAtIndex:indexPath.row] objectForKey:@"image"]);
         
         cell.imageView.image = img;
-    }else{
-        cell.imageView.image = [UIImage imageNamed:@"noFaq.png"];
+    }else{ // ไม่มี Object Image
+        cell.imageView.image = [UIImage imageNamed:@"noImage.png"];
     }
-
     return cell;
 }
 
@@ -147,7 +152,7 @@
                                           message:nil delegate:self
                                           cancelButtonTitle:@"OK" otherButtonTitles:nil];
             [returnMessage show];
-            [self viewWillAppear:NO];
+            [self viewWillAppear:YES];
         }else{
             [sendBox getErrorMessage];
         }
@@ -164,14 +169,13 @@
     else{
         [displayObject removeAllObjects];
         for (NSDictionary *item in myObject) {
-            NSString *string = [item objectForKey:@"objectName"];
-            NSRange range = [string rangeOfString:searchText options:NSCaseInsensitiveSearch];
-            if (range.location !=  NSNotFound) {
+            NSString *stringObj = [item objectForKey:@"objectName"];
+            NSRange rangeObj = [stringObj rangeOfString:searchText options:NSCaseInsensitiveSearch];
+            if (rangeObj.location !=  NSNotFound) {
                 [displayObject addObject:item];
-            } 
+            }
         }
     }
-    
     [showObj reloadData];
 }
 

@@ -19,7 +19,6 @@
 @synthesize objectName;
 @synthesize imgView;
 
-UIImagePickerController *picker;
 UIImage *pickedImage;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil

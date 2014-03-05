@@ -38,6 +38,8 @@
 
 - (void) viewWillAppear:(BOOL)animated
 {
+    NSLog(@"viewWillAppear");
+    
     sendBox = [[postMessage alloc]init];
     
     // Create array to hold dictionaries
@@ -51,6 +53,9 @@
     NSString *post = [NSString stringWithFormat:@"userID=%@",userID];
     NSURL *url = [NSURL URLWithString:@"http://angsila.cs.buu.ac.th/~53160117/TalkTogether/getChatHistory"];
     BOOL error = [sendBox post:post toUrl:url];
+    
+    [myObject removeAllObjects];
+    [displayObject removeAllObjects];
     
     if (!error) {
         int returnNum = [sendBox getReturnMessage];
@@ -81,14 +86,19 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
+    NSLog(@"cellForRoll");
     static NSString *CellIdentifier = @"everChatCell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
-    // selected cell color
+    // selected cell background color
     UIView *bgColorView = [[UIView alloc] init];
     [bgColorView setBackgroundColor:[UIColor colorWithRed:134.0/255.0 green:114.0/255.0 blue:93.0/255.0 alpha:1.0]];
     [cell setSelectedBackgroundView:bgColorView];
+    
+    // selected cell text color
+    cell.textLabel.highlightedTextColor = [UIColor whiteColor];
+    cell.detailTextLabel.highlightedTextColor = [UIColor whiteColor];
     
     if (cell == nil) {
         // Use the default cell style.
@@ -105,6 +115,23 @@
         cell.textLabel.text = [[displayObject objectAtIndex:indexPath.row] objectForKey:@"objectName"];
         cell.detailTextLabel.text = @"";
         cell.imageView.image = [UIImage imageNamed:@"car1.png"];
+    }
+    
+    if ([[[displayObject objectAtIndex:indexPath.row] objectForKey:@"readed"] isEqualToString:@"0"]) { // ยังไม่ได้อ่าน
+        NSLog(@"color");
+        // cell color
+        [cell setBackgroundColor:[UIColor colorWithRed:35.0/255.0 green:145.0/255.0 blue:216.0/255.0 alpha:0.5]];
+        // text color
+        cell.textLabel.textColor = [UIColor darkGrayColor];
+        // detailText color
+        cell.detailTextLabel.textColor = [UIColor whiteColor];
+    }else{
+        // cell color
+        [cell setBackgroundColor:[UIColor colorWithRed:248.0/255.0 green:239.0/255.0 blue:222.0/255.0 alpha:1]];
+        // text color
+        cell.textLabel.textColor = [UIColor brownColor];
+        // detailText color
+        cell.detailTextLabel.textColor = [UIColor darkGrayColor];
     }
     
     return cell;

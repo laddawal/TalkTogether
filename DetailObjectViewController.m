@@ -21,6 +21,7 @@
     NSString *barcodeID;
     NSString *userID;
     NSString *urlQR;
+    NSString *urlImg;
     NSString *request;
     NSString *newLatitude,*newLongitude;
     NSString *newBarcodeID;
@@ -38,9 +39,11 @@
 @implementation DetailObjectViewController
 @synthesize recieveObjectID;
 @synthesize scrollView;
-@synthesize viewName,viewQR,viewBarcode,viewGPS,viewFAQ,viewRequestResponder,bgQr;
-@synthesize mapView,barcodeIDLabel,nameDetail,qrImage,faqTable;
-@synthesize saveQR,editGPS,save,setting,editFAQBtn,requestResponder,editBarcode,generateQr;
+@synthesize viewName,viewQR,viewBarcode,viewGPS,viewFAQ,viewRequestResponder,viewImageObj,bgQr;
+@synthesize mapView,barcodeIDLabel,nameDetail,qrImage,faqTable,objectImg;
+@synthesize saveQR,editGPS,save,setting,editFAQBtn,requestResponder,editBarcode,generateQr,changeObjImg;
+
+UIImage *pickedImage;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -63,7 +66,7 @@
 	// Do any additional setup after loading the view.
     
     [self.scrollView setScrollEnabled:YES];
-    [self.scrollView setContentSize:CGSizeMake(320, 1900)];
+    [self.scrollView setContentSize:CGSizeMake(320, 2460)];
     
     [nameDetail setDelegate:self];
     
@@ -74,6 +77,7 @@
     viewGPS.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"viewGPS.png"]];
     viewFAQ.backgroundColor =[UIColor colorWithPatternImage:[UIImage imageNamed:@"viewGPS.png"]];
     viewRequestResponder.backgroundColor =[UIColor colorWithPatternImage:[UIImage imageNamed:@"viewName.png"]];
+    viewImageObj.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"viewQR.png"]];
     
     // รับ objectID จาหหน้าก่อนหน้า
     objectID = [recieveObjectID description];
@@ -128,33 +132,47 @@
                 longitude = [NSString stringWithFormat:@"%@",[fetchDict objectForKey:@"longitude"]];
                 barcodeID = [NSString stringWithFormat:@"%@",[fetchDict objectForKey:@"barcodeID"]];
                 urlQR = [NSString stringWithFormat:@"%@",[fetchDict objectForKey:@"QRcodeImg"]];
+                urlImg = [NSString stringWithFormat:@"%@",[fetchDict objectForKey:@"image"]];
                 request = [NSString stringWithFormat:@"%@",[fetchDict objectForKey:@"request"]];
             }
+            //---- Object Image ----//
+            NSString *imgPart = [NSString stringWithFormat:@"http://angsila.cs.buu.ac.th/~53160117/TalkTogether/objectImage/%@.jpg",objectID];
+            url = [NSURL URLWithString:imgPart];
+            NSData *dataObjImg = [NSData dataWithContentsOfURL:url];
+            UIImage *objImg = [[UIImage alloc] initWithData:dataObjImg];
+            objectImg.image = objImg;
+            if ([urlImg isEqualToString:@"0"]) { // ไม่มี Object Image
+                objectImg.hidden = YES;
+            }else{ // มี Object Image
+                objectImg.hidden = NO;
+            }
             
-            // Name
+            //---- Name ----//
             if ([[NSUserDefaults standardUserDefaults] stringForKey:@"objectName"] == NULL) { // เช็คว่ามี objectName ที่จะแก้ไหม ถ้าไม่แสดงอันที่มาจาก DB
                 nameDetail.text = objectName;
             }else{ // ถ้ามีแสดงอันที่จะแก้
                 nameDetail.text = [[NSUserDefaults standardUserDefaults] stringForKey:@"objectName"];
             }
             
-            // QR Code
+            //---- QR Code ----//
             NSString *qrPart = [NSString stringWithFormat:@"http://angsila.cs.buu.ac.th/~53160117/TalkTogether/uploads/%@.jpg",objectID];
             url = [NSURL URLWithString:qrPart];
-            NSData *data = [NSData dataWithContentsOfURL:url];
-            UIImage *img = [[UIImage alloc] initWithData:data];
-            qrImage.image = img;
-            if ([urlQR isEqualToString:@"0"]) {
+            NSData *dataQr = [NSData dataWithContentsOfURL:url];
+            UIImage *imgQr = [[UIImage alloc] initWithData:dataQr];
+            qrImage.image = imgQr;
+            if ([urlQR isEqualToString:@"0"]) { //ไม่มี QR Code
+                bgQr.hidden = NO;
                 qrImage.hidden = YES;
                 saveQR.enabled = NO;
                 generateQr.enabled = YES;
-            }else{
+            }else{ // มี QR Code
+                bgQr.hidden = YES;
                 qrImage.hidden = NO;
                 saveQR.enabled = YES;
                 generateQr.enabled = NO;
             }
             
-            // Map
+            //---- Map ----//
             if ([[NSUserDefaults standardUserDefaults] stringForKey:@"latitude"] == NULL &&
                 [[NSUserDefaults standardUserDefaults] stringForKey:@"longitude"] == NULL) { // เช็คว่ามี GPS ที่จะแก้ไหม ถ้าไม่มีแสดงอันที่มาจาก DB
                 if ([latitude isEqualToString:@"<null>"] && [longitude isEqualToString:@"<null>"]) {
@@ -198,7 +216,7 @@
                 [mapView addAnnotation:ann];
             }
             
-            // Barcode
+            //---- Barcode ----//
             if ([[NSUserDefaults standardUserDefaults] stringForKey:@"barCodeID"] == NULL) { // เช็คว่ามี Barcode ที่ต้องแก้ไหมถ้า ไม่มีแสดงอันที่เอามาจาก DB
                 if ([barcodeID isEqualToString:@"<null>"]) {
                     barcodeIDLabel.text = @"ไม่มี Barcode";
@@ -209,7 +227,7 @@
                 barcodeIDLabel.text = [[NSUserDefaults standardUserDefaults] stringForKey:@"barCodeID"];
             }
             
-            // Check Permission
+            //---- Check Permission ----//
             post = [NSString stringWithFormat:@"userID=%@&objectID=%@",userID,objectID];
             
             url = [NSURL URLWithString:@"http://angsila.cs.buu.ac.th/~53160117/TalkTogether/getPermission.php"];
@@ -228,6 +246,7 @@
                     editFAQBtn.hidden = NO;
                     viewRequestResponder.hidden = YES;
                     editBarcode.hidden = NO;
+                    changeObjImg.hidden = NO;
                 }else{ // เป็นผู้ติดต่อ
                     flagResponder = NO;
                     
@@ -237,6 +256,7 @@
                     }else{ // ยังไม่เคยส่งคำขอเป็นผู้ดูแล
                         requestResponder.enabled = YES;
                     }
+                    
                     [nameDetail setBorderStyle:UITextBorderStyleNone];
                     [nameDetail setEnabled:NO];
                     [setting setEnabled:NO];
@@ -247,12 +267,21 @@
                     editFAQBtn.hidden = YES;
                     viewRequestResponder.hidden = NO;
                     editBarcode.hidden = YES;
+                    changeObjImg.hidden = YES;
                 }
             }
         }
     }else{
         [sendBox getErrorMessage];
     }
+}
+
+-(void)viewWillDisappear:(BOOL)animated{
+    // ลบ barCodeID,latitude,longitude จาก NSUserDefault
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"latitude"];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"longitude"];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"barCodeID"];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"objectName"];
 }
 
 - (void)didReceiveMemoryWarning
@@ -313,10 +342,15 @@
     NSString *postEdit;
     NSURL *urlEdit;
     BOOL errorEdit;
-    if (bgQr.hidden == YES) { // แก้ QR Code
-        NSData *imageData = UIImageJPEGRepresentation(qrImage.image, 100);
+    if (objectImg.hidden == NO) { // แก้ Object Image
+        NSData *imageDataObj = UIImageJPEGRepresentation(objectImg.image, 100);
+        url = [NSURL URLWithString:@"http://angsila.cs.buu.ac.th/~53160117/TalkTogether/saveObjectImg.php"];
+        errorEdit = [sendBox postImage:imageDataObj withObjectID:objectID toUrl:url];
+    }
+    if (qrImage.hidden == NO) { // แก้ QR Code
+        NSData *imageDataQr = UIImageJPEGRepresentation(qrImage.image, 100);
         url = [NSURL URLWithString:@"http://angsila.cs.buu.ac.th/~53160117/TalkTogether/saveQrcode.php"];
-        errorEdit = [sendBox postImage:imageData withObjectID:objectID toUrl:url];
+        errorEdit = [sendBox postImage:imageDataQr withObjectID:objectID toUrl:url];
     }
     if (newBarcodeID != NULL){ // แก้ barcode
         postEdit = [NSMutableString stringWithFormat:@"objectID=%@&barcodeID=%@",objectID,newBarcodeID];
@@ -354,6 +388,41 @@
     [responView setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
     
     [self.navigationController pushViewController:responView animated:YES];
+}
+
+- (IBAction)changeObjImg:(id)sender {
+    UIImagePickerController *picker = [[UIImagePickerController alloc]init];
+    picker.delegate = self;
+    
+    //    if ((UIBarButtonItem *)sender == choosePhotoBtn) {
+    picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    //    }else{
+    //        picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+    //    }
+    [self presentViewController:picker animated:YES completion:Nil];
+}
+
+-(UIImage*)imageWithImage:(UIImage*)pickedImage scaledToSize:(CGSize)newSize;
+{
+    UIGraphicsBeginImageContext(newSize);
+    [pickedImage drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
+    UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return newImage;
+}
+
+-(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    [picker dismissViewControllerAnimated:YES completion:Nil];
+    
+    pickedImage = [info objectForKey:@"UIImagePickerControllerOriginalImage"];
+    
+    CGSize newSize;
+    newSize.width = 200;
+    newSize.height = 200;
+    pickedImage = [self imageWithImage:pickedImage scaledToSize:newSize];
+    
+    objectImg.image = pickedImage;
 }
 
 - (IBAction)generateQr:(id)sender {

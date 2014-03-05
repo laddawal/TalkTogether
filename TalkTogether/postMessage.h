@@ -2,8 +2,8 @@
 //  postMessage.h
 //  testPostFromFunction
 //
-//  Created by Jigdaw on 11/22/13.
-//  Copyright (c) 2013 arnan_srisontisuk. All rights reserved.
+//  Created by PloyZb on 11/22/13.
+//  Copyright (c) 2013 PloyZb. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

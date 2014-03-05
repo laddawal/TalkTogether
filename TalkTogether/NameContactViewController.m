@@ -60,6 +60,13 @@
     [bgColorView setBackgroundColor:[UIColor colorWithRed:134.0/255.0 green:114.0/255.0 blue:93.0/255.0 alpha:1.0]];
     [cell setSelectedBackgroundView:bgColorView];
     
+    // selected cell text color
+    cell.textLabel.highlightedTextColor = [UIColor whiteColor];
+    cell.detailTextLabel.highlightedTextColor = [UIColor whiteColor];
+    
+    // cell text color
+    cell.textLabel.textColor = [UIColor brownColor];
+    
     if (cell == nil) {
         // Use the default cell style.
         cell = [[UITableViewCell alloc] initWithStyle : UITableViewCellStyleDefault
