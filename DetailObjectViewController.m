@@ -423,6 +423,7 @@ UIImage *pickedImage;
     pickedImage = [self imageWithImage:pickedImage scaledToSize:newSize];
     
     objectImg.image = pickedImage;
+    objectImg.hidden = NO;
 }
 
 - (IBAction)generateQr:(id)sender {
