@@ -17,7 +17,6 @@
 @end
 
 @implementation EditGPSViewController
-@synthesize locationManager;
 @synthesize mapView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -34,55 +33,29 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
-    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg.png"]]; // bg
-    
-    // Create object
-    locationManager=[[CLLocationManager alloc] init];
-    
-    locationManager.delegate=self;
-    
-    //The desired accuracy that you want, not guaranteed though
-    locationManager.desiredAccuracy=kCLLocationAccuracyBest;
-    
-    //The distance in meters a device must move before an update event is triggered
-    locationManager.distanceFilter=500;
-    self.locationManager=locationManager;
-    
-    if([CLLocationManager locationServicesEnabled]){
-        [self.locationManager startUpdatingLocation];
-    }
+    UILongPressGestureRecognizer *lpgr = [[UILongPressGestureRecognizer alloc]
+                                          initWithTarget:self action:@selector(handleLongPress:)];
+    lpgr.minimumPressDuration = 0.5; //user needs to press for 0.5 seconds
+    [self.mapView addGestureRecognizer:lpgr];
 }
 
-- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
+- (void)handleLongPress:(UIGestureRecognizer *)gestureRecognizer
+{
+    if (gestureRecognizer.state != UIGestureRecognizerStateBegan)
+        return;
     
-    CLLocationCoordinate2D currentCoordinates = newLocation.coordinate;
+    CGPoint touchPoint = [gestureRecognizer locationInView:self.mapView];
+    CLLocationCoordinate2D touchMapCoordinate = [self.mapView convertPoint:touchPoint toCoordinateFromView:self.mapView];
     
-    NSLog(@"Entered new Location with the coordinates Latitude: %f Longitude: %f", currentCoordinates.latitude, currentCoordinates.longitude);
+    DisplayMap *annot = [[DisplayMap alloc] init];
     
-    //Optional: turn off location services once we've gotten a good location
-    [manager stopUpdatingLocation];
+    annot.coordinate = touchMapCoordinate;
+    [self.mapView addAnnotation:annot];
     
-    latitude = currentCoordinates.latitude;
-    longitude = currentCoordinates.longitude;
+    [self.mapView removeGestureRecognizer:gestureRecognizer];
     
-    // กำหนด latitude longtitude ลงในแผนที่
-    mapView.hidden = NO;
-    [mapView setMapType:MKMapTypeStandard];
-    [mapView setZoomEnabled:YES];
-    [mapView setScrollEnabled:YES];
-    MKCoordinateRegion region = { {0.0, 0.0 }, { 0.0, 0.0 } };
-    region.center.latitude = latitude;
-    region.center.longitude = longitude;
-    region.span.longitudeDelta = 0.01f;
-    region.span.latitudeDelta = 0.01f;
-    [mapView setRegion:region animated:YES];
-    
-    [mapView setDelegate:self];
-    
-    DisplayMap *ann = [[DisplayMap alloc] init];
-    ann.title = @"ตำแหน่งของคุณ";
-    ann.coordinate = region.center;
-    [mapView addAnnotation:ann];
+    latitude = touchMapCoordinate.latitude;
+    longitude = touchMapCoordinate.longitude;
 }
 
 - (void)didReceiveMemoryWarning

@@ -20,7 +20,6 @@
 
 @implementation GPSRegisterViewController
 @synthesize objectName;
-@synthesize locationManager;
 @synthesize mapView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -39,11 +38,9 @@
     
     sendBox = [[postMessage alloc]init];
     
-    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg.png"]]; // bg
-    
     UILongPressGestureRecognizer *lpgr = [[UILongPressGestureRecognizer alloc]
                                           initWithTarget:self action:@selector(handleLongPress:)];
-    lpgr.minimumPressDuration = 0.1; //user needs to press for 0.1 seconds
+    lpgr.minimumPressDuration = 0.5; //user needs to press for 0.5 seconds
     [self.mapView addGestureRecognizer:lpgr];
     
     [objectName setDelegate:self];
@@ -82,13 +79,18 @@
 
 - (IBAction)register:(id)sender {
     [objectName resignFirstResponder]; // Hide KeyBoard with button
-    
     if ([[objectName text] isEqual:@""]) {
         UIAlertView *alertTextFieldNull =[[UIAlertView alloc]
                                           initWithTitle:@"กรุณาใส่ชื่อวัตถุ"
                                           message:nil delegate:self
                                           cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alertTextFieldNull show];
+    }else if([mapView.annotations count] == 0){
+        UIAlertView *alertLocationNull =[[UIAlertView alloc]
+                                          initWithTitle:@"กรุณาระบุตำแหน่งวัตถุ"
+                                          message:nil delegate:self
+                                          cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alertLocationNull show];
     }else{
         // ดึง userID จาก NSUserDefault
         NSUserDefaults *defaultUserID = [NSUserDefaults standardUserDefaults];

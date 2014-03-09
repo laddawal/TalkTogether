@@ -7,12 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <CoreLocation/CoreLocation.h>
 #import <MapKit/MapKit.h>
 
-@interface EditGPSViewController : UIViewController <CLLocationManagerDelegate,MKMapViewDelegate>
+@interface EditGPSViewController : UIViewController <MKMapViewDelegate>
 
-@property (strong, nonatomic) CLLocationManager *locationManager;
 @property (strong, nonatomic) IBOutlet MKMapView *mapView;
 - (IBAction)submit:(id)sender;
 @end

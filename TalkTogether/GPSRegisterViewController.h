@@ -7,19 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <CoreLocation/CoreLocation.h>
 #import "postMessage.h"
 #import <MapKit/MapKit.h>
 
-@interface GPSRegisterViewController : UIViewController <CLLocationManagerDelegate,MKMapViewDelegate,UITextFieldDelegate>
+@interface GPSRegisterViewController : UIViewController <MKMapViewDelegate,UITextFieldDelegate>
 {
     postMessage *sendBox;
 }
 
 @property (strong, nonatomic) IBOutlet UITextField *objectName;
 @property (strong, nonatomic) IBOutlet MKMapView *mapView;
-
-@property (strong, nonatomic) CLLocationManager *locationManager;
 
 - (IBAction)register:(id)sender;
 @end
