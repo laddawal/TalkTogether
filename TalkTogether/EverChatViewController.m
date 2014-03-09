@@ -40,7 +40,6 @@
 {
     sendBox = [[postMessage alloc]init];
     
-    // Create array to hold dictionaries
     myObject = [[NSMutableArray alloc] init];
     
     // ดึง userID จาก NSUserDefault
@@ -110,7 +109,16 @@
     }else{ // เป็นผู้ติดต่อ
         cell.textLabel.text = [[displayObject objectAtIndex:indexPath.row] objectForKey:@"objectName"];
         cell.detailTextLabel.text = @"";
-        cell.imageView.image = [UIImage imageNamed:@"car1.png"];
+        
+        if ([[[displayObject objectAtIndex:indexPath.row] objectForKey:@"image"] isEqualToString:@"0"]) { // ไม่มี Object Image
+            cell.imageView.image = [UIImage imageNamed:@"noImage.png"];
+        }else{ // มี Object Image
+            NSString *imgPart = [NSString stringWithFormat:@"http://angsila.cs.buu.ac.th/~53160117/TalkTogether/objectImage/%@.jpg",[[displayObject objectAtIndex:indexPath.row] objectForKey:@"objectID"]];
+            NSURL *url = [NSURL URLWithString:imgPart];
+            NSData *dataObjImg = [NSData dataWithContentsOfURL:url];
+            UIImage *objImg = [[UIImage alloc] initWithData:dataObjImg];
+            cell.imageView.image = objImg;
+        }
     }
     
     if ([[[displayObject objectAtIndex:indexPath.row] objectForKey:@"readed"] isEqualToString:@"0"]) { // ยังไม่ได้อ่าน
@@ -184,7 +192,6 @@
 
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
     [searchBar setShowsCancelButton:YES animated:YES];
-    // tableViewObj.allowsSelection = NO;
     myTable.scrollEnabled = NO;
 }
 

@@ -39,8 +39,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     sendBox = [[postMessage alloc]init];
-    
-    // Create array to hold dictionaries
+
     myObject = [[NSMutableArray alloc] init];
     
     // ดึง userID จาก NSUserDefault
@@ -189,7 +188,6 @@
 
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
     [searchBar setShowsCancelButton:YES animated:YES];
-    // tableViewObj.allowsSelection = NO;
     showObj.scrollEnabled = NO;
 }
 

@@ -51,12 +51,8 @@ UIImage *pickedImage;
 -(IBAction)getPhoto:(id)sender{
     UIImagePickerController *picker = [[UIImagePickerController alloc]init];
     picker.delegate = self;
-    
-    //    if ((UIBarButtonItem *)sender == choosePhotoBtn) {
     picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-    //    }else{
-    //        picker.sourceType = UIImagePickerControllerSourceTypeCamera;
-    //    }
+
     [self presentViewController:picker animated:YES completion:Nil];
 }
 

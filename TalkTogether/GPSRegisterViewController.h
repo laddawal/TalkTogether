@@ -19,7 +19,6 @@
 @property (strong, nonatomic) IBOutlet UITextField *objectName;
 @property (strong, nonatomic) IBOutlet MKMapView *mapView;
 
-//Add a location manager property to this app delegate
 @property (strong, nonatomic) CLLocationManager *locationManager;
 
 - (IBAction)register:(id)sender;

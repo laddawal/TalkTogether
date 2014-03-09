@@ -22,7 +22,6 @@
 @end
 
 @implementation addResponderViewController
-//@synthesize recieveUserID;
 @synthesize myTable;
 @synthesize recieveObjectID;
 
@@ -48,7 +47,6 @@
     
     sendBox = [[postMessage alloc]init];
     
-    // Create array to hold dictionaries
     myObject = [[NSMutableArray alloc] init];
     selectedUserID = [[NSMutableArray alloc] init];
     

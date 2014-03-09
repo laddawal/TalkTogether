@@ -39,7 +39,6 @@
     
     sendBox = [[postMessage alloc]init];
     
-    // Create array to hold dictionaries
     myObject = [[NSMutableArray alloc] init];
 }
 
@@ -129,11 +128,6 @@
     [searchBar resignFirstResponder];
     showObject.allowsSelection = YES;
     showObject.scrollEnabled = YES;
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-//    [_searchBar becomeFirstResponder];
-    
 }
 
 - (void)viewWillAppear:(BOOL)animated {

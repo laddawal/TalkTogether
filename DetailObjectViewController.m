@@ -136,14 +136,14 @@ UIImage *pickedImage;
                 request = [NSString stringWithFormat:@"%@",[fetchDict objectForKey:@"request"]];
             }
             //---- Object Image ----//
-            NSString *imgPart = [NSString stringWithFormat:@"http://angsila.cs.buu.ac.th/~53160117/TalkTogether/objectImage/%@.jpg",objectID];
-            url = [NSURL URLWithString:imgPart];
-            NSData *dataObjImg = [NSData dataWithContentsOfURL:url];
-            UIImage *objImg = [[UIImage alloc] initWithData:dataObjImg];
-            objectImg.image = objImg;
             if ([urlImg isEqualToString:@"0"]) { // ไม่มี Object Image
                 objectImg.hidden = YES;
             }else{ // มี Object Image
+                NSString *imgPart = [NSString stringWithFormat:@"http://angsila.cs.buu.ac.th/~53160117/TalkTogether/objectImage/%@.jpg",objectID];
+                url = [NSURL URLWithString:imgPart];
+                NSData *dataObjImg = [NSData dataWithContentsOfURL:url];
+                UIImage *objImg = [[UIImage alloc] initWithData:dataObjImg];
+                objectImg.image = objImg;
                 objectImg.hidden = NO;
             }
             
@@ -299,9 +299,9 @@ UIImage *pickedImage;
 // Save QR Code to Gallery
 - (IBAction)saveQrImg:(id)sender {
     UIImageWriteToSavedPhotosAlbum(qrImage.image,
-                                   self, // send the message to 'self' when calling the callback
-                                   @selector(thisImage:hasBeenSavedInPhotoAlbumWithError:usingContextInfo:), // the selector to tell the method to call on completion
-                                   NULL); // you generally won't need a contextInfo here
+                                   self,
+                                   @selector(thisImage:hasBeenSavedInPhotoAlbumWithError:usingContextInfo:),
+                                   NULL);
 }
 
 - (IBAction)sendResponder:(id)sender {
@@ -394,11 +394,8 @@ UIImage *pickedImage;
     UIImagePickerController *picker = [[UIImagePickerController alloc]init];
     picker.delegate = self;
     
-    //    if ((UIBarButtonItem *)sender == choosePhotoBtn) {
     picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-    //    }else{
-    //        picker.sourceType = UIImagePickerControllerSourceTypeCamera;
-    //    }
+    
     [self presentViewController:picker animated:YES completion:Nil];
 }
 

@@ -59,8 +59,8 @@
             for (NSDictionary* fetchDict in jsonReturn){
                 iconNum = [NSString stringWithFormat:@"%@",fetchDict];
             }
+            
             // Bunton Badge Number
-            //Create a label (width/height not important at this stage)
             UILabel *yourLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 1, 1)];
             yourLabel.text = iconNum;
             yourLabel.textColor = [UIColor whiteColor];
@@ -68,7 +68,6 @@
             
             CGRect labelFrame = yourLabel.frame;
             
-            //Here we create a UIImage that is resizable, but will not resize the areas concerned with the cap insets you've defined
             UIImage *badgeImage = [[UIImage imageNamed:@"badge.png"]resizableImageWithCapInsets:UIEdgeInsetsMake(0, 10, 0, 10)];
             badgeImageView = [[UIImageView alloc]initWithImage:badgeImage];
             
@@ -77,17 +76,14 @@
             
             labelFrame.size.width += 13; // padding ซ้าย ขวา
             
-            badgeImageView.frame = labelFrame; //The badge is now the right width with padding taken into account
+            badgeImageView.frame = labelFrame;
             
-            //Center the label on the badge image view
             yourLabel.center = CGPointMake(badgeImageView.frame.size.width/2, badgeImageView.frame.size.height/2);
             
-            //Finally we add the label to the badge image view
             [badgeImageView addSubview:yourLabel];
             
             badgeImageView.frame = CGRectOffset(badgeImageView.frame, 80, 0);
             
-            //Add your badge to the main view
             [chatHistoryBtn addSubview:badgeImageView];
         }
     }

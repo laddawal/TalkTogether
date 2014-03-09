@@ -18,7 +18,6 @@
 
 @property (strong, nonatomic) IBOutlet MKMapView *nearObjMap;
 
-//Add a location manager property to this app delegate
 @property (strong, nonatomic) CLLocationManager *locationManager;
 
 @end

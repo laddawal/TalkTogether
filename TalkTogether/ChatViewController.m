@@ -24,6 +24,7 @@
     NSString *userID;
     NSString *senderID;
     NSString *responderID;
+    NSString *urlImg;
     
     NSMutableString *post;
     NSURL *url;
@@ -32,6 +33,8 @@
     NSMutableArray *jsonReturn;
     
     NSTimer *timer;
+    
+    UIImage *objImg;
 }
 @end
 
@@ -210,13 +213,23 @@
                         [bubbleData addObject:sayBubble];
                     }else{
                         NSBubbleData *sayBubble = [NSBubbleData dataWithText:strMessage date:date type:BubbleTypeSomeoneElse];
-                        sayBubble.avatar = [UIImage imageNamed:@"car1.png"]; // Object Image
+                        
+                        NSString *imgPart = [NSString stringWithFormat:@"http://angsila.cs.buu.ac.th/~53160117/TalkTogether/objectImage/%@.jpg",objectID];
+                        url = [NSURL URLWithString:imgPart];
+                        NSData *dataObjImg = [NSData dataWithContentsOfURL:url];
+                        
+                        sayBubble.avatar = [UIImage imageWithData:dataObjImg]; // Object Image
                         [bubbleData addObject:sayBubble];
                     }
                 }else{
                     if ([sender isEqualToString:@"2"]) {
                         NSBubbleData *sayBubble = [NSBubbleData dataWithText:strMessage date:date type:BubbleTypeMine];
-                        sayBubble.avatar = [UIImage imageNamed:@"car1.png"]; // User Image
+                        
+                        NSString *imgPart = [NSString stringWithFormat:@"http://angsila.cs.buu.ac.th/~53160117/TalkTogether/objectImage/%@.jpg",objectID];
+                        url = [NSURL URLWithString:imgPart];
+                        NSData *dataObjImg = [NSData dataWithContentsOfURL:url];
+                        
+                        sayBubble.avatar = [UIImage imageWithData:dataObjImg]; // User Image
                         [bubbleData addObject:sayBubble];
                     }else{
                         NSBubbleData *sayBubble = [NSBubbleData dataWithText:strMessage date:date type:BubbleTypeSomeoneElse];

@@ -12,7 +12,6 @@
 
 @interface EditGPSViewController : UIViewController <CLLocationManagerDelegate,MKMapViewDelegate>
 
-//Add a location manager property to this app delegate
 @property (strong, nonatomic) CLLocationManager *locationManager;
 @property (strong, nonatomic) IBOutlet MKMapView *mapView;
 - (IBAction)submit:(id)sender;

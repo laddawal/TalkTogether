@@ -82,10 +82,6 @@
     objectID =  symbol.data ;
     
     [reader dismissViewControllerAnimated:YES completion:nil]; // กลับหน้าระบุวัตถุด้วย QR Code
-//    [reader dismissViewControllerAnimated:YES completion:^{
-//        [(UINavigationController *)self.presentingViewController popToRootViewControllerAnimated:YES];
-//    }];
-//    [self.navigationController popViewControllerAnimated:YES];
     
     NSLog(@"objectID : %@",objectID);
     

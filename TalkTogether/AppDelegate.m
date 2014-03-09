@@ -82,7 +82,6 @@
 - (void)applicationDidEnterBackground:(UIApplication *)application{
     if([[UIDevice currentDevice] respondsToSelector:@selector(isMultitaskingSupported)])
     {
-//        NSLog(@"Multitasking Supported");
         
         // Clear Notification & iconAppBadgeNumber
         [[UIApplication sharedApplication] cancelAllLocalNotifications];
@@ -124,10 +123,9 @@
                 }
                 
                 UILocalNotification *localNotification = [[UILocalNotification alloc] init]; //Create the local notification
-//                [localNotification setFireDate:[NSDate dateWithTimeIntervalSinceNow:0]]; //Set the date when the alert will be launched
                 
                 [localNotification setAlertAction:@"Launch"]; //The button's text that launches the application and is shown in the alert
-//                [localNotification setAlertBody:@"12345"]; //Set the message in the notification from the textField's text
+                
                 [localNotification setHasAction: YES]; //Set that pushing the button will launch the application
                 [localNotification setApplicationIconBadgeNumber:[iconNum intValue]]; //Set the Application Icon
                 
@@ -152,13 +150,6 @@
     [[FBSession activeSession] closeAndClearTokenInformation];
     
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"userID"];
-    
-    // ดึง userID จาก NSUserDefault
-//    NSUserDefaults *defaultUserID = [NSUserDefaults standardUserDefaults];
-//    NSString *userID = [defaultUserID stringForKey:@"userID"];
-//    NSLog(@"userID : %@",userID);
-
-//    [[NSUserDefaults standardUserDefaults] synchronize];
 
 }
 
